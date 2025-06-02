@@ -1,0 +1,419 @@
+.desktop {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.desktop .div-5 {
+  background-color: #ffffff;
+  height: 6659px;
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.desktop .overlap-4 {
+  height: 1413px;
+  left: -356px;
+  position: absolute;
+  top: -223px;
+  width: 2164px;
+}
+
+.desktop .overlap-5 {
+  height: 500px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1796px;
+}
+
+.desktop .ellipse-9 {
+  background-color: var(--primary);
+  border-radius: 250px;
+  filter: blur(250px);
+  height: 500px;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  width: 500px;
+}
+
+.desktop .overlap-6 {
+  height: 1008px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 405px;
+  width: 70%;
+}
+
+.desktop .ellipse-10 {
+  background-color: #9747ff;
+  border-radius: 250px;
+  filter: blur(250px);
+  height: 500px;
+  left: 1308px;
+  opacity: 0.5;
+  position: absolute;
+  top: 508px;
+  width: 500px;
+}
+
+.desktop .basic-step {
+  align-items: center;
+  display: flex;
+  height: 160px;
+  justify-content: space-between;
+  left: 0;
+  padding: 0px 5%;
+  position: absolute;
+  top: 772px;
+  width: 100%;
+  flex-direction: row;
+}
+
+.desktop .image {
+  height: auto;
+  position: relative;
+  width: 120px;
+}
+
+.desktop .image-title{
+  font-size: 18px;
+  font-weight: 500;
+  color:  #a7a7a7;
+}
+
+.desktop .booking {
+  background-image: url(https://c.animaapp.com/bADEbyrk/img/clip-path-group-1@2x.png);
+  background-size: 100% 100%;
+  height: 32px;
+  position: relative;
+  width: 188.6px;
+}
+
+.desktop .overlap-group-6 {
+  background-image: url(https://c.animaapp.com/bADEbyrk/img/clip-path-group-2@2x.png);
+  background-size: 100% 100%;
+  height: 32px;
+  width: 189px;
+}
+
+.desktop .group-13 {
+  background-image: url(https://c.animaapp.com/bADEbyrk/img/clip-path-group-3@2x.png);
+  background-size: 100% 100%;
+  height: 32px;
+}
+
+.desktop .tripadvisor {
+  height: 32px;
+  position: relative;
+  width: 211.83px;
+}
+
+.desktop .owl {
+  height: 25px;
+  left: 0;
+  position: absolute;
+  top: 1px;
+  width: 42px;
+}
+
+.desktop .overlap-group-7 {
+  height: 25px;
+  position: relative;
+}
+
+.desktop .vector-18 {
+  height: 19px;
+  left: 22px;
+  position: absolute;
+  top: 5px;
+  width: 19px;
+}
+
+.desktop .vector-19 {
+  height: 19px;
+  left: 1px;
+  position: absolute;
+  top: 5px;
+  width: 19px;
+}
+
+.desktop .vector-20 {
+  height: 4px;
+  left: 9px;
+  position: absolute;
+  top: 13px;
+  width: 4px;
+}
+
+.desktop .vector-21 {
+  height: 4px;
+  left: 30px;
+  position: absolute;
+  top: 13px;
+  width: 4px;
+}
+
+.desktop .group-14 {
+  height: 10px;
+  left: 5px;
+  position: absolute;
+  top: 9px;
+  width: 10px;
+}
+
+.desktop .group-15 {
+  height: 10px;
+  left: 26px;
+  position: absolute;
+  top: 9px;
+  width: 10px;
+}
+
+.desktop .vector-22 {
+  height: 12px;
+  left: 11px;
+  position: absolute;
+  top: 2px;
+  width: 21px;
+}
+
+.desktop .vector-23 {
+  height: 25px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 42px;
+}
+
+.desktop .group-16 {
+  height: 31px;
+  left: 48px;
+  position: absolute;
+  top: 1px;
+  width: 49px;
+}
+
+.desktop .group-17 {
+  height: 25px;
+  left: 100px;
+  position: absolute;
+  top: 0;
+  width: 103px;
+}
+
+.desktop .vector-24 {
+  height: 6px;
+  left: 206px;
+  position: absolute;
+  top: 6px;
+  width: 6px;
+}
+
+.desktop .airbnb {
+  height: 32px;
+  position: relative;
+  width: 102.53px;
+}
+
+.desktop .overlap-7 {
+  height: 1597px;
+  left: 10%;
+  position: absolute;
+  top: 3657px;
+  width: 80%;
+}
+
+.desktop .ellipse-11 {
+  background-color: #d9952f;
+  border-radius: 250px;
+  filter: blur(250px);
+  height: 500px;
+  left: 977px;
+  opacity: 0.5;
+  position: absolute;
+  top: 523px;
+  width: 500px;
+}
+
+.desktop .BACKGROUND {
+  height: 272px;
+  left: 872px;
+  position: absolute;
+  top: 0;
+  width: 448px;
+}
+
+.desktop .overlap-group-8 {
+  height: 272px;
+  left: 22px;
+  position: relative;
+  width: 375px;
+}
+
+.desktop .clip-path-group {
+  height: 272px;
+  left: 19px;
+  position: absolute;
+  top: 0;
+  width: 356px;
+}
+
+.desktop .group-18 {
+  height: 202px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 202px;
+}
+
+.desktop .graphic-elements {
+  height: 176px;
+  left: 0;
+  position: absolute;
+  top: 972px;
+  width: 184px;
+}
+
+.desktop .overlap-8 {
+  height: 733px;
+  left: 165px;
+  position: absolute;
+  top: 5354px;
+  width: 1275px;
+}
+
+.desktop .OBJECTS {
+  height: 483px;
+  left: 1091px;
+  position: absolute;
+  top: 250px;
+  width: 184px;
+}
+
+.desktop .services-6 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 14px;
+  left: 165px;
+  position: absolute;
+  top: 1214px;
+}
+
+.desktop .text-wrapper-34 {
+  color: var(--x-2nd);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 7.2px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.desktop .text-wrapper-35 {
+  color: var(--variable-collection-black);
+  font-family: var(--bold-type-44-font-family);
+  font-size: var(--bold-type-44-font-size);
+  font-style: var(--bold-type-44-font-style);
+  font-weight: var(--bold-type-44-font-weight);
+  letter-spacing: var(--bold-type-44-letter-spacing);
+  line-height: var(--bold-type-44-line-height);
+  position: relative;
+  width: fit-content;
+}
+
+.desktop .overlap-9 {
+  height: 722px;
+  left: 0;
+  position: absolute;
+  top: 2843px;
+  width: 1358px;
+}
+
+.desktop .ticket-star-wrapper {
+  align-items: center;
+  background-color: var(--x-4th);
+  border-radius: 100px;
+  box-shadow: 0px 0px 0px #00000008, 0px 15px 34px #00000008, 0px 62px 62px #00000005, 0px 139px 83px #00000003,
+    0px 246px 99px transparent, 0px 385px 108px transparent;
+  display: inline-flex;
+  gap: 16px;
+  left: 1239px;
+  padding: 32px;
+  position: absolute;
+  top: 340px;
+  transform: rotate(-7.21deg);
+}
+
+.desktop .ticket-star {
+  height: 53.65px;
+  margin-bottom: -2.82px;
+  margin-left: -2.82px;
+  margin-right: -2.82px;
+  margin-top: -2.82px;
+  position: relative;
+  transform: rotate(7.21deg);
+  width: 53.65px;
+}
+
+@media (max-width: 768px) {
+  .desktop .overlap-4 {
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: auto;
+    position: relative;
+  }
+
+  .desktop .overlap-5 {
+    left: 0;
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+
+  .desktop .overlap-6 {
+    left: 0;
+    width: 100%;
+    position: relative;
+    height: auto;
+    top: 50px;
+  }
+
+  .desktop .basic-step {
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.image-title {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+}
+
+.basic-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}

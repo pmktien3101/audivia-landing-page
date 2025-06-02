@@ -1,0 +1,238 @@
+.cards-services {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  justify-content: center;
+  position: relative;
+  width: 350px;
+}
+
+.cards-services .group-5 {
+  position: relative;
+  width: 70px;
+}
+
+.cards-services .overlap-3 {
+  position: relative;
+}
+
+.cards-services .ellipse-8 {
+  background-color: #ececec;
+  border-radius: 35px;
+  height: 70px;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  width: 70px;
+}
+
+.cards-services .group-6 {
+  height: 72px;
+  left: 15px;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+.cards-services .overlap-group-4 {
+  height: 72px;
+  position: relative;
+}
+
+.cards-services .group-7 {
+  height: 19px;
+  left: 13px;
+  position: absolute;
+  top: 2px;
+  width: 13px;
+}
+
+.cards-services .group-8 {
+  height: 7px;
+  left: 3px;
+  position: absolute;
+  top: 65px;
+  width: 35px;
+}
+
+.cards-services .vector-11 {
+  height: 47px;
+  left: 0;
+  position: absolute;
+  top: 20px;
+  width: 40px;
+}
+
+.cards-services .group-9 {
+  height: 34px;
+  left: 5px;
+  position: absolute;
+  top: 25px;
+  width: 29px;
+}
+
+.cards-services .vector-12 {
+  height: 4px;
+  left: 12px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.cards-services .vector-13 {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  top: 63px;
+  width: 40px;
+}
+
+.cards-services .overlap-group-5 {
+  height: 46px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 52px;
+}
+
+.cards-services .group-10 {
+  height: 41px;
+  left: 2px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+
+.cards-services .vector-14 {
+  height: 32px;
+  left: 0;
+  position: absolute;
+  top: 13px;
+  width: 45px;
+}
+
+.cards-services .vector-15 {
+  height: 33px;
+  left: 0;
+  position: absolute;
+  top: 13px;
+  width: 45px;
+}
+
+.cards-services .vector-16 {
+  height: 7px;
+  left: 4px;
+  position: absolute;
+  top: 26px;
+  width: 10px;
+}
+
+.cards-services .group-11 {
+  height: 1px;
+  left: 14px;
+  position: absolute;
+  top: 41px;
+  width: 27px;
+}
+
+.cards-services .vector-17 {
+  height: 33px;
+  left: 498px;
+  position: absolute;
+  top: 411px;
+  width: 45px;
+}
+
+.cards-services .group-12 {
+  height: 58px;
+  left: 14px;
+  position: absolute;
+  top: 6px;
+  width: 42px;
+}
+
+.cards-services .frame-48 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+}
+
+.cards-services .all-you-needs-2 {
+  color: var(--variable-collection-black);
+  font-family: var(--semibold-type-28-font-family);
+  font-size: var(--semibold-type-28-font-size);
+  font-style: var(--semibold-type-28-font-style);
+  font-weight: var(--semibold-type-28-font-weight);
+  letter-spacing: var(--semibold-type-28-letter-spacing);
+  line-height: var(--semibold-type-28-line-height);
+  margin-top: -1.00px;
+  position: relative;
+  width: fit-content;
+}
+
+.cards-services .text-wrapper-33 {
+  color: #a7a7a7;
+  font-family: var(--medium-type-18-font-family);
+  font-size: var(--medium-type-18-font-size);
+  font-style: var(--medium-type-18-font-style);
+  font-weight: var(--medium-type-18-font-weight);
+  letter-spacing: var(--medium-type-18-letter-spacing);
+  line-height: var(--medium-type-18-line-height);
+  position: relative;
+  text-align: center;
+  width: 254px;
+}
+
+.cards-services.flexible-booking {
+  gap: 67px;
+}
+
+.cards-services.secure-payment {
+  gap: 72px;
+}
+
+.cards-services.all-you-needs {
+  box-shadow: 0px 2px 70px #0000000f;
+  gap: 60px;
+}
+
+.cards-services .off {
+  background-color: #ececec;
+  border-radius: 35px;
+}
+
+.cards-services .services-all-you-needs {
+  height: 80px;
+}
+
+.cards-services .off.services-secure-payment {
+  height: 70px;
+}
+
+.cards-services .off.services-flexible-booking {
+  height: 70px;
+}
+
+.cards-services .group-5.off .overlap-3 {
+  left: 9px;
+  top: 12px;
+  width: 52px;
+}
+
+.cards-services .group-5.services-all-you-needs .overlap-3 {
+  height: 80px;
+}
+
+.cards-services .group-5.off.services-secure-payment .overlap-3 {
+  height: 46px;
+}
+
+.cards-services .group-5.off.services-flexible-booking .overlap-3 {
+  height: 46px;
+}

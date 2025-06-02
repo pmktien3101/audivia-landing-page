@@ -1,0 +1,308 @@
+.tittle {
+  align-items: center;
+  display: flex;
+  left: 165px;
+  position: absolute;
+  top: 0;
+  width: 1254px;
+  gap: 20px;
+}
+
+.tittle .image {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+  position: relative;
+}
+
+.tittle .frame-6 {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow:
+    0px 4px 10px #8c8c8c1a, 0px 18px 18px #8c8c8c17, 0px 40px 24px #8c8c8c0d, 0px 71px 29px #8c8c8c03, 0px 111px 31px transparent;
+  display: inline-flex;
+  justify-content: center;
+  padding: 16px 32px;
+  position: relative;
+}
+
+.tittle .text-wrapper-5 {
+  color: var(--primary);
+  font-family: var(--bold-type-14-font-family);
+  font-size: var(--bold-type-14-font-size);
+  font-style: var(--bold-type-14-font-style);
+  font-weight: var(--bold-type-14-font-weight);
+  letter-spacing: var(--bold-type-14-letter-spacing);
+  line-height: var(--bold-type-14-line-height);
+  margin-top: -1.30px;
+  position: relative;
+  width: fit-content;
+}
+
+.tittle .img {
+  height: 20px;
+  margin-bottom: -1.00px;
+  margin-top: -1.00px;
+  position: relative;
+  width: 20px;
+  background: var(--primary);
+}
+
+.tittle .from-southeast-asia {
+  align-self: stretch;
+  color: transparent;
+  font-family: var(--bold-type-70-font-family);
+  font-size: var(--bold-type-70-font-size);
+  font-style: var(--bold-type-70-font-style);
+  font-weight: var(--bold-type-70-font-weight);
+  letter-spacing: var(--bold-type-70-letter-spacing);
+  line-height: var(--bold-type-70-line-height);
+  position: relative;
+}
+
+.tittle .span {
+  color: #1b1b1b;
+  font-family: var(--bold-type-70-font-family);
+  font-size: var(--bold-type-70-font-size);
+  font-style: var(--bold-type-70-font-style);
+  font-weight: var(--bold-type-70-font-weight);
+  letter-spacing: var(--bold-type-70-letter-spacing);
+  line-height: var(--bold-type-70-line-height);
+}
+
+.tittle .text-wrapper-6 {
+  color: var(--primary);
+  font-family: var(--bold-type-70-font-family);
+  font-size: var(--bold-type-70-font-size);
+  font-style: var(--bold-type-70-font-style);
+  font-weight: var(--bold-type-70-font-weight);
+  letter-spacing: var(--bold-type-70-letter-spacing);
+  line-height: var(--bold-type-70-line-height);
+}
+
+.tittle .p {
+  align-self: stretch;
+  color: #a7a7a7;
+  font-family: var(--medium-type-18-font-family);
+  font-size: var(--medium-type-18-font-size);
+  font-style: var(--medium-type-18-font-style);
+  font-weight: var(--medium-type-18-font-weight);
+  letter-spacing: var(--medium-type-18-letter-spacing);
+  line-height: var(--medium-type-18-line-height);
+  position: relative;
+}
+
+.tittle .frame-7 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  position: relative;
+}
+
+.tittle .frame-8 {
+  align-items: center;
+  background-color: var(--x-1st);
+  border-radius: 30px;
+  box-shadow:
+    0px 4px 10px #8c8c8c1a, 0px 18px 18px #8c8c8c17, 0px 40px 24px #8c8c8c0d, 0px 71px 29px #8c8c8c03, 0px 111px 31px transparent;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  height: 50px;
+  justify-content: center;
+  padding: 16px 32px;
+  position: relative;
+}
+
+.tittle .text-wrapper-7 {
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1.00px;
+  position: relative;
+  width: fit-content;
+}
+
+.tittle .frame-9 {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: var(--x-1st);
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  justify-content: center;
+  padding: 16px 32px;
+  position: relative;
+  width: 170px;
+}
+
+.tittle .text-wrapper-8 {
+  color: var(--variable-collection-black);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -6.00px;
+  margin-top: -1.00px;
+  position: relative;
+  width: fit-content;
+}
+
+.tittle .vector-2 {
+  height: 20px;
+  margin-bottom: -1.00px;
+  margin-right: -6.00px;
+  margin-top: -1.00px;
+  position: relative;
+  width: 20px;
+}
+
+.tittle .overlap-wrapper {
+  height: 550px;
+  position: relative;
+  width: 719.15px;
+  margin-top: -50px;
+}
+
+.tittle .overlap {
+  height: 550px;
+  position: relative;
+  width: 719px;
+}
+
+.tittle .vector-3 {
+  height: 664px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 719px;
+}
+
+.tittle .vector-4 {
+  height: 241px;
+  left: 537px;
+  position: absolute;
+  top: 284px;
+  width: 113px;
+}
+
+.tittle .overlap-group {
+  height: 225px;
+  left: 25px;
+  position: absolute;
+  top: 29px;
+  width: 213px;
+}
+
+.tittle .vector-5 {
+  height: 205px;
+  left: 0;
+  position: absolute;
+  top: 19px;
+  width: 202px;
+}
+
+.tittle .vector-6 {
+  height: 35px;
+  left: 172px;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+.tittle .vector-7 {
+  height: 35px;
+  left: 581px;
+  position: absolute;
+  top: 248px;
+  width: 31px;
+}
+
+.tittle .maps {
+  height: 83px;
+  left: 311px;
+  position: absolute;
+  top: 612px;
+  width: 68px;
+}
+
+.tittle .plane {
+  height: 85px;
+  left: 351px;
+  position: absolute;
+  top: 0;
+  width: 68px;
+}
+
+.tittle .images {
+  height: 595px;
+  left: 75px;
+  position: absolute;
+  top: 77px;
+  width: 500px;
+}
+
+.tittle .main-person-image {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+  position: absolute;
+}
+
+.tittle .info-cards {
+  position: absolute;
+  top: 300px; 
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  z-index: 3; 
+}
+
+.tittle .card {
+  background-color: #ffffff;
+  border-radius: 10px; /* Adjust border radius */
+  box-shadow:
+    0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  padding: 10px 20px; /* Adjust padding */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+.tittle .card .icon {
+  width: 30px; /* Adjust size */
+  height: 30px; /* Adjust size */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px; /* Adjust icon size */
+}
+
+.tittle .customers .icon {
+   background-color: #cdfaff;
+   color: #ff69b4; /* Pink icon color */
+}
+
+.tittle .card .text-wrapper {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tittle .customers .text-wrapper {
+    font-size: 18px;
+    color: var(--primary); 
+}
+
