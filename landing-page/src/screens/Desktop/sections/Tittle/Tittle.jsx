@@ -15,7 +15,7 @@ export const Tittle = () => {
             <br />
           </span>
 
-          <span className="text-wrapper-6">– Hướng dẫn viên trong tai bạn</span>
+          <span className="text-wrapper-6">– Hướng dẫn viên luôn bên bạn</span>
         </p>
 
         <p className="p">
