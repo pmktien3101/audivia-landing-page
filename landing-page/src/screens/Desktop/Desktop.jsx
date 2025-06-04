@@ -1,17 +1,27 @@
-import React from "react";
-import { Div } from "./sections/Div";
-import { DivWrapper } from "./sections/DivWrapper";
-import { Frame } from "./sections/Frame";
-import { Frame1 } from "./sections/Frame1";
-import { FrameWrapper } from "./sections/FrameWrapper";
-import { Group } from "./sections/Group";
+import React, { useEffect } from "react";
+import { SectionFeature } from "./sections/SectionFeature";
+import { Feedback } from "./sections/Feedback";
 import { Header } from "./sections/Header";
-import { SectionComponentNode } from "./sections/SectionComponentNode";
-import { ServicesOption } from "./sections/ServicesOption";
 import { Tittle } from "./sections/Tittle";
 import "./style.css";
+import { CoreValuesOption } from "./sections/CoreValuesOption/CoreValuesOption";
+import { TopPlace } from "./sections/TopPlace/TopPlace";
+import { TopPlaceList } from "../../components/TopPlaceList/TopPlaceList";
+import { SectionPoint } from "./sections/SectionPoint/SectionPoint";
+import { Footer } from "./sections/Footer/Footer";
+import { Subscribe } from "./sections/Subscribe/Subscribe";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export const Desktop = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      offset: 300
+    });
+  }, []);
+
   return (
     <div className="desktop" data-model-id="1:166">
       <div className="div-5">
@@ -22,13 +32,13 @@ export const Desktop = () => {
             <Header />
           </div>
 
-          <div className="overlap-6">
+          <div className="overlap-6" data-aos="fade-up">
             <div className="ellipse-10" />
 
             <Tittle />
             <div className="basic-step">
 
-              <div className="image-container">
+              <div className="image-container" data-aos="fade-right" data-aos-delay="100">
                 <img
                   className="image"
                   alt="Image1"
@@ -37,7 +47,7 @@ export const Desktop = () => {
                 <div className="image-title">Chọn điểm đến</div>
               </div>
 
-              <div className="image-container">
+              <div className="image-container" data-aos="fade-right" data-aos-delay="200">
                 <img
                   className="image"
                   alt="Image1"
@@ -46,7 +56,7 @@ export const Desktop = () => {
                 <div className="image-title">Mua tour</div>
               </div>
 
-              <div className="image-container">
+              <div className="image-container" data-aos="fade-right" data-aos-delay="300">
                 <img
                   className="image"
                   alt="Image1"
@@ -54,7 +64,7 @@ export const Desktop = () => {
                 />
                 <div className="image-title">Đeo tai nghe</div>
               </div>
-              <div className="image-container">
+              <div className="image-container" data-aos="fade-right" data-aos-delay="400">
                 <img
                   className="image"
                   alt="Image1"
@@ -66,8 +76,7 @@ export const Desktop = () => {
           </div>
         </div>
 
-        <div className="overlap-7">
-          <div className="ellipse-11" />
+        <div className="overlap-7" data-aos="fade-up">
 
           <div className="BACKGROUND">
             <div className="overlap-group-8">
@@ -84,9 +93,11 @@ export const Desktop = () => {
               />
             </div>
           </div>
-
-          <Group />
-          <Frame />
+          <SectionFeature />
+          <div className="ellipse-11" />
+          <div data-aos="fade-left">
+            <Feedback />
+          </div>
           <img
             className="graphic-elements"
             alt="Graphic elements"
@@ -94,27 +105,25 @@ export const Desktop = () => {
           />
         </div>
 
-        <div className="overlap-8">
-          <img
-            className="OBJECTS"
-            alt="Objects"
-            src="https://c.animaapp.com/bADEbyrk/img/objects.svg"
-          />
 
-          <FrameWrapper />
+
+        <div className="services-6" data-aos="fade-up">
+          <div className="text-wrapper-34">GIÁ TRỊ CỐT LỖI</div>
+
+          <div className="text-wrapper-35">Lý do nên chọn Audivia</div>
         </div>
 
-        <div className="services-6">
-          <div className="text-wrapper-34">SERVICES</div>
-
-          <div className="text-wrapper-35">Why book using Travelo</div>
+        <div data-aos="fade-right">
+          <CoreValuesOption />
         </div>
-
-        <ServicesOption />
-        <DivWrapper />
-        <Div />
-        <div className="overlap-9">
-          <SectionComponentNode />
+        <div data-aos="fade-left">
+          <TopPlace />
+        </div>
+        <div data-aos="fade-right">
+          <TopPlaceList />
+        </div>
+        <div className="overlap-9" data-aos="fade-left">
+          <SectionPoint />
           <div className="ticket-star-wrapper">
             <img
               className="ticket-star"
@@ -123,8 +132,16 @@ export const Desktop = () => {
             />
           </div>
         </div>
+        <div className="overlap-8" data-aos="fade-right">
+          <img
+            className="OBJECTS"
+            alt="Objects"
+            src="https://c.animaapp.com/bADEbyrk/img/objects.svg"
+          />
 
-        <Frame1 />
+          <Subscribe />
+        </div>
+        <Footer />
       </div>
     </div>
   );

@@ -1,0 +1,196 @@
+.section-component-node {
+  align-items: flex-end;
+  display: inline-flex;
+  gap: 80px;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.section-component-node .group-2 {
+  height: 722px;
+  position: relative;
+  width: 720px;
+}
+
+.section-component-node .overlap-group-3 {
+  height: 722px;
+  position: relative;
+}
+
+.section-component-node .rectangle-8 {
+  background-color: rgb(183, 249, 249);
+  border-radius: 0px 279.5px 279.5px 0px;
+  height: 559px;
+  left: 0;
+  position: absolute;
+  top: 163px;
+  width: 720px;
+}
+
+.section-component-node .men {
+  height: 696px;
+  left: 131px;
+  object-fit: cover;
+  position: absolute;
+  top: 26px;
+  width: 550px;
+}
+
+.section-component-node .ellipse-4 {
+  background-color: #2fd9b9;
+  border-radius: 20px;
+  filter: blur(3px);
+  height: 40px;
+  left: 131px;
+  position: absolute;
+  top: 91px;
+  width: 40px;
+}
+
+.section-component-node .ellipse-5 {
+  background: linear-gradient(170deg, rgba(200, 43, 255, 1) 0%, rgba(102, 11, 221, 1) 100%);
+  border-radius: 50px;
+  filter: blur(6px);
+  height: 100px;
+  left: 535px;
+  position: absolute;
+  top: 0;
+  width: 100px;
+}
+
+.section-component-node .ellipse-6 {
+  background-color: #e74c3c;
+  border-radius: 20px;
+  filter: blur(2px);
+  height: 40px;
+  left: 80px;
+  position: absolute;
+  top: 285px;
+  width: 40px;
+}
+
+.section-component-node .ellipse-7 {
+  background-color: #e74c3c;
+  border-radius: 30px;
+  filter: blur(2px);
+  height: 60px;
+  left: 615px;
+  position: absolute;
+  top: 417px;
+  width: 60px;
+}
+
+.section-component-node .frame-31 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 57px;
+  position: relative;
+}
+
+.section-component-node .frame-32 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  width: 475px;
+}
+
+.section-component-node .services-5 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.section-component-node .text-wrapper-25 {
+  color: var(--primary);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 7.2px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.section-component-node .we-help-you-find {
+  color: var(--variable-collection-black);
+  font-family: var(--bold-type-44-font-family);
+  font-size: var(--bold-type-44-font-size);
+  font-style: var(--bold-type-44-font-style);
+  font-weight: var(--bold-type-44-font-weight);
+  letter-spacing: var(--bold-type-44-letter-spacing);
+  line-height: var(--bold-type-44-line-height);
+  position: relative;
+  width: fit-content;
+}
+
+.section-component-node .hay-travelo-there-to-2 {
+  color: #a7a7a7;
+  font-family: var(--medium-type-18-font-family);
+  font-size: var(--medium-type-18-font-size);
+  font-style: var(--medium-type-18-font-style);
+  font-weight: var(--medium-type-18-font-weight);
+  letter-spacing: var(--medium-type-18-letter-spacing);
+  line-height: var(--medium-type-18-line-height);
+  position: relative;
+  width: fit-content;
+}
+
+.section-component-node .frame-33 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 35px 35px;
+  position: relative;
+  width: 475px;
+}
+
+.section-component-node .frame-34 {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #1918251a;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 150px;
+  justify-content: center;
+  position: relative;
+  width: 220px;
+}
+
+.section-component-node .text-wrapper-26 {
+  color: var(--x-1st);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 30px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.section-component-node .text-wrapper-27 {
+  color: #a7a7a7;
+  font-family: var(--medium-type-18-font-family);
+  font-size: var(--medium-type-18-font-size);
+  font-style: var(--medium-type-18-font-style);
+  font-weight: var(--medium-type-18-font-weight);
+  letter-spacing: var(--medium-type-18-letter-spacing);
+  line-height: var(--medium-type-18-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}

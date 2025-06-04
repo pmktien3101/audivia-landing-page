@@ -19,6 +19,7 @@ export const Header = () => {
 
         <div className="text-wrapper-2">Khám Phá</div>
 
+        <div className="text-wrapper-2">Về chúng tôi</div>
 
         <div className="text-wrapper-2">Hổ Trợ</div>
       </div>

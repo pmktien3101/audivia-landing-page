@@ -1,0 +1,13 @@
+.services-option {
+  align-items: center;
+  display: flex;
+  gap: 30px;
+  left: 165px;
+  position: absolute;
+  top: 1383px;
+}
+
+.services-option .cards-services-instance {
+  left: -205px !important;
+  top: 1960px !important;
+}

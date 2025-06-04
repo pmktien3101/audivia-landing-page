@@ -9,6 +9,7 @@
   position: absolute;
   top: 223px;
   width: 1440px;
+  margin-top: 20px;
 }
 
 .header .frame-2 {
@@ -22,8 +23,8 @@
 
 .header .vector {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 
 .header .text-wrapper {
@@ -35,7 +36,7 @@
   background-clip: text;
   color: transparent;
   font-family: "Plus Jakarta Sans", Helvetica;
-  font-size: 24px;
+  font-size: 35px;
   font-weight: 700;
   letter-spacing: 0;
   line-height: normal;
@@ -62,6 +63,7 @@
   margin-top: -1.00px;
   position: relative;
   width: fit-content;
+  cursor: pointer;
 }
 
 .header .frame-3 {
@@ -70,6 +72,7 @@
   flex: 0 0 auto;
   gap: 10px;
   position: relative;
+  cursor: pointer;
   
 }
 
@@ -87,6 +90,8 @@
   border: 1px solid;
   border-color: var(--x-1st);
   border-radius: 30px;
+  cursor: pointer;
+
 }
 
 .header .text-wrapper-3 {

@@ -117,6 +117,8 @@
   justify-content: center;
   padding: 16px 32px;
   position: relative;
+  cursor: pointer;
+
 }
 
 .tittle .text-wrapper-7 {
@@ -144,6 +146,8 @@
   padding: 16px 32px;
   position: relative;
   width: 170px;
+  cursor: pointer;
+
 }
 
 .tittle .text-wrapper-8 {

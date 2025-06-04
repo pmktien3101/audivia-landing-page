@@ -1,0 +1,129 @@
+.frame {
+  align-items: center;
+  display: inline-flex;
+  gap: 160px;
+  justify-content: center;
+  left: 20px;
+  position: absolute;
+  top: 8px;
+}
+
+.frame .div-2 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 57px;
+  position: relative;
+}
+
+.frame .div-3 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  width: 475px;
+}
+
+.frame .services-2 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 14px;
+  margin-right: -1.00px;
+  position: relative;
+}
+
+.frame .text-wrapper-14 {
+  color: var(--primary);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 7.20px;
+  line-height: normal;
+  margin-top: -1.00px;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .text-wrapper-15 {
+  color: var(--variable-collection-black);
+  font-family: "Plus Jakarta Sans", Helvetica;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.frame .hay-travelo-there-to {
+  color: #a7a7a7;
+  font-family: var(--medium-type-18-font-family);
+  font-size: var(--medium-type-18-font-size);
+  font-style: var(--medium-type-18-font-style);
+  font-weight: var(--medium-type-18-font-weight);
+  letter-spacing: var(--medium-type-18-letter-spacing);
+  line-height: var(--medium-type-18-line-height);
+  position: relative;
+  width: fit-content;
+}
+
+.frame .div-4 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+}
+
+.frame .cards-key-features-instance {
+  flex: 0 0 auto !important;
+}
+
+.frame .design-component-instance-node {
+  font-family: var(--bold-type-24-font-family) !important;
+  font-size: var(--bold-type-24-font-size) !important;
+  font-style: var(--bold-type-24-font-style) !important;
+  font-weight: var(--bold-type-24-font-weight) !important;
+  letter-spacing: var(--bold-type-24-letter-spacing) !important;
+  line-height: var(--bold-type-24-line-height) !important;
+  white-space: unset !important;
+}
+
+.frame .overlap-group-wrapper {
+  height: 663px;
+  position: relative;
+  width: 475px;
+}
+
+.frame .overlap-group-2 {
+  height: 670px;
+  position: relative;
+  width: 482px;
+}
+
+.frame .rectangle-5 {
+  height: 417px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 350px;
+  border-radius: 20px;
+  border: 3px solid white;
+}
+
+.frame .rectangle-6 {
+  height: 432px;
+  left: 118px;
+  object-fit: cover;
+  position: absolute;
+  top: 238px;
+  width: 365px;
+  border-radius: 20px;
+  border: 3px solid white;
+}

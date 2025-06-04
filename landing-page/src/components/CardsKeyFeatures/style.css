@@ -14,7 +14,9 @@
   position: relative;
   width: 100px;
 }
-
+.cards-key-features .title{
+  color: var(--x-1st);
+}
 .cards-key-features .frame-47 {
   align-items: flex-start;
   display: inline-flex;
