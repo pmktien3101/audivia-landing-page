@@ -1,0 +1,28 @@
+name: React Deployment
+
+on:
+  push:
+    branches: [production]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: |
+          cd /services/audivia-landing-page/landing-page
+          git fetch origin
+          git checkout production
+          git pull
+          docker build -t audivia .
+          docker stop audivia-container || true
+          docker rm audivia-container || true
+          docker run -d --name audivia-container -p 4000:3000 audivia
+            
+          
