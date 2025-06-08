@@ -16,7 +16,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: 22
         script: |
-          cd /services/audivia-landing-page/landing-page
+          cd /root/services/audivia-landing-page/landing-page
           git fetch origin
           git checkout production
           git pull
