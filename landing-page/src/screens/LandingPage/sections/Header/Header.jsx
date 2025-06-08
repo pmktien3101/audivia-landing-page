@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="header">
       <div className="frame-2">
@@ -26,11 +28,11 @@ export const Header = () => {
 
       <div className="frame-3">
         <div className="frame-4">
-          <div className="text-wrapper-3">Đăng Nhập</div>
+          <div className="text-wrapper-3" onClick={() => navigate("/auth/login")}>Đăng Nhập</div>
         </div>
 
         <div className="frame-5">
-          <div className="text-wrapper-4">Đăng ký</div>
+          <div className="text-wrapper-4" onClick={() => navigate("/auth/register")}>Đăng ký</div>
         </div>
       </div>
     </header>

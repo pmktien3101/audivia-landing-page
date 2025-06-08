@@ -13,7 +13,7 @@ import { Subscribe } from "./sections/Subscribe/Subscribe";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export const Desktop = () => {
+export const LandingPage = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
