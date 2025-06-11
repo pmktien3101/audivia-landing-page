@@ -1,20 +1,64 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthForm from '../components/AuthForm';
 import './style.css';
-import AuthForm from '../components';
 
-const Login = () => {
-  const handleLogin = (data: any) => {
-    console.log('Login data:', data);
-    // Implement your login logic here (e.g., send data to an API)
-    alert(`Logged in with Email: ${data.email} and Password: ${data.password}`);
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (field) => (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: e.target.value,
+    }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Login form submitted:", formData);
+  };
+
+  const loginFields = [
+    {
+      type: "email",
+      name: "email",
+      placeholder: "email@gmail.com",
+      icon: "✉️",
+      label: "Email"
+    },
+    {
+      type: "password",
+      name: "password",
+      placeholder: "Enter your password",
+      icon: "🔒",
+      label: "Password"
+    }
+  ];
+
   return (
-    <div className="login-container">
-      <h1 className="login-title">Login Screen</h1>
-      <AuthForm isLogin={true} onSubmit={handleLogin} />
-    </div>
+    <AuthForm
+      type="login"
+      title="Welcome Back!!"
+      fields={loginFields}
+      formData={formData}
+      onInputChange={handleInputChange}
+      onSubmit={handleSubmit}
+      submitButtonText="Login"
+      showForgotPassword={true}
+      showSocialLogin={true}
+      footerText="Don't have an account?"
+      footerLinkText="Sign up"
+      onFooterLinkClick={() => navigate('/register')}
+      illustrationSrc="/login-illustration.png"
+      illustrationAlt="Person working on laptop"
+      layoutReverse={true}
+      containerClassName="login-container"
+    />
   );
 };
 
-export default Login;
+export default LoginPage;

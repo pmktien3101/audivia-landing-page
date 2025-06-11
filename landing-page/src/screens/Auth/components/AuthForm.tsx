@@ -1,43 +1,124 @@
 import React from 'react';
-import './style.css';
 
-interface AuthFormProps {
-  isLogin: boolean;
-  onSubmit: (data: any) => void;
-}
+import { useState } from "react"
+import "./style.css"
 
-const AuthForm: React.FC<AuthFormProps> = ({ isLogin, onSubmit }) => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault(); // Prevent default form submission
-    onSubmit({ email, password });
-  };
+const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <div className="input-group">
+      {label && <label className="input-label">{label}</label>}
+      <div className="input-wrapper">
+        <span className="input-icon">{icon}</span>
+        <input
+          type={type === "password" && showPassword ? "text" : type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          className="form-input"
+        />
+        {type === "password" && (
+          <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? "🙈" : "👁️"}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
 
-      <label htmlFor="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+const AuthForm = ({
+  type,
+  title,
+  fields,
+  formData,
+  onInputChange,
+  onSubmit,
+  submitButtonText,
+  showForgotPassword = false,
+  showSocialLogin = false,
+  footerText,
+  footerLinkText,
+  onFooterLinkClick,
+  illustrationSrc,
+  illustrationAlt,
+  layoutReverse = false,
+  containerClassName = "",
+}) => {
+  return (
+    <div className={`auth-container ${containerClassName}`}>
+      <div className={`auth-content ${layoutReverse ? "login-layout" : ""}`}>
+        <div className="illustration-section">
+          <div className="illustration-circle">
+            <img src={illustrationSrc || "/placeholder.svg"} alt={illustrationAlt} className="illustration-image" />
+          </div>
+        </div>
 
-      <button type="submit">
-        {isLogin ? 'Login' : 'Register'}
-      </button>
-    </form>
-  );
-};
+        <div className="form-section">
+          <div className="form-container">
+            <h1 className="form-title">{title}</h1>
 
-export default AuthForm;
+            <form onSubmit={onSubmit} className="auth-form">
+              {fields.map((field, index) => (
+                <FormInput
+                  key={index}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
+                  onChange={onInputChange(field.name)}
+                  icon={field.icon}
+                  label={field.label}
+                />
+              ))}
+
+              {showForgotPassword && (
+                <div className="forgot-password">
+                  <button type="button" className="link-button">
+                    Forgot Password?
+                  </button>
+                </div>
+              )}
+
+              <button type="submit" className="submit-button">
+                {submitButtonText}
+              </button>
+            </form>
+
+            {showSocialLogin && (
+              <>
+                <div className="divider">
+                  <span>or</span>
+                </div>
+
+                <div className="social-login">
+                  <button type="button" className="social-button google">
+                    <span className="social-icon">G</span>
+                  </button>
+                  <button type="button" className="social-button facebook">
+                    <span className="social-icon">f</span>
+                  </button>
+                  <button type="button" className="social-button apple">
+                    <span className="social-icon">🍎</span>
+                  </button>
+                </div>
+              </>
+            )}
+
+            <div className="form-footer">
+              <span className="footer-text">
+                {footerText}
+                <button type="button" className="link-button" onClick={onFooterLinkClick}>
+                  {footerLinkText}
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AuthForm
+export { FormInput }

@@ -1,21 +1,4 @@
 {
-  "nodes": [
-    {
-      "id": "src/screens/LandingPage/LandingPage.jsx",
-      "label": "LandingPage",
-      "routes": [
-        "/"
-      ],
-      "dataModelId": "1:166",
-      "isRoot": true
-    },
-    {
-      "id": "src/screens/Auth/components/AuthForm.tsx",
-      "label": "AuthForm",
-      "routes": [
-        "/auth"
-      ]
-    }
-  ],
+  "nodes": [],
   "edges": []
 }

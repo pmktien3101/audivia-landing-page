@@ -1,26 +1,27 @@
-import { useState } from "react"
-import AuthForm from "../components/AuthForm"
-import "./style.css"
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthForm from '../components/AuthForm';
+import './style.css';
 
-const RegisterPage = ({ onSwitchToLogin }) => {
-  const [formData, setFormData] = useState({
+const RegisterPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = React.useState({
     email: "",
     phone: "",
     password: "",
-  })
+  });
 
   const handleInputChange = (field) => (e) => {
     setFormData((prev) => ({
       ...prev,
       [field]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("Register form submitted:", formData)
-    // Xử lý logic đăng ký ở đây
-  }
+    e.preventDefault();
+    console.log("Register form submitted:", formData);
+  };
 
   const registerFields = [
     {
@@ -44,7 +45,7 @@ const RegisterPage = ({ onSwitchToLogin }) => {
       icon: "🔒",
       label: "Password",
     },
-  ]
+  ];
 
   return (
     <AuthForm
@@ -59,13 +60,13 @@ const RegisterPage = ({ onSwitchToLogin }) => {
       showSocialLogin={false}
       footerText="Already have an account?"
       footerLinkText="Sign in"
-      onFooterLinkClick={onSwitchToLogin}
+      onFooterLinkClick={() => navigate('/login')}
       illustrationSrc="/register-illustration.png"
       illustrationAlt="Person working on laptop for registration"
       layoutReverse={false}
       containerClassName="register-container"
     />
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage; 
