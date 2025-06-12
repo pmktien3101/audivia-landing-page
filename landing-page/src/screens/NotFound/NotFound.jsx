@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ROUTES from '../../utils/routes';
 import './NotFound.css';
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
   return (
     <div className="not-found-container">
       <h1>404</h1>

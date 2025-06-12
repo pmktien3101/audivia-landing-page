@@ -1,8 +1,13 @@
 import { useState } from "react"
 import AuthForm from "../components/AuthForm"
 import "./style.css"
+import ROUTES from "../../../utils/routes"
+import { useNavigate } from "react-router-dom"
+import { FiLock, FiMail, FiUser } from "react-icons/fi"
 
-const RegisterPage = ({ onSwitchToLogin }) => {
+const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -23,44 +28,42 @@ const RegisterPage = ({ onSwitchToLogin }) => {
   }
 
   const registerFields = [
+    
     {
-      name: "email",
+      name: "Username",
+      type: "name",
+      placeholder: "Nhập username",
+      icon: <FiUser/>,
+    },
+    {
+      name: "Email",
       type: "email",
       placeholder: "email@gmail.com",
-      icon: "✉️",
-      label: "Email",
+      icon: <FiMail/>,
     },
     {
-      name: "phone",
-      type: "tel",
-      placeholder: "Enter your phone no",
-      icon: "📱",
-      label: "Phone no",
-    },
-    {
-      name: "password",
+      name: "Password",
       type: "password",
-      placeholder: "Enter your password",
-      icon: "🔒",
-      label: "Password",
+      placeholder: "Nhập mật khẩu",
+      icon: <FiLock/>,
     },
   ]
 
   return (
     <AuthForm
       type="register"
-      title="Create Account"
+      title="Tạo tài khoản"
       fields={registerFields}
       formData={formData}
       onInputChange={handleInputChange}
       onSubmit={handleSubmit}
-      submitButtonText="Create Account"
+      submitButtonText="Tạo tài khoản"
       showForgotPassword={false}
       showSocialLogin={false}
-      footerText="Already have an account?"
-      footerLinkText="Sign in"
-      onFooterLinkClick={onSwitchToLogin}
-      illustrationSrc="/register-illustration.png"
+      footerText="Bạn đã có tài khoản?"
+      footerLinkText="Đăng nhập"
+      onFooterLinkClick={() => navigate(ROUTES.LOGIN)}
+      illustrationSrc="https://res.cloudinary.com/dgzn2ix8w/image/upload/v1748439988/Audivia/xxynw0hglztf4mijnobw.png"
       illustrationAlt="Person working on laptop for registration"
       layoutReverse={false}
       containerClassName="register-container"

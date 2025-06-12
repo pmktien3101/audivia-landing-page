@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useState } from "react"
 import "./style.css"
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -20,7 +22,7 @@ const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
         />
         {type === "password" && (
           <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? "🙈" : "👁️"}
+            {showPassword ? <FiEyeOff/> : <FiEye/>}
           </button>
         )}
       </div>
@@ -29,7 +31,6 @@ const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
 }
 
 const AuthForm = ({
-  type,
   title,
   fields,
   formData,
@@ -50,9 +51,7 @@ const AuthForm = ({
     <div className={`auth-container ${containerClassName}`}>
       <div className={`auth-content ${layoutReverse ? "login-layout" : ""}`}>
         <div className="illustration-section">
-          <div className="illustration-circle">
-            <img src={illustrationSrc || "/placeholder.svg"} alt={illustrationAlt} className="illustration-image" />
-          </div>
+            <img src={illustrationSrc} alt={illustrationAlt} className="illustration-image" />
         </div>
 
         <div className="form-section">
@@ -68,14 +67,13 @@ const AuthForm = ({
                   value={formData[field.name]}
                   onChange={onInputChange(field.name)}
                   icon={field.icon}
-                  label={field.label}
                 />
               ))}
 
               {showForgotPassword && (
                 <div className="forgot-password">
                   <button type="button" className="link-button">
-                    Forgot Password?
+                    Quên nhập khẩu?
                   </button>
                 </div>
               )}
@@ -88,18 +86,15 @@ const AuthForm = ({
             {showSocialLogin && (
               <>
                 <div className="divider">
-                  <span>or</span>
+                  <span>Hoặc</span>
                 </div>
 
                 <div className="social-login">
                   <button type="button" className="social-button google">
-                    <span className="social-icon">G</span>
+                    <span className="social-icon"><FaGoogle size={20}/></span>
                   </button>
                   <button type="button" className="social-button facebook">
-                    <span className="social-icon">f</span>
-                  </button>
-                  <button type="button" className="social-button apple">
-                    <span className="social-icon">🍎</span>
+                    <span className="social-icon"><FaFacebook size={20}/></span>
                   </button>
                 </div>
               </>

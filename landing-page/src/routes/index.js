@@ -1,6 +1,6 @@
 import NoHeaderLayout from "../layouts/NoHeaderLayout";
 import LoginPage from "../screens/Auth/Login/Login";
-import RegisterPage from "../screens/Auth/Register/Register";
+import RegisterPage from "../screens/Auth/Register";
 import { LandingPage } from "../screens/LandingPage";
 import ROUTES from "../utils/routes";
 

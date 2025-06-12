@@ -1,58 +1,49 @@
-/* Register Specific Styles */
-.register-container .form-title {
-  color: #2d3748;
-  background: linear-gradient(135deg, #d4a574 0%, #c49660 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.register-container .submit-button {
-  background: linear-gradient(135deg, #d4a574 0%, #c49660 100%);
-  box-shadow: 0 4px 15px rgba(212, 165, 116, 0.2);
-}
-
-.register-container .submit-button:hover {
-  background: linear-gradient(135deg, #c49660 0%, #b8854c 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(212, 165, 116, 0.4);
-}
-
-.register-container .illustration-circle {
-  background: linear-gradient(135deg, #f4d4c7 0%, #e8c4b0 100%);
-  box-shadow: 0 20px 40px rgba(212, 165, 116, 0.2);
-}
-
-.register-container .form-input:focus {
-  border-color: #d4a574;
-  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.15);
-}
-
-/* Register animation */
+/* Login Specific Styles */
 .register-container .auth-content {
-  animation: slideInFromLeft 0.6s ease-out;
-}
+  animation: slideInFromRight 0.6s ease-out;
+  background-color: var(--blue-light);
+  min-height: 550px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(144, 39, 176, 0.2);
 
-@keyframes slideInFromLeft {
+}
+.register-container .submit-button{
+  margin-bottom: 20px;
+}
+.register-container .illustration-section {
+  flex: 0 0 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  top:-110px;
+  height: 400px;
+  background: var(--blue-gradient);
+  border-radius: 0 0 300px 300px;
+  box-shadow: 0 4px 3px rgba(8, 8, 8, 0.1);
+  position: relative;
+}
+.register-container .form-title{
+  color: var(--primary);
+}
+.register-container .link-button{
+  color: var(--x-1st);
+}
+.register-container .illustration-image {
+  width: 100%;
+  height: 450px;
+  position: absolute;
+  bottom: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain;
+}
+@keyframes slideInFromRight {
   from {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-/* Register specific input styling */
-.register-container .input-group:nth-child(1) .input-icon {
-  color: #d4a574;
-}
-
-.register-container .input-group:nth-child(2) .input-icon {
-  color: #e8c4b0;
-}
-
-.register-container .input-group:nth-child(3) .input-icon {
-  color: #c49660;
 }
