@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 export const Tittle = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleDemoClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="tittle">
       <div className="image">
@@ -27,7 +37,7 @@ export const Tittle = () => {
             <div className="text-wrapper-7">Bắt Đầu</div>
           </div>
 
-          <div className="frame-9">
+          <div className="frame-9" onClick={handleDemoClick} style={{ cursor: 'pointer' }}>
             <div className="text-wrapper-8">Xem Demo</div>
 
             <img
@@ -38,6 +48,65 @@ export const Tittle = () => {
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000
+          }}
+          onClick={handleCloseModal}
+        >
+          <div 
+            style={{
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '10px',
+              maxWidth: '90%',
+              width: '800px',
+              position: 'relative'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={handleCloseModal}
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '10px',
+                background: 'none',
+                border: 'none',
+                fontSize: '24px',
+                cursor: 'pointer',
+                color: '#333'
+              }}
+            >
+              ×
+            </button>
+            <video 
+              controls 
+              style={{ 
+                width: '100%',
+                borderRadius: '5px'
+              }}
+            >
+              <source 
+                src="https://res.cloudinary.com/dgzn2ix8w/video/upload/v1749889095/Audivia/vpjuulywloka1r9bopuf.mp4" 
+                type="video/mp4" 
+              />
+              Trình duyệt của bạn không hỗ trợ thẻ video.
+            </video>
+          </div>
+        </div>
+      )}
 
       <div className="overlap-wrapper">
         <div className="overlap">
