@@ -1,0 +1,166 @@
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.balance-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+
+.balance-change {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #10b981;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.balance-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 60px;
+}
+
+.balance-bar {
+    width: 20px;
+    border-radius: 5px 5px 0 0;
+    background-color: #6366f1;
+}
+
+.search-box-bottom {
+    position: relative;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-input-bottom {
+    padding: 5px 10px;
+    padding-left: 35px;
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input-bottom:focus {
+    box-shadow: none;
+}
+
+.search-icon-bottom {
+    position: absolute;
+    left: 10px;
+    color: #9ca3af;
+    font-size: 16px;
+}
+
+.activity-chart svg {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.activity-info {
+    font-size: 14px;
+    color: #6b7280;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.my-card {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    padding: 25px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+}
+
+.my-card .card-title {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-number {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.card-holder {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.invoice-summary-card .invoice-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.invoice-change-positive {
+    font-size: 14px;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.invoice-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.invoice-badge.blue {
+    background: #3b82f6;
+}
+
+.invoice-badge.red {
+    background: #ef4444;
+}
+
+.invoice-badge.yellow {
+    background: #f59e0b;
+}
+
