@@ -1,10 +1,14 @@
 import React from 'react';
 import {
     MdOutlineDashboard, MdOutlineDescription, MdOutlineCreditCard,
-    MdGroup
+    MdGroup,
+    MdMoney,
+    MdMap,
+    MdSettings
 } from "react-icons/md";
 import './styles.css';
 import ROUTES from '../../../utils/routes';
+import { FaDollarSign } from 'react-icons/fa';
 
 const menuItems = [
     {
@@ -23,18 +27,32 @@ const menuItems = [
     },
     {
         id: 3,
-        title: 'Invoice',
-        icon: MdOutlineDescription,
-        path: '#',
+        title: 'Revenue',
+        icon: FaDollarSign,
+        path: ROUTES.ADMIN.REVENUE,
         isActive: false
     },
     {
         id: 4,
-        title: 'Card',
-        icon: MdOutlineCreditCard,
-        path: '#',
+        title: 'Invoice',
+        icon: MdOutlineDescription,
+        path: ROUTES.ADMIN.REVENUE,
         isActive: false
-    }
+    },
+    {
+        id: 5,
+        title: 'Tour Management',
+        icon: MdMap,
+        path: ROUTES.ADMIN.REVENUE,
+        isActive: false
+    },
+    {
+        id: 6,
+        title: 'FAQ',
+        icon: MdSettings,
+        path: ROUTES.ADMIN.FAQ,
+        isActive: false
+    },
 ];
 
 const AdminSidebar = () => {

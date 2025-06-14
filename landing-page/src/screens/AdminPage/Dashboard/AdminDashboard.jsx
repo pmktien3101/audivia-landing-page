@@ -1,23 +1,30 @@
-import {
-    FiSearch,
-    FiCheck,
-  } from "react-icons/fi"
-
-  import { IoTrendingUp } from "react-icons/io5"
   import './style.css';
   import "../../../layouts/AdminLayout/style.css"
   import AdminHeader from "../components/AdminHeader";
-  
+  import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
   const AdminDashboard = () => {
-    const balanceBars = [
-      { height: "40%", color: "#6366f1" },
-      { height: "70%", color: "#6366f1" },
-      { height: "50%", color: "#6366f1" },
-      { height: "80%", color: "#6366f1" },
-    ]
-  
-    const activityChartPoints = "M0 60 L20 40 L40 50 L60 20 L80 30 L100 10 L120 45 L140 30 L160 55 L180 25" // Example SVG path data
-  
+   
+    // Sample data for pie chart (tour distribution)
+    const tourData = [
+      { name: 'Tour A', value: 400 },
+      { name: 'Tour B', value: 300 },
+      { name: 'Tour C', value: 300 },
+      { name: 'Tour D', value: 200 },
+    ];
+
+    // Sample data for bar chart (monthly registrations)
+    const monthlyData = [
+      { month: 'Jan', users: 65 },
+      { month: 'Feb', users: 59 },
+      { month: 'Mar', users: 80 },
+      { month: 'Apr', users: 81 },
+      { month: 'May', users: 56 },
+      { month: 'Jun', users: 55 },
+    ];
+
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
     return (
       <div className="dashboard">
   
@@ -26,70 +33,63 @@ import {
 
           <AdminHeader/>
   
-          <h1 className="main-title">Hi Robert, <span className="overview-text">Overview</span></h1>
+          <h1 className="main-title"><span className="overview-text">Overview</span></h1>
   
           <div className="stats-grid">
             <div className="stat-card balance-card">
-              <div className="card-title">Balance</div>
-              <div className="balance-amount">$ 54321.65</div>
-              <div className="balance-change">
-                <IoTrendingUp size={16} />
-                +15%
-              </div>
-              <div className="balance-chart">
-                {balanceBars.map((bar, index) => (
-                  <div key={index} className="balance-bar" style={{ height: bar.height, backgroundColor: bar.color }}></div>
-                ))}
-              </div>
+              <div className="card-title">Total Tours</div>
             </div>
   
             <div className="stat-card activity-card">
-              <div className="card-title">Latest Activity</div>
-              <div className="activity-chart">
-                <svg viewBox="0 0 200 80">
-                  <path d={activityChartPoints} fill="none" stroke="#6366f1" strokeWidth="3" />
-                  <defs>
-                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#6366f1" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  <path d={`${activityChartPoints} L180 80 L0 80 Z`} fill="url(#chartGradient)" />
-                </svg>
-              </div>
-              <div className="activity-info">
-                <span>75%</span>
-              </div>
-              <div className="search-box-bottom">
-                <input type="text" className="search-input-bottom" placeholder="Search" />
-                <FiSearch className="search-icon-bottom" size={18} />
-              </div>
+              <div className="card-title">Total invoices</div>
+             
             </div>
   
             <div className="stat-card my-card">
-              <div className="card-title">My Card</div>
-              <div className="card-number">1234 5678 9101 1123</div>
-              <div className="card-holder">Robert Downey</div>
+              <div className="card-title">Total Revenue</div>
             </div>
   
             <div className="stat-card invoice-summary-card">
-              <div className="card-title">Total Invoice</div>
-              <div className="invoice-value">520 <span className="invoice-change-positive">+12%</span></div>
+              <div className="card-title">Total Users</div>
             </div>
   
-            <div className="stat-card invoice-summary-card">
-              <div className="card-title">Paid Invoice</div>
-              <div className="invoice-value">210 <span className="invoice-badge blue">85% <IoTrendingUp size={12} /></span></div>
+
+            <div className="stat-card chart-card">
+              <div className="card-title">User Distribution by Tour</div>
+              <div className="chart-container">
+                <PieChart width={350} height={350}>
+                  <Pie
+                    data={tourData}
+                    cx={150}
+                    cy={150}
+                    labelLine={false}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+                  >
+                    {tourData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </div>
             </div>
-  
-            <div className="stat-card invoice-summary-card">
-              <div className="card-title">Unpaid Invoice</div>
-              <div className="invoice-value">65 <span className="invoice-badge red">15% <IoTrendingUp size={12} /></span></div>
-            </div>
-  
-            <div className="stat-card invoice-summary-card">
-              <div className="card-title">Invoice Sent</div>
-              <div className="invoice-value">120 <span className="invoice-badge yellow"><FiCheck size={12} /></span></div>
+
+            <div className="stat-card chart-card">
+              <div className="card-title">Monthly User Registrations</div>
+              <div className="chart-container">
+                <BarChart width={300} height={300} data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="users" fill="#6366f1" />
+                </BarChart>
+              </div>
             </div>
           </div>
         </div>

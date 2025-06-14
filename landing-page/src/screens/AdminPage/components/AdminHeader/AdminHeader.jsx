@@ -18,8 +18,8 @@ const AdminHeader = () => {
                 <div className="profile-section">
                   <div className="profile-avatar"></div>
                   <div className="profile-info">
-                    <div className="profile-name">Robert Downey</div>
-                    <div className="profile-username">@robert564</div>
+                    <div className="profile-name">Tina Pham</div>
+                    <div className="profile-username">@tina31</div>
                   </div>
                 </div>
               </div>

@@ -19,9 +19,8 @@ const ROUTES = {
     NOTIFICATION: '/notification',
     ADMIN: {
       DASHBOARD: '/admin',
-      TRANSACTION: '/admin/transaction',
+      REVENUE: '/admin/revenue',
       MEMBER: '/admin/member',
-      FEATURE: '/admin/feature',
       FAQ: '/admin/faq',
       FEEDBACK: '/admin/feedback',
       CONTACT: '/admin/contact',
