@@ -21,6 +21,7 @@ const ROUTES = {
       DASHBOARD: '/admin',
       REVENUE: '/admin/revenue',
       MEMBER: '/admin/member',
+      TOUR: '/admin/tour',
       FAQ: '/admin/faq',
       FEEDBACK: '/admin/feedback',
       CONTACT: '/admin/contact',

@@ -1,7 +1,7 @@
 
 .main-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     background: rgba(255, 255, 255, 0.3);
     padding: 12px 25px;
@@ -91,7 +91,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #f97316, #ea580c); /* Orange gradient for avatar */
+    background: linear-gradient(135deg, var(--primary), #ea580c); /* Orange gradient for avatar */
     cursor: pointer;
 }
 

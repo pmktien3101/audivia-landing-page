@@ -3,23 +3,19 @@ import './style.css'
 const AdminHeader = () => {
     return (
         <div className="main-header">
-            <div className="search-box">
-              <input type="text" className="search-input" placeholder="Search" />
-              <FiSearch className="search-icon" size={18} />
-            </div>
             <div className="header-right">
               <div className="header-icons">
-                <button className="icon-btn">
+                <button className="icon-btn" title="Tin nhắn">
                   <FiMail size={20} />
                 </button>
-                <button className="icon-btn">
+                <button className="icon-btn" title="Thông báo">
                   <FiBell size={20} />
                 </button>
                 <div className="profile-section">
                   <div className="profile-avatar"></div>
                   <div className="profile-info">
                     <div className="profile-name">Tina Pham</div>
-                    <div className="profile-username">@tina31</div>
+                    <div className="profile-username">Quản trị viên</div>
                   </div>
                 </div>
               </div>

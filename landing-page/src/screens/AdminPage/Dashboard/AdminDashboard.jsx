@@ -33,29 +33,29 @@
 
           <AdminHeader/>
   
-          <h1 className="main-title"><span className="overview-text">Overview</span></h1>
+          <h1 className="main-title"><span className="overview-text">Tổng Quan</span></h1>
   
           <div className="stats-grid">
             <div className="stat-card balance-card">
-              <div className="card-title">Total Tours</div>
+              <div className="card-title">Tổng số tour</div>
             </div>
   
             <div className="stat-card activity-card">
-              <div className="card-title">Total invoices</div>
+              <div className="card-title">Tổng hoá đơn</div>
              
             </div>
   
             <div className="stat-card my-card">
-              <div className="card-title">Total Revenue</div>
+              <div className="card-title">Tổng doanh thu</div>
             </div>
   
             <div className="stat-card invoice-summary-card">
-              <div className="card-title">Total Users</div>
+              <div className="card-title">Tổng số người dùng</div>
             </div>
   
 
             <div className="stat-card chart-card">
-              <div className="card-title">User Distribution by Tour</div>
+              <div className="card-title">Phân bố người dùng theo tour</div>
               <div className="chart-container">
                 <PieChart width={350} height={350}>
                   <Pie
@@ -79,7 +79,7 @@
             </div>
 
             <div className="stat-card chart-card">
-              <div className="card-title">Monthly User Registrations</div>
+              <div className="card-title">Đăng ký người dùng hàng tháng</div>
               <div className="chart-container">
                 <BarChart width={300} height={300} data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
