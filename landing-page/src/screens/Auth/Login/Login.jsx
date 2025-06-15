@@ -4,6 +4,7 @@ import { FiMail, FiLock } from 'react-icons/fi';
 import AuthForm from '../components/AuthForm';
 import './style.css';
 import ROUTES from '../../../utils/routes';
+import userService from '../../../services/user';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = React.useState("");
 
   const handleInputChange = (field) => (e) => {
     setFormData((prev) => ({
@@ -19,21 +21,29 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted:", formData);
+    setError("");
+    try {
+      const response = await userService.login(formData.email, formData.password);
+      if (response.accessToken) {
+        navigate(ROUTES.ADMIN.DASHBOARD);
+      }
+    } catch (err) {
+      setError(err.message || "Đăng nhập thất bại. Vui lòng thử lại.");
+    }
   };
 
   const loginFields = [
     {
       type: "email",
-      name: "Email",
+      name: "email",
       placeholder: "email@gmail.com",
       icon: <FiMail size={20} />,
     },
     {
       type: "password",
-      name: "Password",
+      name: "password",
       placeholder: "Nhập mật khẩu",
       icon: <FiLock size={20} />,
     }
@@ -57,6 +67,7 @@ const LoginPage = () => {
       illustrationAlt="Person working on laptop"
       layoutReverse={true}
       containerClassName="login-container"
+      error={error}
     />
   );
 };

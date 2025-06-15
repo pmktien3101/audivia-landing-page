@@ -20,11 +20,6 @@ const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
           onChange={onChange}
           className="form-input"
         />
-        {type === "password" && (
-          <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <FiEyeOff/> : <FiEye/>}
-          </button>
-        )}
       </div>
     </div>
   )
@@ -46,6 +41,7 @@ const AuthForm = ({
   illustrationAlt,
   layoutReverse = false,
   containerClassName = "",
+  error = "",
 }) => {
   return (
     <div className={`auth-container ${containerClassName}`}>
@@ -59,6 +55,8 @@ const AuthForm = ({
             <h1 className="form-title">{title}</h1>
 
             <form onSubmit={onSubmit} className="auth-form">
+              {error && <div className="error-message">{error}</div>}
+              
               {fields.map((field, index) => (
                 <FormInput
                   key={index}

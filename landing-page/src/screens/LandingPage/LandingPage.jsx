@@ -108,7 +108,7 @@ export const LandingPage = () => {
 
 
         <div className="services-6" data-aos="fade-up">
-          <div className="text-wrapper-34">GIÁ TRỊ CỐT LỖI</div>
+          <div className="text-wrapper-34">GIÁ TRỊ CỐT LÕI</div>
 
           <div className="text-wrapper-35">Lý do nên chọn Audivia</div>
         </div>

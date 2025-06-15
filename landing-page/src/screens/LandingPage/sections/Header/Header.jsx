@@ -24,16 +24,16 @@ export const Header = () => {
 
         <div className="text-wrapper-2">Về chúng tôi</div>
 
-        <div className="text-wrapper-2">Hổ Trợ</div>
+        <div className="text-wrapper-2">Hỗ Trợ</div>
       </div>
 
       <div className="frame-3">
-        <div className="frame-4">
-          <div className="text-wrapper-3" onClick={() => navigate(ROUTES.LOGIN)}>Đăng Nhập</div>
+        <div className="frame-4" onClick={() => navigate(ROUTES.LOGIN)}>
+          <div className="text-wrapper-3">Đăng Nhập</div>
         </div>
 
-        <div className="frame-5">
-          <div className="text-wrapper-4" onClick={() => navigate(ROUTES.REGISTER)}>Đăng ký</div>
+        <div className="frame-5" onClick={() => navigate(ROUTES.REGISTER)}>
+          <div className="text-wrapper-4">Đăng ký</div>
         </div>
       </div>
     </header>
