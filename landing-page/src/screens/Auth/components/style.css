@@ -168,7 +168,6 @@
   text-decoration: underline;
 }
 
-/* Social Login Styles */
 .divider {
   text-align: center;
   margin: 30px 0;
@@ -225,19 +224,12 @@
   object-fit: contain;
 }
 
-.social-button.google img {
-  width: 20px;
-  height: 20px;
+.social-button.google .social-icon svg {
+  color: #DB4437;
 }
 
-.social-button.facebook img {
-  width: 20px;
-  height: 20px;
-}
-
-.social-button.apple img {
-  width: 20px;
-  height: 20px;
+.social-button.facebook .social-icon svg {
+  color: #1877F3;
 }
 
 /* Forgot Password */

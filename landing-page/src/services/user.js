@@ -23,6 +23,7 @@ const userService = {
     getCurrentUser: async () => {
         try {
             const response = await axiosClient.get('/auth/profile');
+            console.log('USER PROFILE,', response)
             return response;
         } catch (error) {
             throw error;

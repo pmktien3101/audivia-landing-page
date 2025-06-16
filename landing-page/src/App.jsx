@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes, adminRoutes, memberRoutes } from './routes';
-import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './contexts/ProtectedRoute';
 
 function App() {
     return (
-        <AuthProvider>
             <Router>
                 <Routes>
                     {/* Public Routes */}
@@ -34,9 +33,11 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
+                                    <ProtectedRoute allowedRoles={['admin']}>
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </ProtectedRoute>
                                 }
                             />
                         );
@@ -51,16 +52,17 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
+                                    <ProtectedRoute allowedRoles={['customer']}>
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </ProtectedRoute>
                                 }
                             />
                         );
                     })}
                 </Routes>
             </Router>
-        </AuthProvider>
     );
 }
 

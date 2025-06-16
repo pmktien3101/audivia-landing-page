@@ -1,7 +1,7 @@
 // define the Route
 const ROUTES = {
     GUEST_HOME: '/',
-    HOME: '/',
+    HOME: '/home',
     LOGIN: '/login',
     REGISTER: '/register',
     CONFIRM_EMAIL: '/confirm-email',

@@ -5,6 +5,7 @@ import AuthForm from '../components/AuthForm';
 import './style.css';
 import ROUTES from '../../../utils/routes';
 import userService from '../../../services/user';
+import { jwtDecode } from 'jwt-decode';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,13 @@ const LoginPage = () => {
     try {
       const response = await userService.login(formData.email, formData.password);
       if (response.accessToken) {
-        navigate(ROUTES.ADMIN.DASHBOARD);
+        const decodedToken = jwtDecode(response.accessToken);
+        const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        if (role === "admin") {
+          navigate(ROUTES.ADMIN.DASHBOARD);
+        } else {
+          navigate(ROUTES.HOME);
+        }
       }
     } catch (err) {
       setError(err.message || "Đăng nhập thất bại. Vui lòng thử lại.");

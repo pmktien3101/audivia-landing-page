@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0 20px 0;
 }
 
 .stat-card {
@@ -85,4 +85,10 @@
     align-items: center;
     height: 300px;
 }
-
+.header-contain{
+    display: flex;
+    justify-content: space-between;
+}
+.hehe{
+    margin-top: 30px;
+}

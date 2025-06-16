@@ -2,10 +2,10 @@
   import "../../../layouts/AdminLayout/style.css"
   import AdminHeader from "../components/AdminHeader";
   import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { MdDownload } from 'react-icons/md';
 
   const AdminDashboard = () => {
-   
-    // Sample data for pie chart (tour distribution)
+  
     const tourData = [
       { name: 'Tour A', value: 400 },
       { name: 'Tour B', value: 300 },
@@ -13,7 +13,6 @@
       { name: 'Tour D', value: 200 },
     ];
 
-    // Sample data for bar chart (monthly registrations)
     const monthlyData = [
       { month: 'Jan', users: 65 },
       { month: 'Feb', users: 59 },
@@ -28,13 +27,16 @@
     return (
       <div className="dashboard">
   
-        {/* Main Content */}
         <div className="main-content">
 
           <AdminHeader/>
-  
+          <div className="header-contain">
           <h1 className="main-title"><span className="overview-text">Tổng Quan</span></h1>
-  
+          <button className="table-btn export-btn hehe">
+              <span className="btn-icon"><MdDownload/></span>
+              <span className="btn-text">Xuất dữ liệu</span>
+            </button>
+          </div> 
           <div className="stats-grid">
             <div className="stat-card balance-card">
               <div className="card-title">Tổng số tour</div>
