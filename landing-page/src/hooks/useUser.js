@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 const ROLE_KEY = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
@@ -7,8 +7,18 @@ const EMAIL_KEY = 'email';
 const USERID_KEY = 'userId';
 
 export default function useUser() {
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem('accessToken'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   return useMemo(() => {
-    const token = localStorage.getItem('accessToken');
     if (!token) return null;
     try {
       const decoded = jwtDecode(token);
@@ -22,5 +32,5 @@ export default function useUser() {
     } catch (e) {
       return null;
     }
-  }, []);
+  }, [token]);
 }

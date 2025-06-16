@@ -15,7 +15,6 @@ const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout},
     {path: ROUTES.LOGIN, component: LoginPage, layout: NoHeaderLayout},
     {path: ROUTES.REGISTER, component: RegisterPage, layout: NoHeaderLayout},
-    {path: ROUTES.HOME, component: Home, layout: CustomerLayout}
 
 ]
 const adminRoutes = [
@@ -26,5 +25,6 @@ const adminRoutes = [
 ]
 
 const memberRoutes = [
+    {path: ROUTES.HOME, component: Home, layout: CustomerLayout}
 ]
 export { adminRoutes, memberRoutes, publicRoutes }

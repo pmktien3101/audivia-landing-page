@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { publicRoutes, adminRoutes, memberRoutes } from './routes';
 import ProtectedRoute from './contexts/ProtectedRoute';
+import ROUTES from './utils/routes';
 
 function App() {
     return (
@@ -61,6 +62,12 @@ function App() {
                             />
                         );
                     })}
+
+                    {/*Redirect to login if not authenticated */}
+                    <Route
+                        path="*"
+                        element={<Navigate to={ROUTES.LOGIN} replace />}
+                    />
                 </Routes>
             </Router>
     );
