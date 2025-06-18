@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import ROUTES from '../utils/routes';
-import useUser from '../hooks/UseUser';
+import useUser from '../hooks/useUser';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
     const user = useUser();
