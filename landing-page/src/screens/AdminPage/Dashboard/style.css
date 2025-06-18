@@ -118,75 +118,79 @@
     margin-top: 20px;
     width: 100%;
 }
-.header-contain{
-    display: flex;
-    justify-content: space-between;
-}
-.hehe{
-    margin-top: 30px;
-}
 
-.dashboard .main-content .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.dashboard .main-content .stat-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard .main-content .stat-card .card-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.dashboard .main-content .stat-card .card-value {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.dashboard .header-contain {
+.header-contain {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.dashboard .main-title {
+.main-title {
     font-size: 28px;
     font-weight: bold;
     color: #1a202c;
 }
 
-.dashboard .date-pickers {
+.date-pickers {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    align-items: flex-end;
+    gap: 20px;
 }
 
-.dashboard .date-pickers input,
-.dashboard .date-pickers select {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 10px 15px;
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #4a5568;
+    padding-left: 3px;
+    text-transform: uppercase;
+}
+
+.date-pickers input,
+.date-pickers select {
+    background-color: #fff;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    padding: 9px 12px;
     font-size: 14px;
+    color: #2d3748;
     transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.dashboard .date-pickers input:focus,
-.dashboard .date-pickers select:focus {
+.date-pickers input:focus,
+.date-pickers select:focus {
     outline: none;
-    border-color: #4A90E2;
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
 }
 
-.stat-card.chart-card {
-    grid-column: span 2;
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 32px;
+}
+
+.select-wrapper::after {
+    content: '⌄';
+    font-size: 16px;
+    color: #718096;
+    position: absolute;
+    right: 12px;
+    top: calc(50% + 5px);
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 /* Icon Colors */
