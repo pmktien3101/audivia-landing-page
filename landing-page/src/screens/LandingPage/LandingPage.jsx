@@ -19,7 +19,6 @@ export const LandingPage = () => {
       duration: 1000,
       once: false,
       offset: 100,
-      disable: 'mobile',
       startEvent: 'DOMContentLoaded',
       mirror: false,
       disableMutationObserver: false,
