@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import './style.css'
 import userService from "../../../../services/user"
 import ROUTES from "../../../../utils/routes"
-import useUser from "../../../../hooks/UseUser"
+import useUser from "../../../../hooks/useUser"
 
 const HeaderIcons = () => (
   <>
