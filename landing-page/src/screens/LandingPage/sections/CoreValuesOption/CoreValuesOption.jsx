@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import "./responsive.css";
 import { CoreValues } from "../../../../components/CoreValues/CoreValues";
 
 export const CoreValuesOption = () => {

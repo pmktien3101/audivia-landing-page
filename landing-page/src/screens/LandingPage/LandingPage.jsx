@@ -18,7 +18,13 @@ export const LandingPage = () => {
     AOS.init({
       duration: 1000,
       once: false,
-      offset: 300
+      offset: 100,
+      disable: 'mobile',
+      startEvent: 'DOMContentLoaded',
+      mirror: false,
+      disableMutationObserver: false,
+      useClassNames: true,
+      disable: window.innerWidth < 768 ? true : false
     });
   }, []);
 
@@ -95,7 +101,7 @@ export const LandingPage = () => {
           </div>
           <SectionFeature />
           <div className="ellipse-11" />
-          <div data-aos="fade-left">
+          <div data-aos="fade-left" className="feedback-container">
             <Feedback />
           </div>
           <img

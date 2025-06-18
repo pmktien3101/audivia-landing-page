@@ -1,0 +1,36 @@
+@media screen and (max-width: 768px) {
+  .cards-services {
+    width: calc(100% - 30px);
+    height: 205px;
+    border-radius: 20px;
+  }
+
+  .cards-services .group-5 {
+    padding: 15px;
+  }
+
+  .cards-services .frame-48 {
+    height: 100px;
+    gap: 15px;
+  }
+
+  .cards-services .all-you-needs-2 {
+    padding: 15px;
+  }
+
+  .cards-services .all-you-needs-2 p {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .cards-services .text-wrapper-33 {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 10px;
+  }
+
+  .icon-img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+} 

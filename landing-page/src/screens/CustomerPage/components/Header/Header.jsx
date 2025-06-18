@@ -37,7 +37,7 @@ const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout }) => (
   </div>
 )
 
-const AdminHeader = () => {
+const Header = () => {
     const user = useUser();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const navigate = useNavigate()
@@ -66,4 +66,4 @@ const AdminHeader = () => {
     )
 }
 
-export default AdminHeader
+export default Header

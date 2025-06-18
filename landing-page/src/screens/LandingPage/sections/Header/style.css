@@ -132,3 +132,11 @@
   text-align: center;
   width: fit-content;
 }
+@media screen and (max-width: 768px) {
+  .header .frame-2 {
+    display: none;
+  }
+  .header .navbar {
+    display: none;
+  }
+}

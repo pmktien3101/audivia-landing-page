@@ -1,3 +1,10 @@
+.top-place-container {
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
 .div {
   align-items: center;
   display: inline-flex;
@@ -190,4 +197,75 @@
   height: 15px;
   position: relative;
   width: 9px;
+}
+
+/* Responsive tour display */
+@media screen and (max-width: 768px) {
+  .div {
+    left: 40px;
+    width: calc(100% - 80px);
+  }
+  
+  .div .frame-24 {
+    top: -70px !important;
+    width: 100%;
+  }
+  
+  .div .rectangle-7 {
+    height: 250px;
+  }
+  
+  .div .frame-27 {
+    height: 200px;
+    padding: 20px;
+  }
+  
+  .div .pandawa-beach-bali {
+    font-size: 20px;
+  }
+  
+  .div .text-wrapper-22 {
+    font-size: 20px;
+  }
+  .frame-30{
+    top: -60px;
+  }
+
+  .div .frame-23 {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+
+  .div .frame-24 {
+    width: calc(33.33% - 10px) !important;
+    min-width: 300px !important;
+    margin: 0 !important;
+    top: 0 !important;
+  }
+
+  .div .rectangle-7 {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  .div .frame-27 {
+    width: 100% !important;
+    height: 250px !important;
+    padding: 25px !important;
+  }
+
+  .div .pandawa-beach-bali {
+    font-size: 22px !important;
+  }
+
+  .div .text-wrapper-22 {
+    font-size: 22px !important;
+  }
+
+  .frame-30 {
+    top: 20px !important;
+  }
 }

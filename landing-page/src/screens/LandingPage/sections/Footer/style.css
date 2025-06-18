@@ -159,3 +159,20 @@
   color: #b3b3b3;
 }
 
+
+
+@media screen and (max-width: 768px) {
+  .frame-1 {
+    top: 2900px !important;
+  }
+  .footer-column:not(:first-child):not(:last-child) {
+    display: none;
+  }
+  
+  .footer-column:first-child,
+  .footer-column:last-child {
+    width: 100%;
+    text-align: left;
+    padding: 20px 0;
+  }
+} 

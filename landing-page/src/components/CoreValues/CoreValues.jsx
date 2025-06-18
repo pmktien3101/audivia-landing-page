@@ -3,7 +3,7 @@ import { FaMicrophone } from "react-icons/fa";
 import { MdHistory } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import "./style.css";
-
+import "./responsive.css";
 export const CoreValues = ({
   services,
 }) => {
@@ -32,7 +32,7 @@ export const CoreValues = ({
             <>
               <p>Giọng Kể Truyền Cảm</p>
               <p className="text-wrapper-33">
-                Chúng tôi biến mỗi câu chuyện thành trải nghiệm đa giác quan, với giọng kể như người dẫn đường tâm huyết.
+                Biến mỗi câu chuyện thành trải nghiệm đa giác quan với giọng kể tâm huyết.
               </p>
             </>
           )}
@@ -41,7 +41,7 @@ export const CoreValues = ({
             <>
               <p>Mỗi bước chân là một câu chuyện</p>
               <p className="text-wrapper-33">
-                Chạm vào từng góc phố, nghe tiếng thì thầm của quá khứ.
+                Chạm vào từng góc phố, lắng nghe tiếng thì thầm của quá khứ.
               </p>
             </>
           )}
@@ -50,7 +50,7 @@ export const CoreValues = ({
             <>
               <p>Tour Của Bạn, Cách Của Bạn</p>
               <p className="text-wrapper-33">
-                Tùy chỉnh lộ trình, nhảy cóc điểm dừng, hay thậm chí tự tạo audio-note để chia sẻ với cộng đồng.
+                Tùy chỉnh lộ trình và chia sẻ audio-note với cộng đồng.
               </p>
             </>
           )}

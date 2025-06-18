@@ -55,3 +55,24 @@
 .cards-key-features.date {
   box-shadow: 0px 2px 80px #0000001a;
 }
+
+@media screen and (max-width: 768px) {
+  .cards-key-features {
+    width: 100% !important;
+    min-width: 0;
+    padding: 16px !important;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cards-key-features .select-many-location,
+  .cards-key-features .chooce-your-favorite {
+    white-space: normal !important;
+    width: 100% !important;
+    text-align: center;
+    font-size: 16px !important;
+  }
+  .cards-key-features .frame-46 {
+    width: 64px;
+    height: 64px;
+  }
+}

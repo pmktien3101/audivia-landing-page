@@ -4,7 +4,7 @@
   border-radius: 30px;
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 400px;
   justify-content: center;
   position: relative;
   width: 350px;
@@ -36,9 +36,9 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   position: relative;
-  height: 250px;
+  height: 200px;
   justify-content: center;
   width: 100%;
 }
@@ -60,7 +60,7 @@
   line-height: var(--semibold-type-28-line-height);
   position: relative;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .cards-services .text-wrapper-33 {
