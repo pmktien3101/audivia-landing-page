@@ -6,17 +6,48 @@
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+.stat-card.chart-card {
+    display: block;
+    padding: 25px;
+}
+
+.stat-card .card-icon {
+    font-size: 32px;
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-card .card-info .card-title,
+.stat-card.chart-card .card-title {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+    font-weight: 500;
+}
+
+.stat-card.chart-card .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.stat-card .card-info .card-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
 }
 
 .card-title {
@@ -83,7 +114,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 350px;
+    margin-top: 20px;
+    width: 100%;
 }
 .header-contain{
     display: flex;
@@ -92,3 +125,72 @@
 .hehe{
     margin-top: 30px;
 }
+
+.dashboard .main-content .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.dashboard .main-content .stat-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard .main-content .stat-card .card-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dashboard .main-content .stat-card .card-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dashboard .header-contain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard .main-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1a202c;
+}
+
+.dashboard .date-pickers {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dashboard .date-pickers input,
+.dashboard .date-pickers select {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+.dashboard .date-pickers input:focus,
+.dashboard .date-pickers select:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.stat-card.chart-card {
+    grid-column: span 2;
+}
+
+/* Icon Colors */
+.balance-card .card-icon { background-color: #e6f7ff; color: #1890ff; }
+.activity-card .card-icon { background-color: #fffbe6; color: #faad14; }
+.my-card .card-icon { background-color: #f6ffed; color: #52c41a; }
+.invoice-summary-card .card-icon { background-color: #fff0f6; color: #eb2f96; }

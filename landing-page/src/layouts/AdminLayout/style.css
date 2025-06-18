@@ -1,19 +1,37 @@
 .layout-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, var(--blue-light) 0%, var(--purple-light) 100%);
     min-height: 100vh;
     color: #374151;
     line-height: 1.6;
 }
-.sidebar-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
+
+.sidebar-container {
+    flex: 0 0 280px;
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
 }
+
+.main-content-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.main-content {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+}
+
 .dashboard {
     display: flex;
     min-height: calc(100vh - 40px);
@@ -33,7 +51,6 @@
     flex: 1;
     padding: 0 30px 30px 30px;
     background: transparent;
-    align-items: center;
-    justify-content: center;
+    overflow-y: auto; /* Add scroll for content overflow */
     margin-top: 20px;
 }
