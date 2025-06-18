@@ -77,13 +77,22 @@ const AdminDashboard = () => {
             <div className="header-contain">
                 <h1 className="main-title"><span className="overview-text">Tổng Quan</span></h1>
                 <div className="date-pickers">
-                    <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-                    <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
-                    <select value={groupBy} onChange={e => setGroupBy(e.target.value)}>
-                        <option value="day">Ngày</option>
-                        <option value="month">Tháng</option>
-                        <option value="year">Năm</option>
-                    </select>
+                    <div className="filter-group">
+                        <label htmlFor="start-date">Từ ngày</label>
+                        <input id="start-date" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+                    </div>
+                    <div className="filter-group">
+                        <label htmlFor="end-date">Đến ngày</label>
+                        <input id="end-date" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+                    </div>
+                    <div className="filter-group select-wrapper">
+                        <label htmlFor="group-by">Nhóm theo</label>
+                        <select id="group-by" value={groupBy} onChange={e => setGroupBy(e.target.value)}>
+                            <option value="day">Ngày</option>
+                            <option value="month">Tháng</option>
+                            <option value="year">Năm</option>
+                        </select>
+                    </div>
                 </div>
                 <button className="table-btn export-btn hehe">
                     <span className="btn-icon"><MdDownload /></span>
