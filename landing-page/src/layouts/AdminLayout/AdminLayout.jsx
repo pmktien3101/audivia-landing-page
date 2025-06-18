@@ -7,8 +7,10 @@ const AdminLayout = ({ children }) => {
             <div className="sidebar-container">
                 <AdminSidebar />
             </div>
-            <div className='main-content'>
-                <div className='content'>{children}</div>
+            <div className='main-content-wrapper'>
+                <div className='main-content'>
+                    <div className='content'>{children}</div>
+                </div>
             </div>
         </div>
     )
