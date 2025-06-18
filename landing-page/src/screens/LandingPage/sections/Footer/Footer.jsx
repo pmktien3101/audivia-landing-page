@@ -55,7 +55,7 @@ export const Footer = () => {
           <h4>Tải Audivia Ngay</h4>
 
             <div className="download-buttons">
-              <a href="https://drive.google.com/file/d/1_93nTq_gW40rKIYWG25H4otHZdNw5eEm/view?fbclid=IwY2xjawK7aEFleHRuA2FlbQIxMABicmlkETF4TUlyR0FjRUJhc2R2YU1mAR7a-rFzLFrDwXy30a20yqEzSt5wVJB4nR5MeVF6HcaUKJMzRQN6vUriHOwNSQ_aem_CRwc5wt_MzOsnV2Gia_hqg&pli=1" target="_blank" rel="noopener noreferrer" className="download-btn">
+              <a href="https://drive.google.com/file/d/1tic5rqSMPBqdbvgXM75LWKmT3QsafhRR/view" target="_blank" rel="noopener noreferrer" className="download-btn">
                 <div className="download-circle">
                   <img src="https://res.cloudinary.com/dgzn2ix8w/image/upload/v1749978483/Audivia/fvim0tiyicrwpr3eaokf.png" alt="Link Tải" />
                 </div>
