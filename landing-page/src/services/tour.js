@@ -1,6 +1,6 @@
 import axiosClient from '../utils/axiosClient';
 
-const TourService = {
+const tourService = {
     getAllTours: async (params = {}) => {
         try {
           // Default params
@@ -58,4 +58,4 @@ const TourService = {
   };
 
 
-export default TourService
+export default tourService

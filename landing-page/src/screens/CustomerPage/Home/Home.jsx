@@ -6,7 +6,7 @@ import SearchBar from '../../../components/SearchBar/index.jsx';
 import { TourList } from '../../../components/Tour/index.jsx';
 import { useCallback, useEffect, useState } from 'react';
 import Category from '../../../components/Category/index.jsx';
-import TourService from '../../../services/tour.js';
+import tourService from '../../../services/tour.js';
 import TourTypeService from '../../../services/tourType.js';
 
 
@@ -47,9 +47,9 @@ const Home = () => {
             };
 
             if (activeCategory === 'all') {
-                result = await TourService.getAllTours(queryParams);
+                result = await tourService.getAllTours(queryParams);
             } else {
-                result = await TourService.getToursByCategory(activeCategory, queryParams);
+                result = await tourService.getToursByCategory(activeCategory, queryParams);
             }
             setTours(result.data)
             setPagination(result.pagination)
