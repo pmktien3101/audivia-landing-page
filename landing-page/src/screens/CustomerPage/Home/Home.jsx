@@ -47,7 +47,7 @@ const Home = () => {
             };
 
             if (activeCategory === 'all') {
-                result = await tourService.getAllTours(queryParams);
+                result = await tourService.getAllToursPaginated(queryParams);
             } else {
                 result = await tourService.getToursByCategory(activeCategory, queryParams);
             }

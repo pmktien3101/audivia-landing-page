@@ -1,7 +1,7 @@
 import axiosClient from '../utils/axiosClient';
 
 const tourService = {
-    getAllTours: async (params = {}) => {
+    getAllToursPaginated: async (params = {}) => {
         try {
           // Default params
           const defaultParams = {
