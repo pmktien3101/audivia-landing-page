@@ -1,0 +1,42 @@
+.search-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20vh; /* hoặc 100vh nếu muốn giữa toàn màn hình */
+}
+
+.search-bar {
+  display: flex;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 2.5rem;
+  box-shadow: 0 8px 24px rgba(3, 4, 8, 0.08);
+  align-items: center;
+  gap: 0;
+}
+
+.search-bar input {
+  font-size: 1.3rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 2rem 0 0 2rem;
+  outline: none;
+  min-width: 320px;
+  background: #f5f7fa;
+}
+
+.search-bar button {
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  border-radius: 0 2rem 2rem 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+}

@@ -1,20 +1,30 @@
-import { FiBell, FiMail, FiLogOut } from "react-icons/fi"
+import { FiBell, FiMail, FiLogOut, FiHome, FiUser, FiSettings } from "react-icons/fi"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link, NavLink } from "react-router-dom"
 import './style.css'
 import userService from "../../../../services/user"
 import ROUTES from "../../../../utils/routes"
 import useUser from "../../../../hooks/useUser"
+import { BsFillPeopleFill, BsPeople } from "react-icons/bs"
+import { GiLoveHowl, GiLoveInjection, GiLoveLetter, GiLovers, GiSelfLove } from "react-icons/gi"
+import { BiHeart } from "react-icons/bi"
+import { HiHeart } from "react-icons/hi2"
 
 const HeaderIcons = () => (
-  <>
-    <button className="icon-btn" title="Tin nhắn">
-      <FiMail size={20} />
-    </button>
-    <button className="icon-btn" title="Thông báo">
+  <div className="header-center">
+    <NavLink to="/home" className="icon-btn" title="Trang chủ">
+      <FiHome size={20} />
+    </NavLink>
+    <NavLink to="/forum" className="icon-btn" title="Diễn đàn">
+      <BsPeople size={20} />
+    </NavLink>
+    <NavLink to="/favorites" className="icon-btn" title="Yêu thích">
+      <BiHeart size={20} />
+    </NavLink>
+    <NavLink to="/notifications" className="icon-btn" title="Thông báo">
       <FiBell size={20} />
-    </button>
-  </>
+    </NavLink>
+  </div>
 )
 
 const ProfileDropdown = ({ onLogout }) => (
@@ -51,18 +61,27 @@ const Header = () => {
 
     return (
         <div className="main-header">
+            <div className="header-left">
+              <img className="logo-img"
+                alt="Vector"
+                src="https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745147401/Audivia/fxjo2mcpmqexcxkomtjd.png"
+              />
+
+              <div className="text-wrapper">Audivia</div>
+ 
+            </div>
+            <div className="header-center">
+              <HeaderIcons />
+            </div>
             <div className="header-right">
-              <div className="header-icons">
-                <HeaderIcons />
-                  <UserProfile 
+                <UserProfile 
                     user={user}
                     isDropdownOpen={isDropdownOpen}
                     onToggleDropdown={toggleDropdown}
                     onLogout={handleLogout}
-                  />
-              </div>
+                />
             </div>
-          </div>
+        </div>
     )
 }
 

@@ -1,0 +1,40 @@
+/* Container chính */
+.map-container {
+    width: 80%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin: 20px auto;
+  }
+  
+  /* Loading và thông báo lỗi */
+  .loading-spinner,
+  .error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    max-width: 80%;
+  }
+  
+  /* Responsive cho mobile */
+  @media (max-width: 768px) {
+    .map-container {
+      height: 300px;
+      border-radius: 0;
+      margin: 10px 0;
+    }
+  }
