@@ -47,6 +47,7 @@
 .nav-menu {
     list-style: none;
     flex: 1;
+    margin-top: 20px;
 }
 
 .nav-item {

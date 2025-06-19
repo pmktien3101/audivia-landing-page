@@ -2,86 +2,144 @@ import './style.css';
 import "../../../layouts/AdminLayout/style.css"
 import AdminHeader from "../components/AdminHeader";
 import Table from '../components/Table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import tourService from '../../../services/tour';
+import Modal from '../components/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TourManagement = () => {
-    const [tableData] = useState([
-        {
-            id: 1,
-            name: 'Tour Dinh Độc Lập',
-            location: 'Hồ Chí Minh',
-            checkpoints: 5,
-            duration: '2 giờ',
-            price: 250000,
-            status: 'Hoạt động'
-        },
-        {
-            id: 2,
-            name: 'Tour Đà Nẵng',
-            location: 'Đà Nẵng',
-            checkpoints: 4,
-            duration: '4 giờ',
-            price: 180000,
-            status: 'Hoạt động'
-        },
-        {
-            id: 3,
-            name: 'Tour Hồ Chí Minh',
-            location: 'Hồ Chí Minh',
-            checkpoints: 6,
-            duration: '3 giờ',
-            price: 0,
-            status: 'Tạm dừng'
-        }
-    ]);
+    const [tours, setTours] = useState();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [editTour, setEditTour] = useState(null);
+    const [tourTypes, setTourTypes] = useState([]);
 
+    useEffect(() => {
+        const fetchTours = async () => {
+            const response = await tourService.getAllTours();
+            setTours(response);
+            // Lấy danh sách thể loại duy nhất từ dữ liệu trả về
+            if (Array.isArray(response)) {
+                const types = Array.from(new Set(response.map(t => t.tourTypeName).filter(Boolean)));
+                setTourTypes(types);
+            }
+        };
+        fetchTours();
+    },[])
+    
     const handleAdd = () => {
-        console.log("Thêm tour mới");
+        setEditTour(null);
+        setModalOpen(true);
     }
 
     const handleEdit = (id) => {
-        console.log("Sửa tour", id);
+        const tour = tours.find(t => t.id === id);
+        setEditTour(tour);
+        setModalOpen(true);
     }
 
-    const handleDelete = (id) => {
-        console.log("Xóa tour", id);
+    const handleDelete = async (id) => {
+        if(window.confirm('Bạn có chắc chắn muốn xoá tour này?')){
+            try {
+                await tourService.deleteTour(id);
+                toast.success('Xoá tour thành công!');
+                const response = await tourService.getAllTours();
+                setTours(response);
+            } catch (e) {
+                toast.error('Xoá tour thất bại!');
+            }
+        }
     }
 
     const handleExport = () => {
         console.log("Xuất dữ liệu");
     };
 
+    const handleModalClose = () => {
+        setModalOpen(false);
+        setEditTour(null);
+    }
+
+    const handleModalSave = async (tour) => {
+        if(editTour){
+            // update
+            try {
+                await tourService.updateTour(tour.id, tour);
+                toast.success('Cập nhật tour thành công!');
+                const response = await tourService.getAllTours();
+                setTours(response);
+            } catch (e) {
+                toast.error('Cập nhật tour thất bại!');
+            }
+        }else{
+            // create
+            // Build the payload, only including non-null fields
+            const payload = {
+                title: tour.title,
+                description: tour.description || '',
+                location: tour.location,
+                startLatitude: tour.startLatitude || 0,
+                startLongitude: tour.startLongitude || 0,
+                price: tour.price ? Number(tour.price) : 0,
+                duration: tour.duration ? Number(tour.duration) : 0,
+                typeId: tour.typeId || '',
+                thumbnailUrl: tour.thumbnailUrl || '',
+                useCustomMap: tour.useCustomMap || false,
+                customMapImages: tour.customMapImages || [],
+            };
+            try {
+                await tourService.createTour(payload);
+                toast.success('Tạo tour thành công!');
+                // Refresh tour list
+                const response = await tourService.getAllTours();
+                setTours(response);
+            } catch (e) {
+                toast.error('Tạo tour thất bại!');
+            }
+        }
+        setModalOpen(false);
+        setEditTour(null);
+    }
+
     return (
         <div className="dashboard">
-            <div className="main-content">
+            <ToastContainer position="top-right" autoClose={2000} />
+            <div className="main-content-table">
                 <AdminHeader/>
                 <div className="main-table">
                     <Table
                         title="Quản lý Tour"
-                        data={tableData}
+                        data={tours || []}
                         onAdd={handleAdd}
                         onExport={handleExport}
                         columns={[
-                            { key: 'name', label: 'Tên Tour' },
+                            {key: 'thumbnailUrl', label: 'Ảnh'},
+                            { key: 'title', label: 'Tên Tour' },
                             { key: 'location', label: 'Địa điểm' },
-                            { key: 'checkpoints', label: 'Số Checkpoint' },
+                            { key: 'tourTypeName', label: 'Loại Tour' },
                             { key: 'duration', label: 'Thời gian' },
                             { key: 'price', label: 'Giá' },
-                            { key: 'status', label: 'Trạng thái' },
                             { key: 'actions', label: 'Thao tác' }
                         ]}
                         filterOptions={[
-                            { value: '', label: 'Tất cả trạng thái' },
-                            { value: 'Hoạt động', label: 'Hoạt động' },
-                            { value: 'Tạm dừng', label: 'Tạm dừng' }
+                            { value: '', label: 'Tất cả thể loại' },
+                            ...tourTypes.map(type => ({ value: type, label: type }))
                         ]}
-                        searchField="name"
+                        filterKey="tourTypeName"
+                        searchField="title"
                         renderCell={(row, column) => {
+                            if (column.key === 'thumbnailUrl') {
+                                return row.thumbnailUrl ? (
+                                    <img src={row.thumbnailUrl} alt={row.title} style={{ width: 60, height: 40, objectFit: 'cover', borderRadius: 4 }} />
+                                ) : (
+                                    <span>No image</span>
+                                );
+                            }
+                            if(column.key === 'duration'){
+                                return `${row.duration} giờ`
+                            }
                             if (column.key === 'price') {
                                 return `${row.price.toLocaleString('vi-VN')} VNĐ`;
-                            }
-                            if (column.key === 'status') {
-                                return <span className={`status-badge ${row.status === 'Hoạt động' ? 'active' : 'inactive'}`}>{row.status}</span>;
                             }
                             if (column.key === 'actions') {
                                 return (
@@ -94,6 +152,9 @@ const TourManagement = () => {
                             return row[column.key];
                         }}
                     />
+                    {modalOpen && (
+                        <Modal onClose={handleModalClose} onSave={handleModalSave} tour={editTour} />
+                    )}
                 </div>
             </div>
         </div>

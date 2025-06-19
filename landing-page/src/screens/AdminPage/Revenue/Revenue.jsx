@@ -42,7 +42,7 @@ const Revenue = () => {
     return (
         <div className="dashboard">
             {/* Main Content */}
-            <div className="main-content">
+            <div className="main-content-table">
                 <AdminHeader/>
                 <div className="main-table">
                     <Table

@@ -38,6 +38,7 @@ export default function Table({
   filterOptions = [],
   searchField = "name",
   renderCell = (row, column) => row[column.key],
+  filterKey = "status",
 }) {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
@@ -52,8 +53,8 @@ export default function Table({
   };
 
   const filteredData = data.filter((row) => {
-    const searchMatch = row[searchField]?.toLowerCase().includes(search.toLowerCase());
-    const filterMatch = !filter || row.status === filter;
+    const searchMatch = (row[searchField] || '').toLowerCase().includes(search.toLowerCase());
+    const filterMatch = !filter || row[filterKey] === filter;
     return searchMatch && filterMatch;
   });
 
