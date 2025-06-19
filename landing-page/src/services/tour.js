@@ -53,9 +53,8 @@ const tourService = {
           console.error('Error fetching tours by category:', error);
           throw error;
         }
-      }
-    
-  };
+      },
+
 
     getAllTours: async(pageIndex = 1, pageSize = 5) => {
         try {
