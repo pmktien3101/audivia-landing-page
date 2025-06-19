@@ -41,9 +41,6 @@
     background: rgba(255, 255, 255, 0);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(149, 176, 199, 0.356);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(116, 174, 222, 0.3);
 }
 
 /* Main Content */
@@ -52,5 +49,13 @@
     padding: 0 30px 30px 30px;
     background: transparent;
     overflow-y: auto; /* Add scroll for content overflow */
+    margin-top: 20px;
+}
+
+.main-content-table {
+    flex: 1;
+    padding: 0 30px 30px 30px;
+    background: transparent;
+    overflow-y: auto;
     margin-top: 20px;
 }
