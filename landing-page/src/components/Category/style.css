@@ -1,0 +1,101 @@
+.category-container {
+    display: flex;
+    gap: 12px;
+    padding: 20px 5%;
+    overflow-x: auto;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 1200px;
+    scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+    -ms-overflow-style: none; /* Ẩn scrollbar trên IE */
+}
+
+/* Ẩn scrollbar trên Chrome/Safari */
+.category-container::-webkit-scrollbar {
+    display: none;
+}
+
+.category-button {
+    padding: 14px 28px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #f6f8fa, #e9ecef);
+    color: #495057;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.category-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #6e8efb, #a777e3);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 50px;
+}
+
+.category-button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 12px rgba(106, 115, 249, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-button:hover::before {
+    opacity: 1;
+}
+
+.category-button.active {
+    color: white;
+    background: linear-gradient(145deg, #5e72e4, #825ee4);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    transform: translateY(0);
+}
+
+.category-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+}
+
+/* Hiệu ứng khi click */
+.category-button:active {
+    transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .category-container {
+        justify-content: flex-start;
+        padding: 16px 5%;
+    }
+    
+    .category-button {
+        padding: 12px 22px;
+        font-size: 14px;
+    }
+}

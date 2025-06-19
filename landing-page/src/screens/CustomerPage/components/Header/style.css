@@ -1,0 +1,77 @@
+.main-header {
+    margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px !important;
+    height: 60px;
+    /* background-color: #ffffff; */
+    background: linear-gradient(135deg, #6e8efb, #a777e3) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    /* relative */
+    z-index: 9999;
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 0 !important;
+}
+  
+.header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+  
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    
+}
+  
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #333;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.icon-btn:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+  
+/* Khi nút đang được chọn */
+.icon-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  
+  .text-wrapper {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }

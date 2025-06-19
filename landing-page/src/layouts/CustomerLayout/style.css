@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.customer-layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* overflow: hidden; */
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    flex: 1;
+    /* overflow-y: auto; */
+    margin: 0;
+    padding: 0;
+}
+
+.customer-content {
+    background-color: #ffffff;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} 

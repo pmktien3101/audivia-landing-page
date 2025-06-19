@@ -1,3 +1,4 @@
+import { Route } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import CustomerLayout from "../layouts/CustomerLayout";
 import NoHeaderLayout from "../layouts/NoHeaderLayout";
@@ -25,6 +26,7 @@ const adminRoutes = [
 ]
 
 const memberRoutes = [
-    {path: ROUTES.HOME, component: Home, layout: CustomerLayout}
+    {path: ROUTES.HOME, component: Home, layout: CustomerLayout},
+    {path: ROUTES.PROFILE, component: Home, layout: CustomerLayout },
 ]
 export { adminRoutes, memberRoutes, publicRoutes }
