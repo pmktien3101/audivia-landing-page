@@ -12,16 +12,16 @@ import { HiHeart } from "react-icons/hi2"
 
 const HeaderIcons = () => (
   <div className="header-center">
-    <NavLink to="/home" className="icon-btn" title="Trang chủ">
+    <NavLink to={ROUTES.HOME} className="icon-btn" title="Trang chủ">
       <FiHome size={20} />
     </NavLink>
-    <NavLink to="/forum" className="icon-btn" title="Diễn đàn">
+    <NavLink to={ROUTES.FORUM} className="icon-btn" title="Diễn đàn">
       <BsPeople size={20} />
     </NavLink>
-    <NavLink to="/favorites" className="icon-btn" title="Yêu thích">
+    <NavLink to={ROUTES.FAVORITES} className="icon-btn" title="Yêu thích">
       <BiHeart size={20} />
     </NavLink>
-    <NavLink to="/notifications" className="icon-btn" title="Thông báo">
+    <NavLink to={ROUTES.NOTIFICATION} className="icon-btn" title="Thông báo">
       <FiBell size={20} />
     </NavLink>
   </div>

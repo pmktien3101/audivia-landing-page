@@ -28,7 +28,7 @@
 .search-bar button {
   font-size: 1.3rem;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background: linear-gradient(135deg, #00A5CF, #d6a4ff) !important;
   color: white;
   border: none;
   border-radius: 0 2rem 2rem 0;
@@ -38,5 +38,5 @@
 }
 
 .search-bar button:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  background: linear-gradient(135deg, #00A5CF, #d6a4ff) !important;
 }
