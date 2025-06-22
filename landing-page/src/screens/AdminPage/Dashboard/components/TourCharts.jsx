@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {
   BarChart,
   Bar,
@@ -15,12 +15,13 @@ import {
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const TourCharts = ({ avgRatingData, tourCategoryData }) => {
+const TourCharts = forwardRef(({ avgRatingData, tourCategoryData }, ref) => {
+  const { barChartRef, pieChartRef } = ref || {};
   return (
     <>
       <div className="stat-card chart-card">
         <div className="card-title">Rating trung bình của tour</div>
-        <div className="chart-container">
+        <div className="chart-container" ref={barChartRef}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={avgRatingData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -35,7 +36,7 @@ const TourCharts = ({ avgRatingData, tourCategoryData }) => {
       </div>
       <div className="stat-card chart-card">
         <div className="card-title">Phân loại tour</div>
-        <div className="chart-container">
+        <div className="chart-container" ref={pieChartRef}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -61,6 +62,6 @@ const TourCharts = ({ avgRatingData, tourCategoryData }) => {
       </div>
     </>
   );
-};
+});
 
 export default TourCharts; 
