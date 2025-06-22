@@ -1,1 +1,1 @@
-export {defaul} from './AdminDashboard'
+export { default } from './AdminDashboard'

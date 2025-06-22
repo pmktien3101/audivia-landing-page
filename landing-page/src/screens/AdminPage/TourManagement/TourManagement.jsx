@@ -11,6 +11,7 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 const TourManagement = () => {
     const [tours, setTours] = useState([]);
+    const [allTours, setAllTours] = useState([]); // Lưu toàn bộ tours cho export
     const [modalOpen, setModalOpen] = useState(false);
     const [editTour, setEditTour] = useState(null);
     const [tourTypes, setTourTypes] = useState([]);
@@ -44,11 +45,23 @@ const TourManagement = () => {
         }
     };
 
+    // Fetch all tours for export
+    const fetchAllTours = async () => {
+        try {
+            const response = await tourService.getAllToursPaginated();
+            setAllTours(response.data || []);
+            return response.data || [];
+        } catch (error) {
+            console.error('Error fetching all tours:', error);
+            setAllTours(tours);
+            return tours;
+        }
+    };
+
     const fetchTourTypes = async () => {
         try {
             const response = await tourService.getTourTypes();
             if (Array.isArray(response)) {
-                // Xử lý trường hợp response là array của objects hoặc strings
                 const types = response.map(type => {
                     if (typeof type === 'object') {
                         return type.name || type.title || type.id || JSON.stringify(type);
@@ -66,8 +79,10 @@ const TourManagement = () => {
     useEffect(() => {
         fetchTours();
         fetchTourTypes();
+        // Fetch all tours for export on component mount
+        fetchAllTours();
     }, []);
-    
+
     const handleAdd = () => {
         setEditTour(null);
         setModalOpen(true);
@@ -80,7 +95,7 @@ const TourManagement = () => {
     }
 
     const handleDelete = async (id) => {
-        if(window.confirm('Bạn có chắc chắn muốn xoá tour này?')){
+        if (window.confirm('Bạn có chắc chắn muốn xoá tour này?')) {
             try {
                 await tourService.deleteTour(id);
                 toast.success('Xoá tour thành công!');
@@ -91,17 +106,13 @@ const TourManagement = () => {
         }
     }
 
-    const handleExport = () => {
-        console.log("Xuất dữ liệu");
-    };
-
     const handleModalClose = () => {
         setModalOpen(false);
         setEditTour(null);
     }
 
     const handleModalSave = async (tour) => {
-        if(editTour){
+        if (editTour) {
             // update
             try {
                 await tourService.updateTour(tour.id, tour);
@@ -110,7 +121,7 @@ const TourManagement = () => {
             } catch (e) {
                 toast.error('Cập nhật tour thất bại!');
             }
-        }else{
+        } else {
             // create
             // Build the payload, only including non-null fields
             const payload = {
@@ -143,17 +154,77 @@ const TourManagement = () => {
         fetchTours(newPageIndex);
     };
 
+    // Prepare export data for tours
+    const getExportProps = async () => {
+        let toursForExport = allTours;
+        if (!toursForExport || toursForExport.length === 0) {
+            toursForExport = await fetchAllTours();
+        }
+
+        // Calculate statistics using all tours
+        const totalTours = toursForExport.length;
+        const totalValue = toursForExport.reduce((sum, tour) => sum + (tour.price || 0), 0);
+        const avgPrice = totalTours > 0 ? totalValue / totalTours : 0;
+        const toursByType = tourTypes.reduce((acc, type) => {
+            acc[type] = toursForExport.filter(tour => tour.tourTypeName === type).length;
+            return acc;
+        }, {});
+
+        const overviewData = {
+            'Tổng số tour': totalTours,
+            'Tổng giá trị': `${totalValue.toLocaleString('vi-VN')} VNĐ`,
+            'Giá trung bình': `${Math.round(avgPrice).toLocaleString('vi-VN')} VNĐ`,
+            'Ngày xuất báo cáo': new Date().toLocaleDateString('vi-VN'),
+            ...Object.keys(toursByType).reduce((acc, type) => {
+                acc[`Số tour ${type}`] = toursByType[type];
+                return acc;
+            }, {})
+        };
+
+        const sheetsData = [
+            {
+                sheetName: 'Danh sách Tour',
+                data: toursForExport.map(tour => ({
+                    'Tên Tour': tour.title || '',
+                    'Địa điểm': tour.location || '',
+                    'Loại Tour': tour.tourTypeName || '',
+                    'Thời gian (giờ)': tour.duration || 0,
+                    'Giá (VNĐ)': tour.price ? tour.price.toLocaleString('vi-VN') : '0',
+                    'Mô tả': tour.description || '',
+                    'URL Ảnh': tour.thumbnailUrl || '',
+                    'Tọa độ bắt đầu': `${tour.startLatitude || 0}, ${tour.startLongitude || 0}`,
+                    'Sử dụng bản đồ tùy chỉnh': tour.useCustomMap ? 'Có' : 'Không'
+                }))
+            },
+            {
+                sheetName: 'Thống kê theo loại',
+                data: Object.keys(toursByType).map(type => ({
+                    'Loại Tour': type,
+                    'Số lượng': toursByType[type],
+                    'Tỷ lệ': totalTours > 0 ? `${((toursByType[type] / totalTours) * 100).toFixed(1)}%` : '0%'
+                }))
+            }
+        ];
+
+        return {
+            overviewData,
+            sheetsData,
+            fileName: `BaoCao_QuanLyTour_${new Date().toISOString().split('T')[0]}`,
+            chartImages: []
+        };
+    };
+
     return (
         <div className="dashboard">
             <ToastContainer position="top-right" autoClose={2000} />
             <div className="main-content-table">
-                <AdminHeader/>
+                <AdminHeader />
                 <div className="main-table">
                     {loading ? (
                         <div className="loading">
-                            <img 
-                                src="https://i.pinimg.com/originals/93/dd/8a/93dd8a26a1706b30a2e8f314e096d129.gif" 
-                                alt="Loading..." 
+                            <img
+                                src="https://i.pinimg.com/originals/93/dd/8a/93dd8a26a1706b30a2e8f314e096d129.gif"
+                                alt="Loading..."
                                 style={{ width: '200px', height: '200px' }}
                             />
                             <p>Đang tải dữ liệu tour...</p>
@@ -164,9 +235,9 @@ const TourManagement = () => {
                                 title="Quản lý Tour"
                                 data={tours || []}
                                 onAdd={handleAdd}
-                                onExport={handleExport}
+                                exportProps={getExportProps}
                                 columns={[
-                                    {key: 'thumbnailUrl', label: 'Ảnh'},
+                                    { key: 'thumbnailUrl', label: 'Ảnh' },
                                     { key: 'title', label: 'Tên Tour' },
                                     { key: 'location', label: 'Địa điểm' },
                                     { key: 'tourTypeName', label: 'Loại Tour' },
@@ -176,9 +247,9 @@ const TourManagement = () => {
                                 ]}
                                 filterOptions={[
                                     { value: '', label: 'Tất cả thể loại' },
-                                    ...tourTypes.map(type => ({ 
-                                        value: type, 
-                                        label: type 
+                                    ...tourTypes.map(type => ({
+                                        value: type,
+                                        label: type
                                     }))
                                 ]}
                                 filterKey="tourTypeName"
@@ -191,7 +262,7 @@ const TourManagement = () => {
                                             <span>No image</span>
                                         );
                                     }
-                                    if(column.key === 'duration'){
+                                    if (column.key === 'duration') {
                                         return `${row.duration} giờ`
                                     }
                                     if (column.key === 'price') {
@@ -208,17 +279,17 @@ const TourManagement = () => {
                                     return row[column.key];
                                 }}
                             />
-                            
+
                             {/* Pagination Controls */}
-                            <div className="pagination-controls" style={{ 
-                                display: 'flex', 
-                                justifyContent: 'center', 
-                                alignItems: 'center', 
-                                gap: '10px', 
+                            <div className="pagination-controls" style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: '10px',
                                 marginTop: '20px',
                                 padding: '10px'
                             }}>
-                                <button 
+                                <button
                                     onClick={() => handlePageChange(pagination.pageIndex - 1)}
                                     disabled={pagination.pageIndex <= 1}
                                     style={{
@@ -231,13 +302,13 @@ const TourManagement = () => {
                                 >
                                     <MdChevronLeft size={20} />
                                 </button>
-                                
+
                                 <span style={{ fontSize: '14px' }}>
-                                    Trang {pagination.pageIndex} / {pagination.totalPages} 
+                                    Trang {pagination.pageIndex} / {pagination.totalPages}
                                     ({pagination.count} tour)
                                 </span>
-                                
-                                <button 
+
+                                <button
                                     onClick={() => handlePageChange(pagination.pageIndex + 1)}
                                     disabled={pagination.pageIndex >= pagination.totalPages}
                                     style={{
@@ -251,7 +322,7 @@ const TourManagement = () => {
                                     <MdChevronRight size={20} />
                                 </button>
                             </div>
-                            
+
                             {modalOpen && (
                                 <Modal onClose={handleModalClose} onSave={handleModalSave} tour={editTour} />
                             )}

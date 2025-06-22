@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {
   LineChart,
   Line,
@@ -12,12 +12,13 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const SocialMediaCharts = ({ postsOverTimeData, postsByAgeGroupData }) => {
+const SocialMediaCharts = forwardRef(({ postsOverTimeData, postsByAgeGroupData }, ref) => {
+  const { lineChartRef } = ref || {};
   return (
     <>
       <div className="stat-card chart-card">
         <div className="card-title">Bài đăng/ảnh theo thời gian</div>
-        <div className="chart-container">
+        <div className="chart-container" ref={lineChartRef}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={postsOverTimeData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -47,6 +48,6 @@ const SocialMediaCharts = ({ postsOverTimeData, postsByAgeGroupData }) => {
       </div> */}
     </>
   );
-};
+});
 
 export default SocialMediaCharts; 
