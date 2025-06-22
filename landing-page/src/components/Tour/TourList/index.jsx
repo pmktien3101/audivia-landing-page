@@ -14,6 +14,7 @@ export const TourList = ({ tours }) => {
             title={tour.title}
             price={tour.price}
             rating={tour.avgRating}
+            tourId={tour.id}
           />
         ))}
       </div>

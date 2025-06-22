@@ -1,0 +1,167 @@
+.saved-tours-list {
+  padding: 20px;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.saved-tours-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f1f3f4;
+  font-family: Plus Jakarta Sans, Helvetica;
+}
+
+.saved-tours-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.tour-count {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.saved-tours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Loading State */
+.saved-tours-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.saved-tours-loading p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Error State */
+.saved-tours-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.saved-tours-error p {
+  color: #dc3545;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.saved-tours-error button {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.saved-tours-error button:hover {
+  background: #1565c0;
+}
+
+/* Empty State */
+.saved-tours-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.saved-tours-empty h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.saved-tours-empty p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .saved-tours-list {
+    padding: 16px;
+  }
+  
+  .saved-tours-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .saved-tours-header h2 {
+    font-size: 24px;
+  }
+  
+  .saved-tours-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .saved-tours-empty {
+    padding: 60px 20px;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+  }
+  
+  .saved-tours-empty h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .saved-tours-grid {
+    grid-template-columns: 1fr;
+  }
+} 
