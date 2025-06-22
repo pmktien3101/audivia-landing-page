@@ -2,13 +2,13 @@ import './style.css';
 import "../../../layouts/AdminLayout/style.css"
 import React, { useState, useEffect } from 'react';
 import AdminHeader from "../components/AdminHeader";
-import { MdDownload } from 'react-icons/md';
 import RevenueCharts from './components/RevenueCharts';
 import TourCharts from './components/TourCharts';
 import UserCharts from './components/UserCharts';
 import SocialMediaCharts from './components/SocialMediaCharts';
 import statisticsService from '../../../services/statistics';
 import { FaUsers, FaBoxOpen, FaChartLine, FaClipboardList } from 'react-icons/fa';
+import ExportReport from '../components/ExportReport/ExportReport'
 
 const AdminDashboard = () => {
     const [startDate, setStartDate] = useState(() => {
@@ -42,8 +42,9 @@ const AdminDashboard = () => {
 
             // Chart data
             const revenueData = await statisticsService.revenueStat(startDate, endDate, groupBy);
-            console.log(revenueData);
             setRevenueOverTimeData(revenueData.items);
+            setTotalRevenue(revenueData.totalRevenue);
+            setTotalBookings(revenueData.totalBookings);
 
             const topTours = await statisticsService.revenueStat(startDate, endDate, 'tour', 10);
             setTopToursData(topTours.items);
@@ -53,12 +54,14 @@ const AdminDashboard = () => {
 
             const tourCategory = await statisticsService.tourStat('tour_type', startDate, endDate);
             setTourCategoryData(tourCategory.items);
+            setTotalTours(tourCategory.totalTours);
 
             const ageDistribution = await statisticsService.userStat('total_by_age', startDate, endDate, 'user_age_group');
             setAgeDistributionData(ageDistribution.items);
 
             const newUsersOverTime = await statisticsService.userStat('new_users', startDate, endDate, groupBy);
             setNewUsersOverTimeData(newUsersOverTime.items);
+            setTotalUsers(newUsersOverTime.totalUsers);
 
             const postsOverTime = await statisticsService.postStat(startDate, endDate, groupBy);
             setPostsOverTimeData(postsOverTime.items);
@@ -111,7 +114,7 @@ const AdminDashboard = () => {
                 <div className="stat-card activity-card">
                     <div className="card-icon"><FaClipboardList /></div>
                     <div className="card-info">
-                        <div className="card-title">Tổng hoá đơn</div>
+                        <div className="card-title">Tổng số lượt mua</div>
                         <div className="card-value">{totalBookings}</div>
                     </div>
                 </div>
