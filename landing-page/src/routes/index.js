@@ -9,6 +9,9 @@ import TourManagement from "../screens/AdminPage/TourManagement";
 import LoginPage from "../screens/Auth/Login/Login";
 import RegisterPage from "../screens/Auth/Register";
 import Home from "../screens/CustomerPage/Home/Home";
+import Forum from "../screens/CustomerPage/Forum";
+import Notification from "../screens/CustomerPage/Notification";
+import Favorites from "../screens/CustomerPage/Favorites";
 import { LandingPage } from "../screens/LandingPage";
 import ROUTES from "../utils/routes";
 
@@ -28,5 +31,8 @@ const adminRoutes = [
 const memberRoutes = [
     {path: ROUTES.HOME, component: Home, layout: CustomerLayout},
     {path: ROUTES.PROFILE, component: Home, layout: CustomerLayout },
+    {path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
+    {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
+    {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
 ]
 export { adminRoutes, memberRoutes, publicRoutes }

@@ -37,6 +37,59 @@
     font-size: 18px;
   }
   
+  .tour-favorite-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+  
+  .tour-favorite-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+  
+  .heart-icon {
+    font-size: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .heart-icon.filled {
+    color: #ff4757;
+    animation: heartBeat 0.3s ease;
+  }
+  
+  .heart-icon.outline {
+    color: #666;
+  }
+  
+  .heart-icon.outline:hover {
+    color: #ff4757;
+  }
+  
+  @keyframes heartBeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
   .tour-info {
     padding: 30px;
     display: flex;
@@ -76,4 +129,21 @@
   .rating-star {
     width: 20px;
     height: 19px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tour-card {
+      width: 100%;
+      max-width: 350px;
+    }
+    
+    .tour-favorite-btn {
+      width: 35px;
+      height: 35px;
+    }
+    
+    .heart-icon {
+      font-size: 18px;
+    }
   }

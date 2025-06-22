@@ -36,6 +36,16 @@ const userService = {
         } catch (error) {
             throw error;
         }
+    },
+
+    getUserFriends: async (userId) => {
+        try {
+            const response = await axiosClient.get(`/user-follows/friends?userId=${userId}`);
+            return response.response;
+        } catch (error) {
+            console.error('Lỗi lấy danh sách bạn bè:', error);
+            throw error;
+        }
     }
 };
 
