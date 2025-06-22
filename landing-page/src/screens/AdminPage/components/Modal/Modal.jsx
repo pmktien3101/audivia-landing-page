@@ -79,6 +79,32 @@ const Modal = ({ onClose, onSave, tour }) => {
         setForm({ ...form, customMapImages: images });
     };
 
+    const handleCustomMapImageUpload = async (idx, e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        setUploading(true);
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'audivia_preset');
+        
+        try {
+            const res = await fetch('https://api.cloudinary.com/v1_1/dgzn2ix8w/image/upload', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await res.json();
+            
+            const images = [...form.customMapImages];
+            images[idx].imageUrl = data.secure_url;
+            setForm({ ...form, customMapImages: images });
+        } catch (err) {
+            alert('Upload ảnh thất bại!');
+        } finally {
+            setUploading(false);
+        }
+    };
+
     const addImage = () => {
         setForm({ ...form, customMapImages: [...form.customMapImages, { ...emptyImage }] });
     };
@@ -211,10 +237,27 @@ const Modal = ({ onClose, onSave, tour }) => {
                             {form.customMapImages.length === 0 && <div className="modal-no-image">Chưa có ảnh nào</div>}
                             {form.customMapImages.map((img, idx) => (
                                 <div key={idx} className="modal-image-row">
-                                    <input name="imageUrl" value={img.imageUrl} onChange={e => handleImageChange(idx, e)} placeholder="Link ảnh" className="modal-image-input"/>
+                                    <div className="modal-image-upload-wrapper">
+                                        <label htmlFor={`custom-map-upload-${idx}`} className="modal-file-label">
+                                            Chọn ảnh
+                                        </label>
+                                        <input
+                                            id={`custom-map-upload-${idx}`}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={e => handleCustomMapImageUpload(idx, e)}
+                                            style={{ display: 'none' }}
+                                        />
+                                        <span className="modal-file-chosen">
+                                            {img.imageUrl ? 'Đã chọn ảnh' : 'Chưa chọn tệp'}
+                                        </span>
+                                    </div>
                                     <input name="order" value={img.order} onChange={e => handleImageChange(idx, e)} placeholder="Thứ tự" type="number" min={0} className="modal-image-order"/>
                                     <input name="name" value={img.name} onChange={e => handleImageChange(idx, e)} placeholder="Tên ảnh" className="modal-image-name"/>
                                     <button type="button" onClick={() => removeImage(idx)} className="modal-remove-image">&times;</button>
+                                    {img.imageUrl && (
+                                        <img src={img.imageUrl} alt={`custom map ${idx}`} style={{width: '200px', marginTop: 8, borderRadius: 8}} />
+                                    )}
                                 </div>
                             ))}
                         </div>
