@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import { MdAdd, MdDownload, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
+import ExportReport from '../ExportReport/ExportReport';
 
 const FilterSelect = ({ value, onChange, options }) => {
   return (
@@ -29,6 +30,80 @@ const SearchInput = ({ value, onChange, placeholder = "Tìm kiếm" }) => {
   );
 };
 
+// Custom Export Button component to handle async exportProps
+const AsyncExportButton = ({ exportProps, onDefaultExport }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentExportProps, setCurrentExportProps] = useState(null);
+
+  const handleExportClick = async () => {
+    if (typeof exportProps === 'function') {
+      setIsLoading(true);
+      try {
+        const resolvedProps = await exportProps();
+        setCurrentExportProps(resolvedProps);
+        // Trigger export immediately after resolving props
+        setTimeout(() => {
+          const exportButton = document.querySelector('.async-export-button');
+          if (exportButton) {
+            exportButton.click();
+          }
+        }, 100);
+      } catch (error) {
+        console.error('Error resolving export props:', error);
+        if (onDefaultExport) {
+          onDefaultExport();
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  if (typeof exportProps === 'function') {
+    return (
+      <>
+        <button
+          className="table-btn export-btn"
+          onClick={handleExportClick}
+          disabled={isLoading}
+        >
+          <span className="btn-icon">
+            {isLoading ? (
+              <div style={{
+                width: '16px',
+                height: '16px',
+                border: '2px solid #fff',
+                borderTop: '2px solid transparent',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }} />
+            ) : (
+              <MdDownload />
+            )}
+          </span>
+          <span className="btn-text">{isLoading ? 'Đang tải...' : 'Xuất dữ liệu'}</span>
+        </button>
+        {currentExportProps && (
+          <div style={{ display: 'none' }}>
+            <ExportReport
+              {...currentExportProps}
+              buttonProps={{ className: 'async-export-button' }}
+            />
+          </div>
+        )}
+        <style jsx>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </>
+    );
+  }
+
+  return <ExportReport {...exportProps} />;
+};
+
 export default function Table({
   title = "Bảng dữ liệu",
   data = [],
@@ -39,6 +114,9 @@ export default function Table({
   searchField = "name",
   renderCell = (row, column) => row[column.key],
   filterKey = "status",
+  // Export Report props
+  exportProps = null, // { overviewData, sheetsData, fileName, chartImages } or async function
+  enableExport = true,
 }) {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
@@ -68,6 +146,46 @@ export default function Table({
     }
   };
 
+  // Default export handler if no exportProps provided
+  const handleDefaultExport = () => {
+    if (onExport) {
+      onExport();
+    } else {
+      console.log("Xuất dữ liệu mặc định");
+    }
+  };
+
+  // Prepare default export data if no exportProps provided
+  const getDefaultExportProps = () => {
+    if (exportProps) {
+      return exportProps;
+    }
+
+    // Auto-generate export data from current table data
+    const exportData = filteredData.map(row => {
+      const exportRow = {};
+      columns.forEach(column => {
+        exportRow[column.label] = row[column.key] || '';
+      });
+      return exportRow;
+    });
+
+    return {
+      overviewData: {
+        'Tổng số bản ghi': filteredData.length,
+        'Ngày xuất báo cáo': new Date().toLocaleDateString('vi-VN')
+      },
+      sheetsData: [
+        {
+          sheetName: title,
+          data: exportData
+        }
+      ],
+      fileName: `${title}_${new Date().toISOString().split('T')[0]}`,
+      chartImages: []
+    };
+  };
+
   return (
     <div>
       <div className="table-header">
@@ -91,14 +209,25 @@ export default function Table({
         <div className="toolbar-right">
           {onAdd && (
             <button className="table-btn add-btn" onClick={onAdd}>
-              <span className="btn-icon"><MdAdd size={20}/></span>
+              <span className="btn-icon"><MdAdd size={20} /></span>
             </button>
           )}
-          {onExport && (
-            <button className="table-btn export-btn" onClick={onExport}>
-              <span className="btn-icon"><MdDownload/></span>
-              <span className="btn-text">Xuất dữ liệu</span>
-            </button>
+          {enableExport && (
+            <>
+              {exportProps ? (
+                // Use AsyncExportButton to handle both sync and async exportProps
+                <AsyncExportButton
+                  exportProps={exportProps}
+                  onDefaultExport={handleDefaultExport}
+                />
+              ) : (
+                // Use default export button if no exportProps
+                <button className="table-btn export-btn" onClick={handleDefaultExport}>
+                  <span className="btn-icon"><MdDownload /></span>
+                  <span className="btn-text">Xuất dữ liệu</span>
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -138,8 +267,8 @@ export default function Table({
         </table>
         {totalPages > 1 && (
           <div className="pagination">
-            <button 
-              className="pagination-btn" 
+            <button
+              className="pagination-btn"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
@@ -148,8 +277,8 @@ export default function Table({
             <span className="pagination-info">
               Trang {currentPage} / {totalPages}
             </span>
-            <button 
-              className="pagination-btn" 
+            <button
+              className="pagination-btn"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >

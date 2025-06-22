@@ -40,8 +40,47 @@ const MemberManagement = () => {
         fetchMembers();
     }, []);
 
+    // Prepare data for export
+    const prepareExportData = () => {
+        const exportData = (filteredMembers || []).map(member => ({
+            'Họ tên': member.fullName || '',
+            'Tên đăng nhập': member.userName || '',
+            'Email': member.email || '',
+            'Vai trò': member.roleName || '',
+            'Ngày tạo': member.createdAt ? new Date(member.createdAt).toLocaleDateString('vi-VN') : '',
+            'Trạng thái': (member.isDeleted === true || member.isDeleted === 'true') ? 'Không hoạt động' : 'Hoạt động'
+        }));
+
+        return exportData;
+    };
+
+    // Prepare overview data for export
+    const prepareOverviewData = () => {
+        const totalMembers = filteredMembers?.length || 0;
+        const activeMembers = filteredMembers?.filter(m => !(m.isDeleted === true || m.isDeleted === 'true')).length || 0;
+        const inactiveMembers = totalMembers - activeMembers;
+
+        // Count members by role
+        const roleStats = {};
+        filteredMembers?.forEach(member => {
+            const role = member.roleName || 'Không xác định';
+            roleStats[role] = (roleStats[role] || 0) + 1;
+        });
+
+        return {
+            'Tổng số thành viên': totalMembers,
+            'Thành viên hoạt động': activeMembers,
+            'Thành viên không hoạt động': inactiveMembers,
+            ...Object.fromEntries(
+                Object.entries(roleStats).map(([role, count]) => [`Số ${role}`, count])
+            ),
+            'Ngày xuất báo cáo': new Date().toLocaleDateString('vi-VN')
+        };
+    };
+
     const handleExport = () => {
-        console.log("Xuất dữ liệu");
+        console.log("Xuất dữ liệu - fallback function");
+        // This will be used as fallback if ExportReport fails
     };
 
     const getInitials = (name) => {
@@ -52,17 +91,30 @@ const MemberManagement = () => {
             .toUpperCase();
     };
 
+    // Prepare export props
+    const exportProps = {
+        overviewData: prepareOverviewData(),
+        sheetsData: [
+            {
+                sheetName: 'Danh sách thành viên',
+                data: prepareExportData()
+            }
+        ],
+        fileName: `BaoCaoThanhVien_${new Date().toISOString().split('T')[0]}`,
+        chartImages: [], // No charts for member management, but keeping for consistency
+    };
+
     return (
         <div className="dashboard">
             {/* Main Content */}
             <div className="main-content-table">
-                <AdminHeader/>
+                <AdminHeader />
                 <div className="main-table">
                     {loading ? (
                         <div className="loading">
-                            <img 
-                                src="https://i.pinimg.com/originals/93/dd/8a/93dd8a26a1706b30a2e8f314e096d129.gif" 
-                                alt="Loading..." 
+                            <img
+                                src="https://i.pinimg.com/originals/93/dd/8a/93dd8a26a1706b30a2e8f314e096d129.gif"
+                                alt="Loading..."
                                 style={{ width: '200px', height: '200px' }}
                             />
                             <p>Đang tải dữ liệu thành viên...</p>
@@ -77,12 +129,14 @@ const MemberManagement = () => {
                                 setFilterValue={setFilterValue}
                                 dateField="createdAt"
                             />
+                            {/* Remove the separate ExportReport and add exportProps to Table */}
                             <Table
                                 title="Quản lý Thành viên"
                                 data={filteredMembers || []}
                                 onExport={handleExport}
+                                exportProps={exportProps}
                                 columns={[
-                                    {key: 'avatarUrl', label:'Ảnh'},
+                                    { key: 'avatarUrl', label: 'Ảnh' },
                                     { key: 'fullName', label: 'Họ tên' },
                                     { key: 'userName', label: 'Tên đăng nhập' },
                                     { key: 'email', label: 'Email' },
@@ -96,9 +150,9 @@ const MemberManagement = () => {
                                         return (
                                             <div className="avatar-container">
                                                 {row.avatarUrl ? (
-                                                    <img 
-                                                        src={row.avatarUrl}                                                
-                                                        alt={row.userName} 
+                                                    <img
+                                                        src={row.avatarUrl}
+                                                        alt={row.userName}
                                                         className="table-avatar"
                                                         onError={(e) => {
                                                             e.target.style.display = 'none';
