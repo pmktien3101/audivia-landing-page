@@ -8,6 +8,8 @@ import { useCallback, useEffect, useState } from 'react';
 import Category from '../../../components/Category/index.jsx';
 import tourService from '../../../services/tour.js';
 import TourTypeService from '../../../services/tourType.js';
+import { Tittle } from '../../LandingPage/sections/Tittle';
+import '../../LandingPage/sections/Tittle/style.css';
 
 
 
@@ -92,6 +94,11 @@ const Home = () => {
 
     return (
         <>
+        <div className='banner-wrapper'>
+        <div className="ellipse-9" />
+            <Tittle/>
+        <div className="ellipse-10" />
+        </div>
             <div className='searchbar'>
                 <div className="wapper-content">
                     <div className="text-wrapper-1">AUDIO TOUR NỔI BẬT</div>

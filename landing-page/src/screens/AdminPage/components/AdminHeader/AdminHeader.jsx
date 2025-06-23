@@ -28,7 +28,13 @@ const ProfileDropdown = ({ onLogout }) => (
 
 const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout }) => (
   <div className="admin-profile-section" onClick={onToggleDropdown}>
-    <div className="admin-profile-avatar"></div>
+     <div className="profile-avatar">
+      {user?.raw.avatarUrl ? (
+        <img src={user.raw.avatarUrl} alt="avatar" />
+      ) : (
+        <span className="avatar-placeholder">{user?.name?.[0]?.toUpperCase() || "U"}</span>
+      )}
+    </div>
     <div className="admin-profile-info">
       <div className="admin-profile-name">{user?.name}</div>
       <div className="admin-profile-username">Quản trị viên</div>
