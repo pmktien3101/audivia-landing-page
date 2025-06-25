@@ -209,10 +209,14 @@
     }
 }
 
-/* Nếu .tittle có width lớn hoặc position: absolute, override lại */
-.tittle {
-  position: relative !important;
-  width: 100% !important;
-  max-width: 1200px !important;
-  left: 0 !important;
+.banner-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-wrapper .tittle {
+    position: relative !important;
+    left: 0 !important;
+    margin: 0 auto !important;
 }

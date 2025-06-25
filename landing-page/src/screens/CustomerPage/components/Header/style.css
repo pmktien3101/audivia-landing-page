@@ -88,7 +88,7 @@
     cursor: pointer;
 }
 
-.profile-avatar {
+.profile-avatar-header {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -99,7 +99,7 @@
     overflow: hidden;
 }
 
-.profile-avatar img {
+.profile-avatar-header img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -113,13 +113,13 @@
     text-transform: uppercase;
 }
 
-.profile-info {
+.profile-info-header {
     display: flex;
     flex-direction: column;
     font-size: 12px;
 }
 
-.profile-name {
+.profile-name-header {
     font-weight: 600;
     color: #1f2937;
 }

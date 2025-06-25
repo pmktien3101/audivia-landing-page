@@ -81,17 +81,23 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    padding: 20px;
+    padding: 0px;
   }
   
   .post-modal {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
+    max-width: 600px;
+    min-width: 380px;
+    max-height: 99vh;
+    min-height: 420px;
     overflow-y: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0;
   }
   
   .post-modal-header {
@@ -125,7 +131,9 @@
   }
   
   .post-modal-content {
-    padding: 20px;
+    padding: 32px 32px 18px 32px;
+    flex: 1;
+    overflow-y: auto;
   }
   
   .post-content-input {
@@ -260,6 +268,10 @@
     .post-modal {
       margin: 10px;
       max-width: none;
+      min-width: unset;
+      width: 95vw;
+      max-height: 99vh;
+      min-height: unset;
     }
     
     .post-modal-actions {
@@ -275,4 +287,81 @@
       width: 100%;
       justify-content: center;
     }
+    
+    .post-modal-content {
+      padding: 16px 8px 8px 8px;
+    }
+  }
+  
+  /* Province Select Dropdown Styles */
+  .province-select-modal {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    z-index: 1001;
+    padding: 18px 18px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    animation: fadeInProvince 0.18s;
+  }
+  @keyframes fadeInProvince {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+  .province-search-input {
+    border: 1.5px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+  .province-search-input:focus {
+    border-color: #00A5CF;
+    box-shadow: 0 0 0 2px rgba(0,165,207,0.12);
+  }
+  .province-list {
+    max-height: 220px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: #fafbfc;
+    box-shadow: 0 1px 4px #0001;
+  }
+  .province-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+  }
+  .province-item:hover {
+    background: #e6f7fb;
+    color: #00A5CF;
+  }
+  .province-cancel-btn {
+    align-self: flex-end;
+    background: #f8f9fa;
+    color: #6c757d;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 2px;
+    transition: background 0.18s, color 0.18s;
+  }
+  .province-cancel-btn:hover {
+    background: #fee;
+    color: #e74c3c;
   }
