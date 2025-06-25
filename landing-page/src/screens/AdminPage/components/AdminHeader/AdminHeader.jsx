@@ -28,7 +28,7 @@ const ProfileDropdown = ({ onLogout }) => (
 
 const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout }) => (
   <div className="admin-profile-section" onClick={onToggleDropdown}>
-     <div className="profile-avatar">
+     <div className="profile-admin-avatar">
       {user?.raw.avatarUrl ? (
         <img src={user.raw.avatarUrl} alt="avatar" />
       ) : (
