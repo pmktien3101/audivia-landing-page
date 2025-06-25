@@ -32,9 +32,9 @@ const saveTourService = {
   },
 
   // Bỏ lưu tour khỏi danh sách yêu thích
-  deleteTourSaved: async (savedtourId) => {
+  deleteTourSaved: async (savedTourId) => {
     try {
-      const response = await axiosClient.delete(`/save-tours/${savedtourId}`);
+      const response = await axiosClient.delete(`/save-tours/${savedTourId}`);
       return response;
     } catch (error) {
       console.error('Error unsaving tour:', error);
@@ -44,15 +44,14 @@ const saveTourService = {
 
 
   
-  toggleSaveTour: async (userId, tourId, isSaved) => {
+  updateTourSaved: async (savedTourId, plannedTime) => {
     try {
-      if (isSaved) {
-        return await saveTourService.unsaveTour(userId, tourId);
-      } else {
-        return await saveTourService.saveTour(userId, tourId);
-      }
+      const response = await axiosClient.put(`/save-tours/${savedTourId}`, {
+        plannedTime: plannedTime
+      })
+      return response
     } catch (error) {
-      console.error('Error toggling save tour:', error);
+      console.error('Error update planned time saved tour:', error);
       throw error;
     }
   }

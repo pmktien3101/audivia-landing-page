@@ -5,11 +5,18 @@ import { CreatePostActions } from './CreatePostActions';
 import { PostModal } from './PostModal';
 import ForumService from '../../../../services/forum';
 import userService from '../../../../services/user';
+import toast from 'react-hot-toast';
+import { uploadImageToCloudinary } from '../../../../services/cloudinary';
 
 export const ForumCreatePost = ({ onPostCreated }) => {
   const [user, setUser] = useState(null);
   const [showPostModal, setShowPostModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [postData, setPostData] = useState({
+    content: '',
+    location: '',
+    images: [],
+  });
 
   const DEFAULT_AVATAR = 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745396073/Audivia/ddizjlgkux0eoifrsoco.avif';
 
@@ -28,29 +35,46 @@ export const ForumCreatePost = ({ onPostCreated }) => {
     fetchCurrentUser();
   }, []);
 
-  const handleSavePost = async (postData) => {
+  const handleSavePost = async () => {
     if (!user?.id) {
-      alert('Không tìm thấy thông tin người dùng');
+      toast.error('Không tìm thấy thông tin người dùng');
+      return;
+    }
+
+    if (!postData.content.trim()) {
+      toast.error('Vui lòng nhập nội dung bài viết');
       return;
     }
 
     setIsSubmitting(true);
     try {
+
+
+      const uploadedImageUrls = [];
+
+      for (const file of postData.images) {
+        const url = await uploadImageToCloudinary(file);
+        uploadedImageUrls.push(url);
+      }
+
+
+
       const response = await ForumService.createPost(
-        postData.images,
+        uploadedImageUrls,
         postData.location,
         postData.content,
         user.id
       );
-      
+
       if (response) {
         onPostCreated?.(response);
         setShowPostModal(false);
-        alert('Đăng bài thành công!');
+        setPostData({ content: '', location: '', images: [] });
+        toast.success('Đăng bài thành công');
       }
     } catch (error) {
-      console.error('Lỗi tạo bài viết:', error);
-      alert('Có lỗi xảy ra khi tạo bài viết');
+      console.log('Lỗi tạo bài viết:', error);
+      toast.error('Đăng bài thất bại');
     } finally {
       setIsSubmitting(false);
     }
@@ -71,6 +95,8 @@ export const ForumCreatePost = ({ onPostCreated }) => {
         onClose={() => setShowPostModal(false)}
         onSave={handleSavePost}
         isSubmitting={isSubmitting}
+        postData={postData}
+        setPostData={setPostData}
       />
     </div>
   );

@@ -1,45 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiX, FiImage, FiMapPin, FiSend } from 'react-icons/fi';
-import './style.css';
+import './style.css';;
 
-export const PostModal = ({ visible, onClose, onSave }) => {
-  const [content, setContent] = useState('');
-  const [location, setLocation] = useState('');
-  const [images, setImages] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export const PostModal = ({ visible, onClose, onSave, isSubmitting, postData, setPostData }) => {
+
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages(prev => [...prev, ...files]);
+    setPostData(prev => ({ ...prev, images: [...prev.images, ...files] }));
   };
 
   const removeImage = (index) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    setPostData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
   };
 
-  const handleSubmit = async () => {
-    if (!content.trim()) {
-      alert('Vui lòng nhập nội dung bài viết');
-      return;
-    }
+  const handleContentChange = (e) => {
+    setPostData(prev => ({ ...prev, content: e.target.value }));
+  };
 
-    setIsSubmitting(true);
-    try {
-      await onSave({
-        content: content.trim(),
-        location: location.trim(),
-        images: images
-      });
-      
-      // Reset form
-      setContent('');
-      setLocation('');
-      setImages([]);
-    } catch (error) {
-      console.error('Lỗi tạo bài viết:', error);
-      alert('Có lỗi xảy ra khi tạo bài viết');
-    } finally {
-      setIsSubmitting(false);
+  const handleCheckIn = () => {
+    const loc = prompt('Nhập địa điểm:');
+    if (loc) {
+      setPostData(prev => ({ ...prev, location: loc }));
     }
   };
 
@@ -59,21 +44,21 @@ export const PostModal = ({ visible, onClose, onSave }) => {
           <textarea
             className="post-content-input"
             placeholder="Bạn đang nghĩ gì?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={postData.content}
+            onChange={handleContentChange}
             rows={4}
           />
 
-          {location && (
+          {postData.location && (
             <div className="location-display">
               <FiMapPin size={16} />
-              <span>{location}</span>
+              <span>{postData.location}</span>
             </div>
           )}
 
-          {images.length > 0 && (
+          {postData.images.length > 0 && (
             <div className="images-preview">
-              {images.map((image, index) => (
+              {postData.images.map((image, index) => (
                 <div key={index} className="image-preview-item">
                   <img 
                     src={URL.createObjectURL(image)} 
@@ -105,10 +90,7 @@ export const PostModal = ({ visible, onClose, onSave }) => {
               />
             </label>
             
-            <button className="action-btn" onClick={() => {
-              const loc = prompt('Nhập địa điểm:');
-              if (loc) setLocation(loc);
-            }}>
+            <button className="action-btn" onClick={handleCheckIn}>
               <FiMapPin size={20} />
               <span>Check in</span>
             </button>
@@ -116,8 +98,8 @@ export const PostModal = ({ visible, onClose, onSave }) => {
 
           <button 
             className="submit-btn"
-            onClick={handleSubmit}
-            disabled={isSubmitting || !content.trim()}
+            onClick={onSave}
+            disabled={isSubmitting || !postData.content.trim()}
           >
             {isSubmitting ? 'Đang đăng...' : 'Đăng bài'}
             <FiSend size={16} />
@@ -125,5 +107,5 @@ export const PostModal = ({ visible, onClose, onSave }) => {
         </div>
       </div>
     </div>
-  );
-};
+    );
+  };

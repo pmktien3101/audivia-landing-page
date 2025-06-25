@@ -78,6 +78,7 @@ const Header = () => {
             </div>
             <div className="header-center">
               <HeaderIcons />
+
             </div>
             <div className="header-right">
                 <UserProfile 
@@ -87,6 +88,7 @@ const Header = () => {
                     onLogout={handleLogout}
                 />
             </div>
+
         </div>
     )
 }
