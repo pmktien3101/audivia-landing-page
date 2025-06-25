@@ -3,10 +3,13 @@ import "./style.css";
 
 export const Tittle = () => {
   const [showModal, setShowModal] = useState(false);
-
+  
   const handleDemoClick = () => {
     setShowModal(true);
   };
+  const handleStart = () => {
+    window.location.href = "https://web.audivia.vn/login";
+  }
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -32,7 +35,7 @@ export const Tittle = () => {
         </p>
 
         <div className="frame-7">
-          <div className="frame-8">
+          <div className="frame-8" onClick={handleStart} style={{cursor:'pointer'}}>
             <div className="text-wrapper-7">Bắt Đầu</div>
           </div>
 
