@@ -4,8 +4,19 @@ import SavedToursList from '../../../components/Tour/SavedToursList';
 import { useNavigate } from 'react-router-dom';
 import saveTourService from '../../../services/saveTour';
 import userService from '../../../services/user';
+import DatePickerModal from '../../../components/DatePickerModal/DatePickerModal';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Favorites = () => {
+  const [savedTours, setSavedTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState()
+  const [selectedDate, setSelectedDate] = useState()
+
+  const [showModal, setShowModal] = useState(false)
+  const [selectedSavedTour, setSelectedSavedTour] = useState(null);
   const navigate = useNavigate();
 
   const handleTourClick = (tourId) => {
@@ -13,14 +24,43 @@ const Favorites = () => {
     navigate(`/tour/${tourId}`);
   };
 
-  const handleScheduleClick = (tourId) => {
-    // Navigate to schedule page
-    navigate(`/schedule/${tourId}`);
+  const handleScheduleClick = (savedTour) => {
+    setSelectedSavedTour(savedTour)
+    if (savedTour.plannedTime) {
+      // Nếu tour đã có ngày lên lịch, parse nó thành Date
+      const parsedDate = new Date(savedTour.plannedTime);
+      setSelectedDate(parsedDate);
+    } else {
+      // Nếu chưa có, xóa ngày đang chọn
+      setSelectedDate(null);
+    }
+    setShowModal(true)
   };
-  const [savedTours, setSavedTours] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [user, setUser] = useState()
+
+  const handleConfirmDate = () => {
+    console.log("Ngày đã chọn:", selectedDate);
+    console.log("saved tour id: ", selectedSavedTour.id);
+    const plannedTime = new Date(
+      Date.UTC(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        0, 0, 0
+      )
+    ).toISOString();
+    const response = saveTourService.updateTourSaved(selectedSavedTour.id, plannedTime)
+    if(response)
+      toast.success("Set up planned time successfully")
+      setShowModal(false)
+
+  }
+  const handleCloseModal = () => {
+    setShowModal(false);
+
+    setSelectedSavedTour(null);
+  };
+
+
 
   const fetchCurrentUser = async() => {
     try {
@@ -75,6 +115,14 @@ useEffect(() => {
         onTourClick={handleTourClick}
         onScheduleClick={handleScheduleClick}
         onDelete={handleDelete}
+      />
+      <DatePickerModal
+        show={showModal}
+        onClose={handleCloseModal}
+        savedTour={selectedSavedTour}
+        onConfirm={handleConfirmDate}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate} 
       />
     </div>
   );

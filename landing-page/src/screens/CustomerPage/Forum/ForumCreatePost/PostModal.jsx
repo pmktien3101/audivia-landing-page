@@ -16,55 +16,30 @@ const VIETNAM_PROVINCES = [
   'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái'
 ];
 
-export const PostModal = ({ visible, onClose, onSave, initialData = {}, isEdit = false }) => {
-  const [content, setContent] = useState('');
-  const [location, setLocation] = useState('');
-  const [images, setImages] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export const PostModal = ({ visible, onClose, onSave, isSubmitting, postData, setPostData, isEdit = false }) => {
   const [showProvinceSelect, setShowProvinceSelect] = useState(false);
   const [provinceSearch, setProvinceSearch] = useState('');
 
   useEffect(() => {
     if (visible) {
-      setContent(initialData.content || '');
-      setLocation(initialData.location || '');
-      setImages(initialData.images || []);
+      setProvinceSearch('');
     }
   }, [visible]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages(prev => [...prev, ...files]);
+    setPostData(prev => ({ ...prev, images: [...prev.images, ...files] }));
   };
 
   const removeImage = (index) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    setPostData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
   };
 
-  const handleSubmit = async () => {
-    if (!content.trim()) {
-      alert('Vui lòng nhập nội dung bài viết');
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await onSave({
-        content: content.trim(),
-        location: location.trim(),
-        images: images
-      });
-      if (!isEdit) {
-        setContent('');
-        setLocation('');
-        setImages([]);
-      }
-    } catch (error) {
-      console.error(isEdit ? 'Lỗi cập nhật bài viết:' : 'Lỗi tạo bài viết:', error);
-      alert('Có lỗi xảy ra khi ' + (isEdit ? 'cập nhật' : 'tạo') + ' bài viết');
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleContentChange = (e) => {
+    setPostData(prev => ({ ...prev, content: e.target.value }));
   };
 
   const filteredProvinces = VIETNAM_PROVINCES.filter(p =>
@@ -87,28 +62,30 @@ export const PostModal = ({ visible, onClose, onSave, initialData = {}, isEdit =
           <textarea
             className="post-content-input"
             placeholder="Bạn đang nghĩ gì?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={postData.content}
+            onChange={handleContentChange}
             rows={4}
           />
 
-          {location && (
+          {postData.location && (
             <div className="location-display">
               <FiMapPin size={16} />
-              <span>{location}</span>
-              <div style={{marginLeft:8, color: 'red'}} onClick={() => setLocation('')}><FiDelete/></div>
+              <span>{postData.location}</span>
+              <div style={{ marginLeft: 8, color: 'red', cursor: 'pointer' }} onClick={() => setPostData(prev => ({ ...prev, location: '' }))}>
+                <FiDelete />
+              </div>
             </div>
           )}
 
-          {images.length > 0 && (
+          {postData.images.length > 0 && (
             <div className="images-preview">
-              {images.map((image, index) => (
+              {postData.images.map((image, index) => (
                 <div key={index} className="image-preview-item">
-                  <img 
-                    src={typeof image === 'string' ? image : URL.createObjectURL(image)} 
-                    alt={`Preview ${index + 1}`} 
+                  <img
+                    src={typeof image === 'string' ? image : URL.createObjectURL(image)}
+                    alt={`Preview ${index + 1}`}
                   />
-                  <button 
+                  <button
                     className="remove-image-btn"
                     onClick={() => removeImage(index)}
                   >
@@ -119,7 +96,6 @@ export const PostModal = ({ visible, onClose, onSave, initialData = {}, isEdit =
             </div>
           )}
 
-          {/* Province select dropdown */}
           {showProvinceSelect && (
             <div className="province-select-modal">
               <input
@@ -139,7 +115,7 @@ export const PostModal = ({ visible, onClose, onSave, initialData = {}, isEdit =
                     key={province}
                     className="province-item"
                     onClick={() => {
-                      setLocation(province);
+                      setPostData(prev => ({ ...prev, location: province }));
                       setShowProvinceSelect(false);
                       setProvinceSearch('');
                     }}
@@ -166,17 +142,17 @@ export const PostModal = ({ visible, onClose, onSave, initialData = {}, isEdit =
                 style={{ display: 'none' }}
               />
             </label>
-            
+
             <button className="action-btn" onClick={() => setShowProvinceSelect(true)}>
               <FiMapPin size={20} />
               <span>Check in</span>
             </button>
           </div>
 
-          <button 
+          <button
             className="submit-btn"
-            onClick={handleSubmit}
-            disabled={isSubmitting || !content.trim()}
+            onClick={onSave}
+            disabled={isSubmitting || !postData.content.trim()}
           >
             {isSubmitting ? (isEdit ? 'Đang cập nhật...' : 'Đang đăng...') : (isEdit ? 'Cập nhật' : 'Đăng bài')}
             <FiSend size={16} />

@@ -16,9 +16,9 @@ const SavedToursList = ({
 
 
 
-  const handleSchedule = (tourId) => {
+  const handleSchedule = (savedTour) => {
     if (onScheduleClick) {
-      onScheduleClick(tourId);
+      onScheduleClick(savedTour);
     }
   };
 
@@ -68,13 +68,14 @@ const SavedToursList = ({
       <div className="saved-tours-grid">
       {savedTours.map((savedTour) => (
           <SavedTourCard
+            savedTour={savedTour} 
             key={savedTour.id}
             savedTourId={savedTour.id}
             tour={savedTour.tour}
             savedTime={savedTour.timeAgo || 'gần đây'}
             onDelete={onDelete} // <- gọi trực tiếp từ props
             onToggleFavorite={onToggleFavorite}
-            onSchedule={handleSchedule}
+            onSchedule={() => handleSchedule(savedTour)}
             onCardClick={handleTourClick}
             plannedTime={savedTour.plannedTime}
           />

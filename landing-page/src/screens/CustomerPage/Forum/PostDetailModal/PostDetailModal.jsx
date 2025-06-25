@@ -173,7 +173,7 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated }) => {
               <h4>{post.user?.userName || 'Người dùng'}</h4>
               {post.location && <span className="post-detail-location"><BiLocationPlus color='red'/> {post.location}</span>}
               <span className="post-detail-time">
-                {new Date(post.createdAt).toLocaleDateString('vi-VN')}
+                {post.time}
               </span>
             </div>
           </div>
