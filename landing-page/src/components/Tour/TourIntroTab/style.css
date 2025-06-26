@@ -1,0 +1,136 @@
+/* style.css */
+.tour-intro-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+  }
+  
+  /* Common Card Style */
+  .info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Section Titles */
+  .section-title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 8px;
+    font-family: Plus Jakarta Sans, Helvetica;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+  }
+  
+  /* General Info Section */
+  .general-info {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(58, 12, 163, 0.03) 100%);
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .info-label {
+    font-size: 17px;
+    color: #718096;
+    font-weight: 500;
+    font-family: Plus Jakarta Sans, Helvetica;
+  }
+  .info-label svg {
+    margin-right: 6px;
+    font-size: 25px;
+    margin-bottom: -5px;
+  }
+  .info-value {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2d3748;
+  }
+  
+  /* Description Section */
+  .description-content {
+    color: #4a5568;
+    line-height: 1.8;
+    font-size: 17px;
+    white-space: pre-line;
+  }
+  
+  /* Checkpoints Section */
+  .checkpoints-section {
+    padding-bottom: 16px;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .checkpoint-count {
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+    color: white;
+    padding: 12px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .info-card {
+      padding: 20px;
+    }
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .info-card {
+    animation: fadeIn 0.6s ease forwards;
+  }

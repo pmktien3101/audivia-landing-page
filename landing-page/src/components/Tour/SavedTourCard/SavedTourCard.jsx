@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { HiOutlineTrash, HiOutlineCalendar } from 'react-icons/hi';
 import { IoStar } from 'react-icons/io5';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 const SavedTourCard = ({ 
   tour, 
   savedTime, 
   onDelete, 
   onSchedule,
-  onCardClick,
   savedTourId
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate()
 
   const handleDelete = async (e) => {
     e.stopPropagation();
@@ -27,9 +27,7 @@ const SavedTourCard = ({
   };
 
   const handleCardClick = () => {
-    if (onCardClick) {
-      onCardClick(tour.id);
-    }
+    navigate(`/tour-detail/${tour.id}`);
   };
 
   return (

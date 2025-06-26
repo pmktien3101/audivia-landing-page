@@ -15,6 +15,7 @@ import Favorites from "../screens/CustomerPage/Favorites";
 import { LandingPage } from "../screens/LandingPage";
 import ROUTES from "../utils/routes";
 import MenuProfile from "../screens/CustomerPage/MenuProfile";
+import TourDetail from "../screens/CustomerPage/TourDetail";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout},
@@ -35,5 +36,6 @@ const memberRoutes = [
     {path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
     {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
     {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
+    {path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout}
 ]
 export { adminRoutes, memberRoutes, publicRoutes }
