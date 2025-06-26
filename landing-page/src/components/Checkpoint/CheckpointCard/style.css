@@ -1,0 +1,155 @@
+/* style.css */
+.checkpoint-card {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+
+  }
+
+  .checkpoint-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+  
+  .checkpoint-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff) ;
+  }
+  
+  .card-order-indicator {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    z-index: 2;
+  }
+  
+  .card-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    
+  }
+  
+  .card-image-wrapper {
+    width: 120px;
+    height: 120px;
+    min-width: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .checkpoint-card:hover .card-image {
+    transform: scale(1.08);
+  }
+  
+  .card-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .card-title {
+    margin: 0 0 12px 0;
+    color: #1a1a1a;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: Plus Jakarta Sans, Helvetica;
+  }
+  
+  .card-description {
+    margin: 0 0 16px 0;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    flex-grow: 1;
+    font-size: 17px;
+  }
+  
+  .card-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #eee, transparent);
+    margin: 12px 0;
+  }
+  
+  .card-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #4361ee;
+    font-weight: 500;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .checkpoint-card {
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px;
+    }
+    
+    .card-content {
+      flex-direction: column;
+    }
+    
+    .card-image-wrapper {
+      width: 100%;
+      height: 180px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+    }
+    
+    .card-description {
+      font-size: 14px;
+    }
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .checkpoint-card {
+    animation: fadeIn 0.6s ease forwards;
+  }

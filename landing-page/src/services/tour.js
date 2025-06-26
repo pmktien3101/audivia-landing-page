@@ -97,6 +97,18 @@ const tourService = {
       throw error;
     }
   },
+
+  getTourById: async (id) => {
+    try {
+      const response = await axiosClient.get(`/tours/${id}`)
+      return response.response
+    } catch (error) {
+      console.log('Error at getTourById', error);
+      
+    }
+  }
+
+
 };
 
 export default tourService;
