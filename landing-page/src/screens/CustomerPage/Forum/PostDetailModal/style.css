@@ -1,6 +1,6 @@
 .post-detail-modal-overlay {
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -10,6 +10,9 @@
   justify-content: center;
   z-index: 1000;
   padding: 20px;
+  background: rgba(0, 0, 0, 0.5); /* nền tối mờ */
+  backdrop-filter: blur(4px); 
+
 }
 
 .post-detail-modal {
@@ -17,13 +20,19 @@
   border-radius: 16px;
   width: 100%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE, Edge */
+  scroll-behavior: smooth;
 }
-
+.post-detail-modal::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
 .post-detail-header {
   display: flex;
   justify-content: space-between;
@@ -63,6 +72,11 @@
   padding: 24px;
   flex: 1;
   overflow-y: auto;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.post-detail-content::-webkit-scrollbar {
+  display: none !important;
 }
 
 /* Post Header */
@@ -194,6 +208,11 @@
   max-height: 300px;
   overflow-y: auto;
   margin-bottom: 20px;
+  scrollbar-width: thin ;
+  -ms-overflow-style: none ;
+}
+.comments-list::-webkit-scrollbar {
+  display: none ;
 }
 
 .comment-item {
@@ -432,4 +451,42 @@
   .comment-submit-btn {
     align-self: flex-end;
   }
+}
+
+/* Custom scrollbar cho Chrome, Edge, Safari */
+.post-detail-modal,
+.post-detail-content,
+.comments-list {
+  scrollbar-width: thin; /* Firefox: nhỏ */
+  scrollbar-color: #c1c1c1 #f5f5f5; /* Firefox: màu thanh cuộn */
+  scroll-behavior: smooth;
+}
+
+/* Chrome, Edge, Safari */
+.post-detail-modal::-webkit-scrollbar,
+.post-detail-content::-webkit-scrollbar,
+.comments-list::-webkit-scrollbar {
+  width: 6px; /* Độ rộng thanh cuộn */
+  background: transparent; /* Nền trong suốt khi không hover */
+  transition: background 0.2s;
+}
+
+.post-detail-modal:hover::-webkit-scrollbar,
+.post-detail-content:hover::-webkit-scrollbar,
+.comments-list:hover::-webkit-scrollbar {
+  background: #f5f5f5; /* Nền khi hover */
+}
+
+.post-detail-modal::-webkit-scrollbar-thumb,
+.post-detail-content::-webkit-scrollbar-thumb,
+.comments-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1; /* Màu thanh cuộn */
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.post-detail-modal::-webkit-scrollbar-thumb:hover,
+.post-detail-content::-webkit-scrollbar-thumb:hover,
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; /* Màu khi hover */
 } 

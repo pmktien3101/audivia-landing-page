@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './style.css';
-import { FiHeart } from 'react-icons/fi';
+import { FiHeart, FiMoreHorizontal, FiEdit3, FiTrash2 } from 'react-icons/fi';
 import { HiHeart } from 'react-icons/hi2';
 import { BiCommentMinus, BiLocationPlus } from 'react-icons/bi';
 
-const Post = ({ post, onClick }) => {
+const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
   const handleClick = () => {
     onClick(post);
   };
+
+  // Đóng menu khi click ra ngoài
+  React.useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
+
+  const isOwner = showMenu && user && post.user && (user.id === post.user.id);
 
   return (
     <div className="post-item" onClick={handleClick}>
@@ -23,6 +40,23 @@ const Post = ({ post, onClick }) => {
             {post.time}
           </span>
         </div>
+        {isOwner && (
+          <div className="post-menu-wrapper" ref={menuRef} onClick={e => e.stopPropagation()}>
+            <button className="post-menu-btn" onClick={() => setMenuOpen(v => !v)}>
+              <FiMoreHorizontal size={20} />
+            </button>
+            {menuOpen && (
+              <div className="post-menu-dropdown">
+                <button className="post-menu-item" onClick={() => { setMenuOpen(false); onPostEdit?.(post); }}>
+                  <FiEdit3 size={16} /> Sửa
+                </button>
+                <button className="post-menu-item delete" onClick={() => { setMenuOpen(false); onPostDelete?.(post); }}>
+                  <FiTrash2 size={16} /> Xoá
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       
       {post.location && (
@@ -35,14 +69,31 @@ const Post = ({ post, onClick }) => {
       
       {post.images && post.images.length > 0 && (
         <div className="post-images">
-          {post.images.map((image, index) => (
-            <img 
-              key={index} 
-              src={image} 
-              alt={`Post image ${index + 1}`}
-              className="post-image"
-            />
-          ))}
+          {post.images.slice(0, 3).map((image, index) => {
+            if (index === 2 && post.images.length > 3) {
+              return (
+                <div key={index} className="post-image-more-wrapper" onClick={handleClick} style={{ position: 'relative', cursor: 'pointer' }}>
+                  <img 
+                    src={image} 
+                    alt={`Post image ${index + 1}`}
+                    className="post-image"
+                  />
+                  <div className="post-image-more-overlay">
+                    +{post.images.length - 3} ảnh
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <img 
+                key={index} 
+                src={image} 
+                alt={`Post image ${index + 1}`}
+                className="post-image"
+                onClick={handleClick}
+              />
+            );
+          })}
         </div>
       )}
 

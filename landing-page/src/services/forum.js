@@ -24,6 +24,12 @@ const ForumService = {
     },
 
     createPost: async (images, location, content, createdBy) => {
+        console.log(images);
+        console.log(content);
+        console.log(createdBy);
+        
+        
+        
         try {
             const postData = {
                 title: "string",

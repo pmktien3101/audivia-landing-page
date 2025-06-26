@@ -5,7 +5,7 @@ import ProtectedRoute from './contexts/ProtectedRoute';
 import ROUTES from './utils/routes';
 
 function App() {
-    return (
+    return (      
             <Router>
                 <Routes>
                     {/* Public Routes */}

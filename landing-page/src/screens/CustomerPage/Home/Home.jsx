@@ -10,7 +10,11 @@ import tourService from '../../../services/tour.js';
 import TourTypeService from '../../../services/tourType.js';
 import { Tittle } from '../../LandingPage/sections/Tittle';
 import '../../LandingPage/sections/Tittle/style.css';
+<<<<<<< feature/suggested-tours
 import SuggestedTourList from '../../../components/Tour/SuggestedTourList/SuggestedTourList.jsx';
+=======
+
+>>>>>>> main
 
 
 const Home = () => {
@@ -94,11 +98,19 @@ const Home = () => {
 
     return (
         <>
+<<<<<<< feature/suggested-tours
             <div className='banner-wrapper'>
                 <div className="ellipse-9" />
                 <Tittle />
                 <div className="ellipse-10" />
             </div>
+=======
+        <div className='banner-wrapper'>
+        <div className="ellipse-9" />
+            <Tittle/>
+        <div className="ellipse-10" />
+        </div>
+>>>>>>> main
             <div className='searchbar'>
                 <div className="wapper-content">
                     <div className="text-wrapper-1">AUDIO TOUR NỔI BẬT</div>

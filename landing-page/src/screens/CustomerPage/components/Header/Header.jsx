@@ -1,4 +1,4 @@
-import { FiBell, FiMail, FiLogOut, FiHome, FiUser, FiSettings } from "react-icons/fi"
+import { FiBell, FiMail, FiLogOut, FiHome, FiUser, FiSettings, FiMenu } from "react-icons/fi"
 import { useState } from "react"
 import { useNavigate, Link, NavLink } from "react-router-dom"
 import './style.css'
@@ -6,9 +6,7 @@ import userService from "../../../../services/user"
 import ROUTES from "../../../../utils/routes"
 import useUser from "../../../../hooks/useUser"
 import { BsFillPeopleFill, BsPeople } from "react-icons/bs"
-import { GiLoveHowl, GiLoveInjection, GiLoveLetter, GiLovers, GiSelfLove } from "react-icons/gi"
 import { BiHeart } from "react-icons/bi"
-import { HiHeart } from "react-icons/hi2"
 
 const HeaderIcons = () => (
   <div className="header-center">
@@ -27,8 +25,12 @@ const HeaderIcons = () => (
   </div>
 )
 
-const ProfileDropdown = ({ onLogout }) => (
+const ProfileDropdown = ({ onLogout, onProfile }) => (
   <div className="profile-dropdown">
+    <button className="dropdown-item" onClick={onProfile}>
+      <FiMenu size={16} />
+      <span>Menu Profile</span>
+    </button>
     <button className="dropdown-item" onClick={onLogout}>
       <FiLogOut size={16} />
       <span>Đăng xuất</span>
@@ -36,14 +38,20 @@ const ProfileDropdown = ({ onLogout }) => (
   </div>
 )
 
-const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout }) => (
+const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfile }) => (
   <div className="profile-section" onClick={onToggleDropdown}>
-    <div className="profile-avatar"></div>
-    <div className="profile-info">
-      <div className="profile-name">{user?.name}</div>
-      <div className="profile-username">Quản trị viên</div>
+    <div className="profile-avatar-header">  
+      {user?.raw.avatarUrl ? (
+        <img src={user.raw.avatarUrl} alt="avatar" />
+      ) : (
+        <span className="avatar-placeholder">{user?.name?.[0]?.toUpperCase() || "U"}</span>
+      )}
     </div>
-    {isDropdownOpen && <ProfileDropdown onLogout={onLogout} />}
+    <div className="profile-info-header">
+      <div className="profile-name-header">{user?.name}</div>
+      <div className="profile-username">Khách hàng</div>
+    </div>
+    {isDropdownOpen && <ProfileDropdown onLogout={onLogout} onProfile={onProfile}/>}
   </div>
 )
 
@@ -59,6 +67,10 @@ const Header = () => {
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
+    const handleProfile = (e) => {
+      navigate(ROUTES.PROFILE);
+    };
+
     return (
         <div className="main-header">
             <div className="header-left">
@@ -72,6 +84,7 @@ const Header = () => {
             </div>
             <div className="header-center">
               <HeaderIcons />
+
             </div>
             <div className="header-right">
                 <UserProfile 
@@ -79,8 +92,10 @@ const Header = () => {
                     isDropdownOpen={isDropdownOpen}
                     onToggleDropdown={toggleDropdown}
                     onLogout={handleLogout}
+                    onProfile={handleProfile}
                 />
             </div>
+
         </div>
     )
 }

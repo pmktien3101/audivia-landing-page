@@ -14,10 +14,6 @@ const SavedTourCard = ({
   const [showOptions, setShowOptions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Debug: Log tour object structure
-  console.log('Tour object:', tour);
-  console.log('Tour ID:', tour?.id);
-  console.log('Tour properties:', Object.keys(tour || {}));
 
   const handleDelete = async (e) => {
     e.stopPropagation();
@@ -27,9 +23,7 @@ const SavedTourCard = ({
 
   const handleSchedule = (e) => {
     e.stopPropagation();
-    if (onSchedule) {
-      onSchedule(tour.id);
-    }
+    onSchedule()
   };
 
   const handleCardClick = () => {
