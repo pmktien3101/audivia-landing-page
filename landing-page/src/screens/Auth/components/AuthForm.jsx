@@ -34,6 +34,7 @@ const AuthForm = ({
   submitButtonText,
   showForgotPassword = false,
   showSocialLogin = false,
+  onGoogleAuth,
   footerText,
   footerLinkText,
   onFooterLinkClick,
@@ -88,11 +89,11 @@ const AuthForm = ({
                 </div>
 
                 <div className="social-login">
-                  <button type="button" className="social-button google">
-                    <span className="social-icon"><FaGoogle size={20}/></span>
+                  <button type="button" onClick={onGoogleAuth} className="social-button google">
+                    <span className="social-icon"><FaGoogle size={20} /></span>
                   </button>
                   <button type="button" className="social-button facebook">
-                    <span className="social-icon"><FaFacebook size={20}/></span>
+                    <span className="social-icon"><FaFacebook size={20} /></span>
                   </button>
                 </div>
               </>

@@ -16,6 +16,24 @@ const userService = {
         }
     },
 
+    loginWithGoogle: async (googleToken) => {
+
+        try {
+            const response = await apiClient.post('/auth/google-login', {
+                token: googleToken,
+            });
+
+            const { accessToken, refreshToken } = response.data;
+
+            await localStorage.setItem('accessToken', accessToken);
+            await localStorage.setItem('refreshToken', refreshToken);
+
+            return response.data;
+        } catch (error) {
+            console.error('Google login failed:', error);
+            throw error;
+        }
+    },
     logout: () => {
         localStorage.removeItem('accessToken');
     },
@@ -28,7 +46,7 @@ const userService = {
             throw error;
         }
     },
-    getAllMembers: async() => {
+    getAllMembers: async () => {
         try {
             const response = await axiosClient.get('/users');
             console.log('MEMBER', response)

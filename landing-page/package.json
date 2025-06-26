@@ -13,6 +13,7 @@
   "dependencies": {
     "@animaapp/vite-plugin-screen-graph": "^0.1.11",
     "@react-google-maps/api": "^2.20.7",
+    "@react-oauth/google": "^0.12.2",
     "aos": "^2.3.4",
     "axios": "^1.10.0",
     "file-saver": "^2.0.5",
