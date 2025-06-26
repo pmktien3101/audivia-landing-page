@@ -1,0 +1,42 @@
+.suggested-tour-list-section {
+    margin: 40px 0 24px 0;
+    padding: 0 16px;
+}
+
+.suggested-tour-list-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3498db;
+    margin-bottom: 4px;
+}
+
+.suggested-tour-list-sub {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.suggested-tour-list-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 8px;
+}
+
+.suggested-tour-list-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.suggested-tour-list {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
