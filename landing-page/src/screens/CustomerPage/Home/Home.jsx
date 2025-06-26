@@ -10,7 +10,7 @@ import tourService from '../../../services/tour.js';
 import TourTypeService from '../../../services/tourType.js';
 import { Tittle } from '../../LandingPage/sections/Tittle';
 import '../../LandingPage/sections/Tittle/style.css';
-
+import SuggestedTourList from '../../../components/Tour/SuggestedTourList/SuggestedTourList.jsx';
 
 
 const Home = () => {
@@ -94,11 +94,11 @@ const Home = () => {
 
     return (
         <>
-        <div className='banner-wrapper'>
-        <div className="ellipse-9" />
-            <Tittle/>
-        <div className="ellipse-10" />
-        </div>
+            <div className='banner-wrapper'>
+                <div className="ellipse-9" />
+                <Tittle />
+                <div className="ellipse-10" />
+            </div>
             <div className='searchbar'>
                 <div className="wapper-content">
                     <div className="text-wrapper-1">AUDIO TOUR NỔI BẬT</div>
@@ -115,54 +115,56 @@ const Home = () => {
                     setPagination(prev => ({ ...prev, pageIndex: 1 }))
                 }}
             />
-            {loading ? (
-                <div className="loading">Đang tải...</div>
-            ) : (
-                <>
-                    <TourList tours={tours} />
+            {
+                loading ? (
+                    <div className="loading">Đang tải...</div>
+                ) : (
+                    <>
+                        <TourList tours={tours} />
 
-                    {/* Pagination Controls */}
-                    <div className="pagination">
-                        <button
-                            disabled={pagination.pageIndex <= 1}
-                            onClick={() => handlePageChange(pagination.pageIndex - 1)}
-                        >
-                            &lt; Trước
-                        </button>
+                        {/* Pagination Controls */}
+                        <div className="pagination">
+                            <button
+                                disabled={pagination.pageIndex <= 1}
+                                onClick={() => handlePageChange(pagination.pageIndex - 1)}
+                            >
+                                &lt; Trước
+                            </button>
 
-                        {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
-                            let pageNum;
-                            if (pagination.totalPages <= 5) {
-                                pageNum = i + 1;
-                            } else if (pagination.pageIndex <= 3) {
-                                pageNum = i + 1;
-                            } else if (pagination.pageIndex >= pagination.totalPages - 2) {
-                                pageNum = pagination.totalPages - 4 + i;
-                            } else {
-                                pageNum = pagination.pageIndex - 2 + i;
-                            }
+                            {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
+                                let pageNum;
+                                if (pagination.totalPages <= 5) {
+                                    pageNum = i + 1;
+                                } else if (pagination.pageIndex <= 3) {
+                                    pageNum = i + 1;
+                                } else if (pagination.pageIndex >= pagination.totalPages - 2) {
+                                    pageNum = pagination.totalPages - 4 + i;
+                                } else {
+                                    pageNum = pagination.pageIndex - 2 + i;
+                                }
 
-                            return (
-                                <button
-                                    key={pageNum}
-                                    className={pagination.pageIndex === pageNum ? 'active' : ''}
-                                    onClick={() => handlePageChange(pageNum)}
-                                >
-                                    {pageNum}
-                                </button>
-                            );
-                        })}
+                                return (
+                                    <button
+                                        key={pageNum}
+                                        className={pagination.pageIndex === pageNum ? 'active' : ''}
+                                        onClick={() => handlePageChange(pageNum)}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                );
+                            })}
 
-                        <button
-                            disabled={pagination.pageIndex >= pagination.totalPages}
-                            onClick={() => handlePageChange(pagination.pageIndex + 1)}
-                        >
-                            Sau &gt;
-                        </button>
-                    </div>
-                    <SuggestedTourList />
-                </>
-            )}
+                            <button
+                                disabled={pagination.pageIndex >= pagination.totalPages}
+                                onClick={() => handlePageChange(pagination.pageIndex + 1)}
+                            >
+                                Sau &gt;
+                            </button>
+                        </div>
+                        <SuggestedTourList />
+                    </>
+                )
+            }
             <GoogleMapComponent />
         </>
     )
