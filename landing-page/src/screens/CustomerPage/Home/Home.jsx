@@ -30,11 +30,11 @@ const Home = () => {
         try {
             const response = await TourTypeService.getTourTypes()
             console.log(response);
-            
-            setCategories([{ id: 'all', name: 'Tất cả' },...response])
+
+            setCategories([{ id: 'all', name: 'Tất cả' }, ...response])
         } catch (error) {
             console.log("Error fetching tour types in home", error);
-            
+
         }
     }
 
@@ -58,12 +58,12 @@ const Home = () => {
 
         } catch (error) {
             console.log("Error fetching tours", error);
-            
-        } finally{
+
+        } finally {
             setLoading(false)
         }
 
-    }, [activeCategory, searchQuery]); 
+    }, [activeCategory, searchQuery]);
 
 
     useEffect(() => {
@@ -77,14 +77,14 @@ const Home = () => {
     // Debounce search
     useEffect(() => {
         const timer = setTimeout(() => {
-        fetchTours(1);
+            fetchTours(1);
         }, 500);
 
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
 
-    
+
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= pagination.totalPages) {
             fetchTours(newPage)
@@ -105,64 +105,65 @@ const Home = () => {
 
                     <div className="text-wrapper-2">Khám phá ngay các tour</div>
                 </div>
-                <SearchBar value={searchQuery} onChange={setSearchQuery}/>
+                <SearchBar value={searchQuery} onChange={setSearchQuery} />
             </div>
-            <Category 
+            <Category
                 categories={categories}
                 activeCategory={activeCategory}
                 onChange={(categoryId) => {
                     setActiveCategory(categoryId)
-                    setPagination(prev => ({...prev, pageIndex: 1}))
-            }}
+                    setPagination(prev => ({ ...prev, pageIndex: 1 }))
+                }}
             />
             {loading ? (
                 <div className="loading">Đang tải...</div>
-                ) : (
-                    <>
+            ) : (
+                <>
                     <TourList tours={tours} />
-                    
+
                     {/* Pagination Controls */}
                     <div className="pagination">
-                        <button 
-                        disabled={pagination.pageIndex <= 1}
-                        onClick={() => handlePageChange(pagination.pageIndex - 1)}
+                        <button
+                            disabled={pagination.pageIndex <= 1}
+                            onClick={() => handlePageChange(pagination.pageIndex - 1)}
                         >
-                        &lt; Trước
+                            &lt; Trước
                         </button>
-                        
+
                         {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
-                        let pageNum;
-                        if (pagination.totalPages <= 5) {
-                            pageNum = i + 1;
-                        } else if (pagination.pageIndex <= 3) {
-                            pageNum = i + 1;
-                        } else if (pagination.pageIndex >= pagination.totalPages - 2) {
-                            pageNum = pagination.totalPages - 4 + i;
-                        } else {
-                            pageNum = pagination.pageIndex - 2 + i;
-                        }
-                        
-                        return (
-                            <button
-                            key={pageNum}
-                            className={pagination.pageIndex === pageNum ? 'active' : ''}
-                            onClick={() => handlePageChange(pageNum)}
-                            >
-                            {pageNum}
-                            </button>
-                        );
+                            let pageNum;
+                            if (pagination.totalPages <= 5) {
+                                pageNum = i + 1;
+                            } else if (pagination.pageIndex <= 3) {
+                                pageNum = i + 1;
+                            } else if (pagination.pageIndex >= pagination.totalPages - 2) {
+                                pageNum = pagination.totalPages - 4 + i;
+                            } else {
+                                pageNum = pagination.pageIndex - 2 + i;
+                            }
+
+                            return (
+                                <button
+                                    key={pageNum}
+                                    className={pagination.pageIndex === pageNum ? 'active' : ''}
+                                    onClick={() => handlePageChange(pageNum)}
+                                >
+                                    {pageNum}
+                                </button>
+                            );
                         })}
-                        
-                        <button 
+
+                        <button
                             disabled={pagination.pageIndex >= pagination.totalPages}
                             onClick={() => handlePageChange(pagination.pageIndex + 1)}
-                            >
+                        >
                             Sau &gt;
                         </button>
                     </div>
+                    <SuggestedTourList />
                 </>
-                )}
-            <GoogleMapComponent/>
+            )}
+            <GoogleMapComponent />
         </>
     )
 }

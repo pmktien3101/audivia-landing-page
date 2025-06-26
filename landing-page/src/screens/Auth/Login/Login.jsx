@@ -6,6 +6,7 @@ import './style.css';
 import ROUTES from '../../../utils/routes';
 import userService from '../../../services/user';
 import { jwtDecode } from 'jwt-decode';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const LoginPage = () => {
     password: "",
   });
   const [error, setError] = React.useState("");
+  const webClientId = import.meta.env.VITE_PUBLIC_GOOGLE_WEB_CLIENT_ID
 
   const handleInputChange = (field) => (e) => {
     setFormData((prev) => ({
@@ -41,6 +43,45 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        console.log("Starting Google Login...");
+
+        const googleAccessToken = response.access_token;
+
+        const userInfoResponse = await fetch(
+          `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${googleAccessToken}`
+        );
+        const userInfo = await userInfoResponse.json();
+
+        // check
+        const { name, email, picture: photo } = userInfo;
+        console.log("User info:", { name, email, photo });
+
+        const backendResponse = await userService.loginWithGoogle(googleAccessToken);
+        console.log(backendResponse);
+
+        if (backendResponse.accessToken && backendResponse.refreshToken) {
+          const decodedToken = jwtDecode(backendResponse.accessToken);
+          const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+          if (role === "admin") {
+            navigate(ROUTES.ADMIN.DASHBOARD);
+          } else {
+            navigate(ROUTES.HOME);
+          }
+        } else {
+          alert("Google login successful but server failed to issue app tokens.");
+        }
+      } catch (error) {
+        console.error("Google login error:", error);
+      }
+    },
+    onError: (error) => {
+      console.error("Google login failed:", error);
+    },
+  });
+
   const loginFields = [
     {
       type: "email",
@@ -67,6 +108,7 @@ const LoginPage = () => {
       submitButtonText="Đăng nhập"
       showForgotPassword={true}
       showSocialLogin={true}
+      onGoogleAuth={handleGoogleLogin}
       footerText="Bạn không có tài khoản?"
       footerLinkText="Đăng ký"
       onFooterLinkClick={() => navigate(ROUTES.REGISTER)}
