@@ -1,1 +1,1 @@
-export { default as SuggestedTourList } from './SuggestedTourList';
+export { default } from './SuggestedTourList';
