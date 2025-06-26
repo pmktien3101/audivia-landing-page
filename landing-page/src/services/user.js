@@ -17,18 +17,17 @@ const userService = {
     },
 
     loginWithGoogle: async (googleToken) => {
-
         try {
-            const response = await apiClient.post('/auth/google-login', {
+            const response = await axiosClient.post('/auth/google-login', {
                 token: googleToken,
             });
 
-            const { accessToken, refreshToken } = response.data;
+            const { accessToken, refreshToken } = response;
 
-            await localStorage.setItem('accessToken', accessToken);
-            await localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
 
-            return response.data;
+            return response;
         } catch (error) {
             console.error('Google login failed:', error);
             throw error;
