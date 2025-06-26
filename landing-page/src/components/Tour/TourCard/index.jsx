@@ -5,12 +5,13 @@ import saveTourService from "../../../services/saveTour";
 import "./style.css";
 import userService from "../../../services/user";
 import { useNavigate } from "react-router-dom";
+import { formatMoney } from "../../../utils/formatter/formatter";
 
-export const TourCard = ({ 
-  imageUrl, 
-  country, 
-  title, 
-  price, 
+export const TourCard = ({
+  imageUrl,
+  country,
+  title,
+  price,
   rating,
   tourId,
   isSaved = false,
@@ -22,15 +23,15 @@ export const TourCard = ({
   const navigate = useNavigate();
   // Debug: Log all props
   console.log('TourCard Props:', { imageUrl, country, title, price, rating, tourId, isSaved });
-  
-  const fetchCurrentUser = async() => {
+
+  const fetchCurrentUser = async () => {
     try {
-        const result = await userService.getCurrentUser();
-        if(result){
-            setUser(result);
-        }
+      const result = await userService.getCurrentUser();
+      if (result) {
+        setUser(result);
+      }
     } catch (error) {
-        console.error('Lỗi lấy thông tin người dùng:', error);
+      console.error('Lỗi lấy thông tin người dùng:', error);
     }
   };
   useEffect(() => {
@@ -38,7 +39,7 @@ export const TourCard = ({
   }, [])
   const handleToggleFavorite = async (e) => {
     e.stopPropagation(); // Ngăn chặn event bubble lên parent
-    
+
     setIsLoading(true);
     try {
       // Lấy user hiện tại nếu chưa có
@@ -53,14 +54,9 @@ export const TourCard = ({
         currentUser = userResult;
       }
 
-      console.log('Current User:', currentUser);
-      console.log('Tour ID:', tourId);
-      console.log('Tour ID type:', typeof tourId);
-
       // Luôn gọi saveTour API với plannedTime
       const response = await saveTourService.saveTour(currentUser.id, tourId);
-      console.log(response);
-      
+
       // Gọi callback để parent component cập nhật state
       if (onToggleFavorite) {
         onToggleFavorite(tourId, !isSaved);
@@ -87,9 +83,9 @@ export const TourCard = ({
         <div className="tour-country-badge">
           <span>{country}</span>
         </div>
-        
+
         {/* Favorite Button */}
-        <button 
+        <button
           className="tour-favorite-btn"
           onClick={handleToggleFavorite}
           disabled={isLoading}
@@ -108,7 +104,7 @@ export const TourCard = ({
       <div className="tour-info">
         <div className="tour-title-price">
           <h3 className="tour-title">{title}</h3>
-          <p className="tour-price">{price == 0? 'Free' : price + ' VNĐ'}</p>
+          <p className="tour-price">{price == 0 ? 'Free' : formatMoney(price) + ' VNĐ'}</p>
         </div>
 
         <div className="tour-rating">

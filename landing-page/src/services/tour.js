@@ -98,6 +98,7 @@ const tourService = {
     }
   },
 
+
   getTourById: async (id) => {
     try {
       const response = await axiosClient.get(`/tours/${id}`)
@@ -106,8 +107,17 @@ const tourService = {
       console.log('Error at getTourById', error);
       
     }
-  }
+  },
 
+
+  getSuggestedTours: async (userId, long, lat, radius) => {
+    try {
+      const response = await axiosClient.get(`/tours/suggested?UserId=${userId}&Longitude=${long}&Latitude=${lat}&Radius=${radius}`)
+      return response.response.data
+    } catch (error) {
+      throw error
+    }
+  }
 
 };
 

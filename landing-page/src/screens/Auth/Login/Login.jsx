@@ -6,8 +6,11 @@ import './style.css';
 import ROUTES from '../../../utils/routes';
 import userService from '../../../services/user';
 import { jwtDecode } from 'jwt-decode';
+import { GoogleLogin } from '@react-oauth/google';
+import useUser from '../../../hooks/useUser';
 
 const LoginPage = () => {
+  const user = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: "",
@@ -41,6 +44,45 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      if (user != null) {
+        userService.logout();
+        alert("Bạn đã được đăng xuất khỏi tài khoản hiện tại để đăng nhập bằng Google.");;
+      }
+
+      const googleIdToken = credentialResponse.credential;
+
+      if (!googleIdToken) {
+        console.error("ID Token not found in Google credential response.");
+        alert("Login failed: ID Token missing.");
+        return;
+      }
+
+      const backendResponse = await userService.loginWithGoogle(googleIdToken);
+
+      if (backendResponse.accessToken && backendResponse.refreshToken) {
+        const decodedToken = jwtDecode(backendResponse.accessToken);
+        const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        if (role === "admin") {
+          navigate(ROUTES.ADMIN.DASHBOARD);
+        } else {
+          navigate(ROUTES.HOME);
+        }
+      } else {
+        alert("Google login successful, but your server failed to issue app tokens.");
+      }
+    } catch (error) {
+      console.error("Google login error:", error);
+      alert(`An error occurred during Google login: ${error.message || error}`);
+    }
+  }
+
+  const handleGoogleLoginError = (error) => {
+    console.error("Google login failed:", error);
+    alert(`Google login failed: ${error.error_description || error.message || error}`);
+  };
+
   const loginFields = [
     {
       type: "email",
@@ -67,6 +109,8 @@ const LoginPage = () => {
       submitButtonText="Đăng nhập"
       showForgotPassword={true}
       showSocialLogin={true}
+      onGoogleAuthSuccess={handleGoogleLoginSuccess}
+      onGoogleAuthError={handleGoogleLoginError}
       footerText="Bạn không có tài khoản?"
       footerLinkText="Đăng ký"
       onFooterLinkClick={() => navigate(ROUTES.REGISTER)}

@@ -1,4 +1,4 @@
-import { FiBell, FiMail, FiLogOut, FiHome, FiUser, FiSettings, FiMenu } from "react-icons/fi"
+import { FiBell, FiMail, FiLogOut, FiHome, FiUser, FiSettings, FiMenu, FiMessageCircle } from "react-icons/fi"
 import { useState } from "react"
 import { useNavigate, Link, NavLink } from "react-router-dom"
 import './style.css'
@@ -11,34 +11,37 @@ import { BiHeart } from "react-icons/bi"
 const HeaderIcons = () => (
   <div className="header-center">
     <NavLink to={ROUTES.HOME} className="icon-btn" title="Trang chủ">
-      <FiHome size={20} />
+      Trang chủ
     </NavLink>
     <NavLink to={ROUTES.FORUM} className="icon-btn" title="Diễn đàn">
-      <BsPeople size={20} />
+      Diễn đàn
     </NavLink>
-    <NavLink to={ROUTES.FAVORITES} className="icon-btn" title="Yêu thích">
-      <BiHeart size={20} />
-    </NavLink>
-    <NavLink to={ROUTES.NOTIFICATION} className="icon-btn" title="Thông báo">
-      <FiBell size={20} />
+    <NavLink to={ROUTES.CONFESSION} className="icon-btn" title="Tâm sự">
+      Đóng góp
     </NavLink>
   </div>
 )
 
-const ProfileDropdown = ({ onLogout, onProfile }) => (
+const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour }) => (
   <div className="profile-dropdown">
+    <div className="dropdown-arrow" />
     <button className="dropdown-item" onClick={onProfile}>
-      <FiMenu size={16} />
+      <FiMenu size={18} />
       <span>Menu Profile</span>
     </button>
+    <button className="dropdown-item" onClick={onFavoriteTour}>
+      <BiHeart size={18} />
+      <span>Tour yêu thích</span>
+    </button>
+    <div className="dropdown-divider" />
     <button className="dropdown-item" onClick={onLogout}>
-      <FiLogOut size={16} />
+      <FiLogOut size={18} />
       <span>Đăng xuất</span>
     </button>
   </div>
 )
 
-const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfile }) => (
+const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfile, onFavoriteTour }) => (
   <div className="profile-section" onClick={onToggleDropdown}>
     <div className="profile-avatar-header">  
       {user?.raw.avatarUrl ? (
@@ -51,7 +54,6 @@ const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfi
       <div className="profile-name-header">{user?.name}</div>
       <div className="profile-username">Khách hàng</div>
     </div>
-    {isDropdownOpen && <ProfileDropdown onLogout={onLogout} onProfile={onProfile}/>}
   </div>
 )
 
@@ -71,6 +73,10 @@ const Header = () => {
       navigate(ROUTES.PROFILE);
     };
 
+    const handleFavoriteTour = () => {
+      navigate(ROUTES.FAVORITES);
+    };
+
     return (
         <div className="main-header">
             <div className="header-left">
@@ -79,21 +85,30 @@ const Header = () => {
                 src="https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745147401/Audivia/fxjo2mcpmqexcxkomtjd.png"
               />
 
-              <div className="text-wrapper">Audivia</div>
+              <div className="text-wrapper gradient-text">Audivia</div>
  
             </div>
             <div className="header-center">
               <HeaderIcons />
-
             </div>
             <div className="header-right">
-                <UserProfile 
-                    user={user}
-                    isDropdownOpen={isDropdownOpen}
-                    onToggleDropdown={toggleDropdown}
-                    onLogout={handleLogout}
-                    onProfile={handleProfile}
-                />
+                <NavLink to={ROUTES.NOTIFICATION} className="icon-btn" title="Thông báo">
+                  <FiBell/>
+                </NavLink>
+                <NavLink to={ROUTES.MESSAGE} className="icon-btn" title="Tin nhắn">
+                  <FiMessageCircle />
+                </NavLink>
+                <div style={{position: 'relative'}}>
+                  <UserProfile 
+                      user={user}
+                      isDropdownOpen={isDropdownOpen}
+                      onToggleDropdown={toggleDropdown}
+                      onLogout={handleLogout}
+                      onProfile={handleProfile}
+                      onFavoriteTour={handleFavoriteTour}
+                  />
+                  {isDropdownOpen && <ProfileDropdown onLogout={handleLogout} onProfile={handleProfile} onFavoriteTour={handleFavoriteTour}/>} 
+                </div>
             </div>
 
         </div>

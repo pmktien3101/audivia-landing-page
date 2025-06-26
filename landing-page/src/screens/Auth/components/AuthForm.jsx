@@ -4,6 +4,7 @@ import { useState } from "react"
 import "./style.css"
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { GoogleLogin } from '@react-oauth/google';
 
 const FormInput = ({ type, placeholder, value, onChange, icon, label }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -34,6 +35,8 @@ const AuthForm = ({
   submitButtonText,
   showForgotPassword = false,
   showSocialLogin = false,
+  onGoogleAuthSuccess,
+  onGoogleAuthError,
   footerText,
   footerLinkText,
   onFooterLinkClick,
@@ -47,7 +50,7 @@ const AuthForm = ({
     <div className={`auth-container ${containerClassName}`}>
       <div className={`auth-content ${layoutReverse ? "login-layout" : ""}`}>
         <div className="illustration-section">
-            <img src={illustrationSrc} alt={illustrationAlt} className="illustration-image" />
+          <img src={illustrationSrc} alt={illustrationAlt} className="illustration-image" />
         </div>
 
         <div className="form-section">
@@ -56,7 +59,7 @@ const AuthForm = ({
 
             <form onSubmit={onSubmit} className="auth-form">
               {error && <div className="error-message">{error}</div>}
-              
+
               {fields.map((field, index) => (
                 <FormInput
                   key={index}
@@ -88,12 +91,24 @@ const AuthForm = ({
                 </div>
 
                 <div className="social-login">
-                  <button type="button" className="social-button google">
-                    <span className="social-icon"><FaGoogle size={20}/></span>
-                  </button>
-                  <button type="button" className="social-button facebook">
-                    <span className="social-icon"><FaFacebook size={20}/></span>
-                  </button>
+                  <GoogleLogin
+                    onSuccess={onGoogleAuthSuccess}
+                    onError={onGoogleAuthError}
+                    render={({ onClick, disabled }) => (
+                      <button
+                        type="button"
+                        onClick={onClick}
+                        disabled={disabled}
+                        className="social-button google"
+                      >
+                        <span className="social-icon"><FaGoogle size={20} /></span>
+                      </button>
+                    )}
+                  />
+
+                  {/* <button type="button" className="social-button facebook">
+                    <span className="social-icon"><FaFacebook size={20} /></span>
+                  </button> */}
                 </div>
               </>
             )}
