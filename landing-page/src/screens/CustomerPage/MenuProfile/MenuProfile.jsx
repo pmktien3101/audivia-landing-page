@@ -7,7 +7,9 @@ import ForumService from '../../../services/forum';
 import { ForumCreatePost } from '../Forum/ForumCreatePost/ForumCreatePost';
 import { PostModal } from '../Forum/ForumCreatePost/PostModal';
 import './style.css';
-import { FiUsers, FiUser, FiMail, FiPhone } from 'react-icons/fi';
+import { FiUsers, FiUser, FiMail, FiPhone, FiArrowDownLeft, FiArrowLeft } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../../utils/routes';
 
 const MenuProfile = () => {
   const [user, setUser] = useState(null);
@@ -18,6 +20,7 @@ const MenuProfile = () => {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [editPost, setEditPost] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -91,7 +94,14 @@ const MenuProfile = () => {
         <CustomerSidebar />
       </div>
       <div className="menu-profile-content">
+       
         <div className="profile-header-bg">
+        <button
+          className="back-home-btn"
+          onClick={() => navigate(ROUTES.HOME)}
+        >
+          <FiArrowLeft />
+        </button>
           <div className="profile-avatar-wrapper">
             <img className="profile-avatar" src={userProfile?.avatarUrl || 'https://randomuser.me/api/portraits/men/32.jpg'} alt="avatar" />
           </div>

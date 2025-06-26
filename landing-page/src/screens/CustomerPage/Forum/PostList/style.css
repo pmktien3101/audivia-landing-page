@@ -55,7 +55,7 @@
 
 .post-list-more-btn {
   padding: 10px 32px;
-  background: #2d8cff;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: 22px;

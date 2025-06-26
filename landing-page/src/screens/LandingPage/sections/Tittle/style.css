@@ -118,7 +118,13 @@
   padding: 16px 32px;
   position: relative;
   cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s cubic-bezier(0.4,0,0.2,1), background 0.2s, color 0.2s;
+}
 
+.tittle .frame-8:hover, .tittle .frame-8:focus {
+  transform: scale(1.06);
+  box-shadow: 0px 8px 24px #8c8c8c33, 0px 18px 18px #8c8c8c17, 0px 40px 24px #8c8c8c0d;
+  background-color: var(--primary, #1b1b1b);
 }
 
 .tittle .text-wrapper-7 {
@@ -147,7 +153,26 @@
   position: relative;
   width: 170px;
   cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s, color 0.2s;
+}
 
+.tittle .frame-9:hover, .tittle .frame-9:focus {
+  transform: scale(1.06);
+  box-shadow: 0px 8px 24px #8c8c8c33, 0px 18px 18px #8c8c8c17, 0px 40px 24px #8c8c8c0d;
+  border-color: var(--primary, #1b1b1b);
+}
+
+.tittle .frame-9:hover .text-wrapper-8, .tittle .frame-9:focus .text-wrapper-8 {
+  color: var(--primary, #1b1b1b);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tittle .frame-8:hover, .tittle .frame-9:hover {
+    transform: none;
+    box-shadow: none;
+    background: inherit;
+    border-color: inherit;
+  }
 }
 
 .tittle .text-wrapper-8 {

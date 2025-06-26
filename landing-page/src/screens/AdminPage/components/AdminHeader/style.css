@@ -151,7 +151,8 @@
 }
 
 .admin-dropdown-item:hover {
-    background-color: #f5f5f5;
+    background: linear-gradient(90deg, #e0f7fa 0%, #f3e5f5 100%);
+    color: #00A5CF;
 }
 .profile-admin-avatar{
     width: 30px;

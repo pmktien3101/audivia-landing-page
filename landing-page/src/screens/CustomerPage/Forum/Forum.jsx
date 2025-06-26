@@ -118,26 +118,34 @@ const Forum = () => {
                 <div className="forum-posts forum-posts-new">
                     <ForumCreatePost onPostCreated={handlePostCreated} />
                     {/* Tabs */}
-                    <div className="forum-tabs">
-                        <button className={activeTab === 'all' ? 'active' : ''} onClick={() => setActiveTab('all')}>Tất cả bài đăng</button>
-                        <button className={activeTab === 'mine' ? 'active' : ''} onClick={() => setActiveTab('mine')}>Bài đăng của tôi</button>
+                    <div className="forum-tabs-wrapper">
+                      <div className="forum-tabs">
+                        <button className={activeTab === 'all' ? 'active' : ''} onClick={() => setActiveTab('all')}>
+                          Tất cả bài đăng
+                        </button>
+                        <button className={activeTab === 'mine' ? 'active' : ''} onClick={() => setActiveTab('mine')}>
+                          Bài đăng của tôi
+                        </button>
+                      </div>
                     </div>
                     {/* Danh sách bài đăng */}
-                    {activeTab === 'all' ? (
-                        <PostList 
-                            posts={posts}
-                            loading={loading}
-                            onPostClick={handlePostClick}
-                            searchTerm={searchTerm}
-                        />
-                    ) : (
-                        <PostList 
-                            posts={myPosts}
-                            loading={loading}
-                            onPostClick={handlePostClick}
-                            searchTerm={searchTerm}
-                        />
-                    )}
+                    <div className="forum-post-list-wrapper">
+                      {activeTab === 'all' ? (
+                          <PostList 
+                              posts={posts}
+                              loading={loading}
+                              onPostClick={handlePostClick}
+                              searchTerm={searchTerm}
+                          />
+                      ) : (
+                          <PostList 
+                              posts={myPosts}
+                              loading={loading}
+                              onPostClick={handlePostClick}
+                              searchTerm={searchTerm}
+                          />
+                      )}
+                    </div>
                 </div>
             </div>
             <PostDetailModal

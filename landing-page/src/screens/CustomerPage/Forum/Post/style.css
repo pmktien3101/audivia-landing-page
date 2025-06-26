@@ -4,17 +4,21 @@
   box-shadow: 0 2px 12px rgba(45,140,255,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
   padding: 20px 18px 16px 18px;
   margin-bottom: 18px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   min-height: 320px;
   position: relative;
+  border: 1.5px solid #e3e8f0;
+  border-left: 6px solid #f3e5f5;
 }
 
 .post-item:hover {
   box-shadow: 0 6px 24px rgba(45,140,255,0.16), 0 2px 8px rgba(0,0,0,0.08);
   transform: translateY(-2px) scale(1.015);
+  border-color: #e0f7fa;
+  border-left: 6px solid #e0f7fa;
 }
 
 .post-header {
@@ -74,8 +78,8 @@
 
 .post-image {
   width: 100%;
-  max-width: 120px;
-  height: 80px;
+  max-width: 260px;
+  height: 180px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.07);
@@ -198,7 +202,7 @@
     padding: 14px 8px 12px 8px;
   }
   .post-image {
-    max-width: 80px;
-    height: 54px;
+    max-width: 180px;
+    height: 120px;
   }
 } 
