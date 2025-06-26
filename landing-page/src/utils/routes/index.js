@@ -15,6 +15,8 @@ const ROUTES = {
     BLOG_DETAILS: '/blog/:id',
     FORUM: '/forum',
     FAVORITES: '/favorites',
+    CONFESSION: '/confession',
+    MESSAGE: '/message',
     SERVICES: '/services',
     CHECKOUT: '/checkout',
     NOTIFICATION: '/notification',
