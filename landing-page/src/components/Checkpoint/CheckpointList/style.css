@@ -1,0 +1,69 @@
+.checkpoint-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .checkpoint-list-title {
+    color: #2d3748;
+    font-size: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .checkpoint-list-title:after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff) ;
+    margin: 8px auto 0;
+  }
+  
+  .checkpoint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .checkpoint-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: -8px 0; /* Giảm khoảng cách với card */
+  }
+  
+  .connector-line {
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+    opacity: 0.6;
+  }
+  
+  .connector-arrow {
+    color: #00A5CF;
+    font-size: 50px;
+    margin-top: 2px;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .checkpoint-list-container {
+      padding: 15px;
+    }
+    
+    .checkpoint-list-title {
+      font-size: 20px;
+    }
+    
+    .connector-line {
+      height: 15px;
+    }
+  }

@@ -4,6 +4,7 @@ import saveTourService from "../../../services/saveTour";
 
 import "./style.css";
 import userService from "../../../services/user";
+import { useNavigate } from "react-router-dom";
 import { formatMoney } from "../../../utils/formatter/formatter";
 
 export const TourCard = ({
@@ -15,11 +16,11 @@ export const TourCard = ({
   tourId,
   isSaved = false,
   onToggleFavorite,
-  onCardClick
+
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState();
-
+  const navigate = useNavigate();
   // Debug: Log all props
   console.log('TourCard Props:', { imageUrl, country, title, price, rating, tourId, isSaved });
 
@@ -68,9 +69,7 @@ export const TourCard = ({
   };
 
   const handleCardClick = () => {
-    if (onCardClick) {
-      onCardClick(tourId);
-    }
+    navigate(`/tour-detail/${tourId}`);
   };
 
   return (

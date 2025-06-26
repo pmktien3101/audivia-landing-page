@@ -36,7 +36,8 @@ const GoogleMapComponent = () => {
       ) : error ? (
         <div className="error-message">{error}</div>
       ) : (
-        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+        loadingElement={<div className="custom-loading">Đang tải Maps...</div>}>
           <GoogleMap
             zoom={16}
             center={currentPosition}
