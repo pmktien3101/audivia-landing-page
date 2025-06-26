@@ -1,3 +1,4 @@
+import { FiSearch } from 'react-icons/fi';
 import './styles.css'
 
 const SearchBar = ({ value, onChange }) => (
@@ -9,7 +10,7 @@ const SearchBar = ({ value, onChange }) => (
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <button>🔍</button>
+      <button><FiSearch/></button>
     </div>
   </div>
 );

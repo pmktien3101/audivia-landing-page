@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 
-export const Tittle = () => {
+export const Tittle = ({ hideActions = false }) => {
   const [showModal, setShowModal] = useState(false);
   
   const handleDemoClick = () => {
@@ -34,20 +34,22 @@ export const Tittle = () => {
           Nơi mỗi điểm đến là một câu chuyện được kể bằng âm thanh sống động
         </p>
 
-        <div className="frame-7">
-          <div className="frame-8" onClick={handleStart} style={{cursor:'pointer'}}>
-            <div className="text-wrapper-7">Bắt Đầu</div>
-          </div>
+        {!hideActions && (
+          <div className="frame-7">
+            <div className="frame-8" onClick={handleStart} style={{cursor:'pointer'}}>
+              <div className="text-wrapper-7">Bắt Đầu</div>
+            </div>
 
-          <div className="frame-9" onClick={handleDemoClick} style={{ cursor: 'pointer' }}>
-            <div className="text-wrapper-8">Xem Demo</div>
-            <img
-              className="vector-2"
-              alt="Vector"
-              src="https://c.animaapp.com/bADEbyrk/img/vector-9.svg"
-            />
+            <div className="frame-9" onClick={handleDemoClick} style={{ cursor: 'pointer' }}>
+              <div className="text-wrapper-8">Xem Demo</div>
+              <img
+                className="vector-2"
+                alt="Vector"
+                src="https://c.animaapp.com/bADEbyrk/img/vector-9.svg"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {showModal && (

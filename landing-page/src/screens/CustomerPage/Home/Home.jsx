@@ -94,78 +94,80 @@ const Home = () => {
 
     return (
         <>
-            <div className='banner-wrapper'>
+            <div className="home-banner-modern">
                 <div className="ellipse-9" />
-                <Tittle />
+                <Tittle hideActions={true} />
                 <div className="ellipse-10" />
             </div>
-            <div className='searchbar'>
-                <div className="wapper-content">
-                    <div className="text-wrapper-1">AUDIO TOUR NỔI BẬT</div>
-
-                    <div className="text-wrapper-2">Khám phá ngay các tour</div>
+            <div className="home-searchbar-modern">
+                <div className="home-searchbar-content">
+                    <div className="home-searchbar-title">AUDIO TOUR NỔI BẬT</div>
+                    <div className="home-searchbar-subtitle">Khám phá ngay các tour</div>
                 </div>
                 <SearchBar value={searchQuery} onChange={setSearchQuery} />
             </div>
-            <Category
-                categories={categories}
-                activeCategory={activeCategory}
-                onChange={(categoryId) => {
-                    setActiveCategory(categoryId)
-                    setPagination(prev => ({ ...prev, pageIndex: 1 }))
-                }}
-            />
-            {
-                loading ? (
-                    <div className="loading">Đang tải...</div>
-                ) : (
-                    <>
-                        <TourList tours={tours} />
-
-                        {/* Pagination Controls */}
-                        <div className="pagination">
-                            <button
-                                disabled={pagination.pageIndex <= 1}
-                                onClick={() => handlePageChange(pagination.pageIndex - 1)}
-                            >
-                                &lt; Trước
-                            </button>
-
-                            {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
-                                let pageNum;
-                                if (pagination.totalPages <= 5) {
-                                    pageNum = i + 1;
-                                } else if (pagination.pageIndex <= 3) {
-                                    pageNum = i + 1;
-                                } else if (pagination.pageIndex >= pagination.totalPages - 2) {
-                                    pageNum = pagination.totalPages - 4 + i;
-                                } else {
-                                    pageNum = pagination.pageIndex - 2 + i;
-                                }
-
-                                return (
-                                    <button
-                                        key={pageNum}
-                                        className={pagination.pageIndex === pageNum ? 'active' : ''}
-                                        onClick={() => handlePageChange(pageNum)}
-                                    >
-                                        {pageNum}
-                                    </button>
-                                );
-                            })}
-
-                            <button
-                                disabled={pagination.pageIndex >= pagination.totalPages}
-                                onClick={() => handlePageChange(pagination.pageIndex + 1)}
-                            >
-                                Sau &gt;
-                            </button>
-                        </div>
-                        <SuggestedTourList />
-                    </>
-                )
-            }
-            <GoogleMapComponent />
+            <div className="home-category-scroll">
+                <Category
+                    categories={categories}
+                    activeCategory={activeCategory}
+                    onChange={(categoryId) => {
+                        setActiveCategory(categoryId)
+                        setPagination(prev => ({ ...prev, pageIndex: 1 }))
+                    }}
+                />
+            </div>
+            <div className="home-tourlist-section">
+                {
+                    loading ? (
+                        <div className="home-loading">Đang tải...</div>
+                    ) : (
+                        <>
+                            <div className="home-tourlist-grid">
+                                <TourList tours={tours} />
+                            </div>
+                            <div className="home-pagination">
+                                <button
+                                    disabled={pagination.pageIndex <= 1}
+                                    onClick={() => handlePageChange(pagination.pageIndex - 1)}
+                                >
+                                    &lt; Trước
+                                </button>
+                                {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
+                                    let pageNum;
+                                    if (pagination.totalPages <= 5) {
+                                        pageNum = i + 1;
+                                    } else if (pagination.pageIndex <= 3) {
+                                        pageNum = i + 1;
+                                    } else if (pagination.pageIndex >= pagination.totalPages - 2) {
+                                        pageNum = pagination.totalPages - 4 + i;
+                                    } else {
+                                        pageNum = pagination.pageIndex - 2 + i;
+                                    }
+                                    return (
+                                        <button
+                                            key={pageNum}
+                                            className={pagination.pageIndex === pageNum ? 'active' : ''}
+                                            onClick={() => handlePageChange(pageNum)}
+                                        >
+                                            {pageNum}
+                                        </button>
+                                    );
+                                })}
+                                <button
+                                    disabled={pagination.pageIndex >= pagination.totalPages}
+                                    onClick={() => handlePageChange(pagination.pageIndex + 1)}
+                                >
+                                    Sau &gt;
+                                </button>
+                            </div>
+                            <div className="home-suggested-tour-slider">
+                                <SuggestedTourList />
+                            </div>
+                        </>
+                    )
+                }
+            </div>
+            {/* <GoogleMapComponent /> Ẩn map khỏi Home */}
         </>
     )
 }

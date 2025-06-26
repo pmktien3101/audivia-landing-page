@@ -222,9 +222,9 @@
   border: none;
 }
 .header-right .icon-btn {
-    border-radius: 50%;
+    /* border-radius: 50%;
     border: 1px solid #e0e7ef;
-    background: #f6fafd;
+    background: #f6fafd; */
     margin-right: 10px;
     color: rgb(65, 63, 63);
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
