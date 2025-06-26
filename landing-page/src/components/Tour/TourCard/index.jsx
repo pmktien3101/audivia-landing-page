@@ -4,12 +4,13 @@ import saveTourService from "../../../services/saveTour";
 
 import "./style.css";
 import userService from "../../../services/user";
+import { formatMoney } from "../../../utils/formatter/formatter";
 
-export const TourCard = ({ 
-  imageUrl, 
-  country, 
-  title, 
-  price, 
+export const TourCard = ({
+  imageUrl,
+  country,
+  title,
+  price,
   rating,
   tourId,
   isSaved = false,
@@ -18,18 +19,18 @@ export const TourCard = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState();
-  
+
   // Debug: Log all props
   console.log('TourCard Props:', { imageUrl, country, title, price, rating, tourId, isSaved });
-  
-  const fetchCurrentUser = async() => {
+
+  const fetchCurrentUser = async () => {
     try {
-        const result = await userService.getCurrentUser();
-        if(result){
-            setUser(result);
-        }
+      const result = await userService.getCurrentUser();
+      if (result) {
+        setUser(result);
+      }
     } catch (error) {
-        console.error('Lỗi lấy thông tin người dùng:', error);
+      console.error('Lỗi lấy thông tin người dùng:', error);
     }
   };
   useEffect(() => {
@@ -37,7 +38,7 @@ export const TourCard = ({
   }, [])
   const handleToggleFavorite = async (e) => {
     e.stopPropagation(); // Ngăn chặn event bubble lên parent
-    
+
     setIsLoading(true);
     try {
       // Lấy user hiện tại nếu chưa có
