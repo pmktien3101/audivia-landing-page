@@ -7,7 +7,7 @@ import userService from '../../../../services/user';
 import { CiLocationOn } from 'react-icons/ci';
 import { BiLocationPlus } from 'react-icons/bi';
 
-export const PostDetailModal = ({ post, visible, onClose, onPostUpdated }) => {
+export const PostDetailModal = ({ post, visible, onClose, onPostUpdated, members = [] }) => {
   const [user, setUser] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(post?.reactions?.length || 0);
@@ -17,7 +17,6 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated }) => {
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
   const [editedContent, setEditedContent] = useState('');
-
   const fetchCurrentUser = async () => {
     try {
       const result = await userService.getCurrentUser();
@@ -96,6 +95,7 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated }) => {
       if (newComment) {
         setComments(prev => [newComment, ...prev]);
         setCommentText('');
+        if (onPostUpdated) onPostUpdated();
       }
     } catch (error) {
       console.error('Lỗi đăng bình luận:', error);
@@ -222,67 +222,71 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated }) => {
               </div>
             ) : comments.length > 0 ? (
               <div className="comments-list">
-                {comments.map((comment) => (
-                  <div key={comment.id} className="comment-item">
-                    {editingComment?.id === comment.id ? (
-                      <div className="comment-edit-form">
-                        <textarea
-                          value={editedContent}
-                          onChange={(e) => setEditedContent(e.target.value)}
-                          className="comment-edit-input"
-                          rows="2"
-                        />
-                        <div className="comment-edit-actions">
-                          <button 
-                            className="btn-save"
-                            onClick={handleUpdateComment}
-                          >
-                            Lưu
-                          </button>
-                          <button 
-                            className="btn-cancel"
-                            onClick={cancelEditComment}
-                          >
-                            Hủy
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="comment-content">
-                          <img 
-                            src={comment.createdBy?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745396073/Audivia/ddizjlgkux0eoifrsoco.avif'} 
-                            alt="avatar" 
-                            className="comment-avatar"
+                {comments.map((comment) => {
+                  // Lấy member info, so sánh id không phân biệt kiểu
+                  const member = members.find(m => String(m.id) === String(comment.createdBy));
+                  return (
+                    <div key={comment.id} className="comment-item">
+                      {editingComment?.id === comment.id ? (
+                        <div className="comment-edit-form">
+                          <textarea
+                            value={editedContent}
+                            onChange={(e) => setEditedContent(e.target.value)}
+                            className="comment-edit-input"
+                            rows="2"
                           />
-                          <div className="comment-text">
-                            <span className="comment-author">{comment.userName || 'Người dùng'}</span>
-                            <p>{comment.content}</p>
-                            <span className="comment-time">
-                              {new Date(comment.createdAt).toLocaleDateString('vi-VN')}
-                            </span>
+                          <div className="comment-edit-actions">
+                            <button 
+                              className="btn-save"
+                              onClick={handleUpdateComment}
+                            >
+                              Lưu
+                            </button>
+                            <button 
+                              className="btn-cancel"
+                              onClick={cancelEditComment}
+                            >
+                              Hủy
+                            </button>
                           </div>
                         </div>
-                        {comment.createdBy === user?.id && (
-                          <div className="comment-actions">
-                            <button 
-                              className="comment-action-btn"
-                              onClick={() => startEditComment(comment)}
-                            >
-                              <FiEdit3 size={16} />
-                            </button>
-                            <button 
-                              className="comment-action-btn delete"
-                              onClick={() => handleDeleteComment(comment.id)}
-                            >
-                              <FiTrash2 size={16} />
-                            </button>
+                      ) : (
+                        <>
+                          <div className="comment-content">
+                            <img 
+                              src={member?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745396073/Audivia/ddizjlgkux0eoifrsoco.avif'} 
+                              alt="avatar" 
+                              className="comment-avatar"
+                            />
+                            <div className="comment-text">
+                              <span className="comment-author">{member?.userName || comment.userName || 'Người dùng'}</span>
+                              <p>{comment.content}</p>
+                              <span className="comment-time">
+                                {new Date(comment.createdAt).toLocaleDateString('vi-VN')}
+                              </span>
+                            </div>
                           </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                ))}
+                          {(member?.id === user?.id || comment.createdBy === user?.id) && (
+                            <div className="comment-actions">
+                              <button 
+                                className="comment-action-btn"
+                                onClick={() => startEditComment(comment)}
+                              >
+                                <FiEdit3 size={16} />
+                              </button>
+                              <button 
+                                className="comment-action-btn delete"
+                                onClick={() => handleDeleteComment(comment.id)}
+                              >
+                                <FiTrash2 size={16} />
+                              </button>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="no-comments">

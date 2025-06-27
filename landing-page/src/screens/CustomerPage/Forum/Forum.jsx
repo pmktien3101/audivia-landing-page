@@ -431,6 +431,7 @@ const Forum = () => {
                 visible={showPostDetail}
                 onClose={handleClosePostDetail}
                 onPostUpdated={handlePostUpdated}
+                members={members}
             />
             {/* Modal sửa bài viết */}
             {showEditModal && (

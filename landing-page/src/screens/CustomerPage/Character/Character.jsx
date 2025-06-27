@@ -5,6 +5,7 @@ import CharacterService from '../../../services/character';
 import HistoryTransaction from '../../../services/historyTransaction';
 import useUser from '../../../hooks/useUser';
 import ROUTES from '../../../utils/routes';
+import toast from 'react-hot-toast';
 
 const Character = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -135,7 +136,7 @@ const Character = () => {
       try {
         setIsUpdating(true);
         await HistoryTransaction.updateAudioCharacterId(userTourId, selectedCharacter.id);
-        alert(`Bạn đã chọn ${selectedCharacter.name}! 🎉`);
+        toast.success('Chọn nhân vật thành công!')
         
         navigate(ROUTES.TOUR_DETAIL.replace(':id', tourId));
       } catch (error) {

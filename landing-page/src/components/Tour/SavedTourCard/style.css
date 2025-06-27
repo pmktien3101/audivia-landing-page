@@ -343,14 +343,15 @@
   color: #ff4757;
   border: none;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 8px;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 1px 4px rgba(255,71,87,0.08);
+  font-size: 22px;
 }
 .delete-btn:hover {
   background: #ff4757;

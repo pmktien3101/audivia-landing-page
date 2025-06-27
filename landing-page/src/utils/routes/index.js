@@ -10,6 +10,7 @@ const ROUTES = {
     SUCCESS_CONFIRM: '/email-success-confirm',
     PROFILE: '/profile',
     PAYMENT: '/payment',
+    FEEDBACK:'/feedback',
     CONTACT: '/contact',
     FAQ: '/faq',
     BLOG: '/blog',

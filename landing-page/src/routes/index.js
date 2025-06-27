@@ -19,6 +19,7 @@ import TourDetail from "../screens/CustomerPage/TourDetail";
 import Character from "../screens/CustomerPage/Character";
 import { Payment } from "../screens/CustomerPage/Payment/Payment";
 import MenuLayout from "../layouts/MenuLayout";
+import Feedback from "../screens/CustomerPage/Feedback";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout},
@@ -41,6 +42,7 @@ const memberRoutes = [
     {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
     {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
     {path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout},
-    {path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout}
+    {path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout},
+    {path: ROUTES.FEEDBACK, component: Feedback, layout: CustomerLayout },
 ]
 export { adminRoutes, memberRoutes, publicRoutes }
