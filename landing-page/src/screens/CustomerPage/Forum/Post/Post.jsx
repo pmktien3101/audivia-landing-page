@@ -25,6 +25,7 @@ const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
   }, [menuOpen]);
 
   const isOwner = showMenu && user && post.user && (user.id === post.user.id);
+  
 
   return (
     <div className="post-item" onClick={handleClick}>
@@ -47,7 +48,10 @@ const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
             </button>
             {menuOpen && (
               <div className="post-menu-dropdown">
-                <button className="post-menu-item" onClick={() => { setMenuOpen(false); onPostEdit?.(post); }}>
+                <button className="post-menu-item" onClick={() => { 
+                  setMenuOpen(false); 
+                  onPostEdit?.(post); 
+                }}>
                   <FiEdit3 size={16} /> Sửa
                 </button>
                 <button className="post-menu-item delete" onClick={() => { setMenuOpen(false); onPostDelete?.(post); }}>

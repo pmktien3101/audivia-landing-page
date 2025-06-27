@@ -3,10 +3,33 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { publicRoutes, adminRoutes, memberRoutes } from './routes';
 import ProtectedRoute from './contexts/ProtectedRoute';
 import ROUTES from './utils/routes';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     return (      
             <Router>
+                <Toaster 
+                    position="top-right"
+                    toastOptions={{
+                        duration: 3000,
+                        style: {
+                            background: '#363636',
+                            color: '#fff',
+                        },
+                        success: {
+                            duration: 3000,
+                            style: {
+                                background: '#4CAF50',
+                            },
+                        },
+                        error: {
+                            duration: 3000,
+                            style: {
+                                background: '#f44336',
+                            },
+                        },
+                    }}
+                />
                 <Routes>
                     {/* Public Routes */}
                     {publicRoutes.map((route, index) => {

@@ -6,10 +6,13 @@ import userService from '../../../services/user';
 import ForumService from '../../../services/forum';
 import { ForumCreatePost } from '../Forum/ForumCreatePost/ForumCreatePost';
 import { PostModal } from '../Forum/ForumCreatePost/PostModal';
+import { PostDetailModal } from '../Forum/PostDetailModal';
 import './style.css';
 import { FiUsers, FiUser, FiMail, FiPhone, FiArrowDownLeft, FiArrowLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../../utils/routes';
+import toast from 'react-hot-toast';
+import { uploadImageToCloudinary } from '../../../services/cloudinary';
 
 const MenuProfile = () => {
   const [user, setUser] = useState(null);
@@ -17,22 +20,31 @@ const MenuProfile = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [friends, setFriends] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [showPostDetail, setShowPostDetail] = useState(false);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [editPost, setEditPost] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [postData, setPostData] = useState({
+    content: '',
+    location: '',
+    images: [],
+  });
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
         const result = await userService.getCurrentUser();
-        console.log('USERRR', result)
         if (result) {
           setUser(result);
           setUserProfile(result);
         }
       } catch (error) {
-        // handle error
       }
     };
     fetchCurrentUser();
@@ -50,7 +62,6 @@ const MenuProfile = () => {
         setFriends(friendsData || []);
         setPosts(postsData || []);
       } catch (error) {
-        // handle error
       } finally {
         setLoadingPosts(false);
       }
@@ -65,28 +76,118 @@ const MenuProfile = () => {
       const postsData = await ForumService.getPostByUserId(user.id);
       setPosts(postsData || []);
     } catch (error) {
-      // handle error
     } finally {
       setLoadingPosts(false);
     }
   };
 
-  // Handler cho nút 3 chấm (edit/delete)
   const handleEditPost = (post) => {
     setEditPost(post);
+    // Chuyển đổi dữ liệu post sang format của postData
+    setPostData({
+      content: post.content || '',
+      location: post.location || '',
+      images: post.images || [],
+    });
     setShowEditModal(true);
   };
 
   const handleDeletePost = async (post) => {
-    const confirmed = window.confirm('Bạn có chắc chắn muốn xoá bài viết này?');
-    if (!confirmed) return;
+    setPostToDelete(post);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeletePost = async () => {
+    if (!postToDelete) return;
+    
     try {
-      await ForumService.deletePost(post.id);
+      await ForumService.deletePost(postToDelete.id);
       await fetchPosts();
+      toast.success('Xóa bài viết thành công');
     } catch (error) {
-      // handle error
+      toast.error('Xóa bài viết thất bại');
+    } finally {
+      setShowDeleteModal(false);
+      setPostToDelete(null);
     }
   };
+
+  const handleSaveEditPost = async () => {
+    if (!editPost?.id) {
+      toast.error('Không tìm thấy bài viết để cập nhật');
+      return;
+    }
+
+    if (!postData.content.trim()) {
+      toast.error('Vui lòng nhập nội dung bài viết');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      // Xử lý upload ảnh mới nếu có
+      const uploadedImageUrls = [];
+      const existingImages = postData.images.filter(img => typeof img === 'string');
+      const newImages = postData.images.filter(img => typeof img === 'object');
+
+      // Upload ảnh mới
+      for (const file of newImages) {
+        const url = await uploadImageToCloudinary(file);
+        uploadedImageUrls.push(url);
+      }
+
+      // Kết hợp ảnh cũ và ảnh mới
+      const allImages = [...existingImages, ...uploadedImageUrls];
+
+    
+      await ForumService.updatePost(editPost.id, {
+        content: postData.content,
+        location: postData.location,
+        images: allImages,
+      });
+
+      // Cập nhật UI ngay lập tức
+      setPosts(prevPosts => {
+        const updatedPosts = prevPosts.map(post => {
+          return post.id === editPost.id 
+            ? { 
+                ...post, 
+                content: postData.content,
+                location: postData.location,
+                images: allImages
+              }
+            : post;
+        });
+        return updatedPosts;
+      });
+
+      // Đóng modal và reset state
+      setShowEditModal(false);
+      setEditPost(null);
+      setPostData({ content: '', location: '', images: [] });
+      
+      // Hiển thị toast thành công
+      toast.success('Cập nhật bài viết thành công');
+      
+    } catch (error) {
+      console.log('Lỗi cập nhật bài viết:', error);
+      toast.error('Cập nhật bài viết thất bại');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handlePostCreated = (newPost) => {
+    setPosts(prev => [newPost, ...prev]);
+  };
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+    setShowPostDetail(true);
+  };
+  const handleClosePostDetail = () => {
+  setShowPostDetail(false);
+  setSelectedPost(null);
+};
 
   return (
     <div className="menu-profile-container">
@@ -123,7 +224,7 @@ const MenuProfile = () => {
         </div>
         {activeTab === 'profile' && (
           <div className="profile-post-box">
-            <ForumCreatePost onPostCreated={newPost => setPosts(prev => [newPost, ...prev])} />
+            <ForumCreatePost onPostCreated={handlePostCreated} />
           </div>
         )}
         <div className="profile-main-content">
@@ -133,7 +234,6 @@ const MenuProfile = () => {
                 <h3>Giới Thiệu</h3>
                 <ul className="profile-contact-list">
                 <li><FiUser size={20} style={{marginRight: 6}}/> {userProfile?.fullName}</li>
-                  <li><FiUsers size={20} style={{marginRight: 6}}/> {userProfile?.userName}</li>
                   <li><FiMail style={{marginRight: 6}}/> {userProfile?.email}</li>
                   <li><FiPhone style={{marginRight: 6}}/> {userProfile?.phone}</li>
                 </ul>
@@ -142,7 +242,7 @@ const MenuProfile = () => {
                 <PostList 
                   posts={posts} 
                   loading={loadingPosts} 
-                  onPostClick={() => {}} 
+                  onPostClick={handlePostClick} 
                   user={user} 
                   onPostEdit={handleEditPost}
                   onPostDelete={handleDeletePost}
@@ -160,20 +260,57 @@ const MenuProfile = () => {
         {showEditModal && (
           <PostModal
             visible={showEditModal}
-            onClose={() => setShowEditModal(false)}
-            onSave={async (updatedData) => {
-              try {
-                await ForumService.updatePost(editPost.id, updatedData);
-                setShowEditModal(false);
-                await fetchPosts();
-              } catch (error) {
-                // handle error
-              }
+            onClose={() => {
+              setShowEditModal(false);
+              setEditPost(null);
+              setPostData({ content: '', location: '', images: [] });
             }}
-            initialData={editPost}
+            onSave={handleSaveEditPost}
+            isSubmitting={isSubmitting}
+            postData={postData}
+            setPostData={setPostData}
             isEdit={true}
           />
         )}
+        
+        {/* Delete Confirmation Modal */}
+        {showDeleteModal && (
+          <div className="delete-modal-overlay" onClick={() => setShowDeleteModal(false)}>
+            <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="delete-modal-header">
+                <div className="delete-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="#EF4444"/>
+                  </svg>
+                </div>
+                <h3>Xóa bài viết</h3>
+                <p>Bạn có chắc chắn muốn xóa bài viết này không? Hành động này không thể hoàn tác.</p>
+              </div>
+              <div className="delete-modal-actions">
+                <button 
+                  className="delete-cancel-btn" 
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Hủy
+                </button>
+                <button 
+                  className="delete-confirm-btn" 
+                  onClick={confirmDeletePost}
+                >
+                  Xóa bài viết
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Post Detail Modal */}
+        <PostDetailModal
+          post={selectedPost}
+          visible={showPostDetail}
+          onClose={handleClosePostDetail}
+          onPostUpdated={fetchPosts}
+        />
       </div>
     </div>
   );

@@ -51,7 +51,8 @@ const ForumService = {
 
     updatePost: async (id, data) => {
         try {
-            await axiosClient.put(`/posts/${id}`, data);
+            const response = await axiosClient.put(`/posts/${id}`, data);
+            return response.response;
         } catch (error) {
             console.error('Lỗi cập nhật thông tin bài đăng:', error.response?.data || error.message);
             throw error;
