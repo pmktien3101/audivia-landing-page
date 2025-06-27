@@ -17,6 +17,8 @@ import ROUTES from "../utils/routes";
 import MenuProfile from "../screens/CustomerPage/MenuProfile";
 import TourDetail from "../screens/CustomerPage/TourDetail";
 import Character from "../screens/CustomerPage/Character";
+import { Payment } from "../screens/CustomerPage/Payment/Payment";
+import MenuLayout from "../layouts/MenuLayout";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout},
@@ -33,7 +35,8 @@ const adminRoutes = [
 
 const memberRoutes = [
     {path: ROUTES.HOME, component: Home, layout: CustomerLayout},
-    {path: ROUTES.PROFILE, component: MenuProfile, layout: NoHeaderLayout },
+    {path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
+    {path: ROUTES.PAYMENT, component: Payment, layout: MenuLayout },
     {path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
     {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
     {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },

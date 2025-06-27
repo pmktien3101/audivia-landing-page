@@ -16,7 +16,7 @@ const menuItems = [
     id: 2,
     title: 'Ví của tôi',
     icon: FaWallet,
-    path: '/wallet',
+    path: ROUTES.PAYMENT,
   },
   {
     id: 3,
@@ -26,12 +26,6 @@ const menuItems = [
   },
   {
     id: 4,
-    title: 'Chọn giọng nói',
-    icon: FaVolumeUp,
-    path: '/voice',
-  },
-  {
-    id: 5,
     title: 'Đăng xuất',
     icon: FaSignOutAlt,
     path: null,
