@@ -8,28 +8,20 @@ import { Toaster } from 'react-hot-toast';
 function App() {
     return (      
             <Router>
-                <Toaster 
-                    position="top-right"
-                    toastOptions={{
-                        duration: 3000,
-                        style: {
-                            background: '#363636',
-                            color: '#fff',
-                        },
-                        success: {
-                            duration: 3000,
-                            style: {
-                                background: '#4CAF50',
-                            },
-                        },
-                        error: {
-                            duration: 3000,
-                            style: {
-                                background: '#f44336',
-                            },
-                        },
-                    }}
-                />
+                <Toaster
+        position="top-center"
+        gutter={8}
+        containerStyle={{ top: '80px' }}
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            background: 'linear-gradient(135deg, #00A5CF, #d6a4ff)',
+            color: '#fff',
+            border: 'none',
+            boxShadow: '0 2px 12px rgba(0,0,0,0.15)',
+          },
+        }}
+      />
                 <Routes>
                     {/* Public Routes */}
                     {publicRoutes.map((route, index) => {

@@ -21,6 +21,7 @@ const ROUTES = {
     SERVICES: '/services',
     CHECKOUT: '/checkout',
     NOTIFICATION: '/notification',
+    CHARACTER: '/character/:id',
     ADMIN: {
       DASHBOARD: '/admin',
       REVENUE: '/admin/revenue',

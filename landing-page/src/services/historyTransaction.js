@@ -9,6 +9,18 @@ const HistoryTransaction = {
             console.log('Error at check user purchased tour: ', error);
             
         }
+    },
+    
+    updateAudioCharacterId: async (id, audioCharacterId) => {
+        try {
+            const response = await axiosClient.put(`/transaction-histories/character/${id}`, {
+                audioCharacterId
+              })
+            return response;
+        } catch (error) {
+            console.error('Error updating audio character:', error);
+            throw error;
+        }
     }
 }
 
