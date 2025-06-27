@@ -63,6 +63,15 @@ const userService = {
             console.error('Lỗi lấy danh sách bạn bè:', error);
             throw error;
         }
+    },
+
+    getUserById: async (userId) => {
+        try {
+            const response = await axiosClient.get(`/users/${userId}`);
+            return response;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 

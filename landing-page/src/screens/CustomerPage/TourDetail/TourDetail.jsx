@@ -8,9 +8,8 @@ import { useParams } from 'react-router-dom';
 import HistoryTransaction from '../../../services/historyTransaction'
 import tourService from '../../../services/tour'
 import ReviewService from '../../../services/review'
+
 export default function TourDetail() {
-
-
   const [activeTab, setActiveTab] = useState('intro');
   const renderTabContent = () => {
     if (!tour) return <div className='loading-data'>Đang tải dữ liệu...</div>;
@@ -32,23 +31,18 @@ export default function TourDetail() {
 
   const checkUserPurchasedTour = async () => {
     const result = await HistoryTransaction.checkUserPurchasedTour(userId, id)
-    console.log(result);
-    
     if (result)
       setTransaction(result)
   }
 
   const fetchTourById = async () => {
     const result = await tourService.getTourById(id)
-    console.log(result);
-    
     if (result)
       setTour(result)
   }
 
   const fetchReviewsByTourId = async () => {
     const result = await ReviewService.getReviewsByTourId(id)
-    console.log(result);
     if (result)
       setReviews(result)
   }
@@ -56,15 +50,15 @@ export default function TourDetail() {
     fetchTourById()
     fetchReviewsByTourId()
     checkUserPurchasedTour()
-    
   }, [])
+
   return (
-    <>
-    <div className='tour-detail-container'>
-        <div className='tour-detail-left'>
-        <TourDetailCard tour={tour} isPurchased={!!transaction}/>
+    <div className='tour-detail-bg'>
+      <div className='tour-detail-main-container'>
+        <div className='tour-detail-main-left'>
+          <TourDetailCard tour={tour} isPurchased={!!transaction}/>
         </div>
-        <div className='tour-detail-right'>
+        <div className='tour-detail-main-right'>
           <div className='split-tab-container'>
             <button 
               className={`split-tab ${activeTab === 'intro' ? 'active' : ''}`}
@@ -83,8 +77,7 @@ export default function TourDetail() {
             {renderTabContent()}
           </div>
         </div>
+      </div>
     </div>
-   
-    </>
   )
 }
