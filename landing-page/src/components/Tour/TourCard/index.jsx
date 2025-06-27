@@ -23,7 +23,7 @@ export const TourCard = ({
   const [user, setUser] = useState();
   const navigate = useNavigate();
   // Debug: Log all props
-  console.log('TourCard Props:', { imageUrl, country, title, price, rating, tourId, isSaved });
+  // console.log('TourCard Props:', { imageUrl, country, title, price, rating, tourId, isSaved });
 
   const fetchCurrentUser = async () => {
     try {
