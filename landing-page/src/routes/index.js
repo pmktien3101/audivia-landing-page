@@ -19,28 +19,30 @@ import TourDetail from "../screens/CustomerPage/TourDetail";
 import Character from "../screens/CustomerPage/Character";
 import { Payment } from "../screens/CustomerPage/Payment/Payment";
 import MenuLayout from "../layouts/MenuLayout";
+import TourAudio from "../screens/CustomerPage/TourAudio";
 
 const publicRoutes = [
-    { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout},
-    {path: ROUTES.LOGIN, component: LoginPage, layout: NoHeaderLayout},
-    {path: ROUTES.REGISTER, component: RegisterPage, layout: NoHeaderLayout},
+    { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
+    { path: ROUTES.LOGIN, component: LoginPage, layout: NoHeaderLayout },
+    { path: ROUTES.REGISTER, component: RegisterPage, layout: NoHeaderLayout },
 
 ]
 const adminRoutes = [
-    {path: ROUTES.ADMIN.DASHBOARD, component: AdminDashboard, layout: AdminLayout},
-    {path: ROUTES.ADMIN.MEMBER, component: MemberManagement, layout: AdminLayout},
-    {path: ROUTES.ADMIN.REVENUE, component: Revenue, layout: AdminLayout},
-    {path: ROUTES.ADMIN.TOUR, component: TourManagement, layout: AdminLayout},
+    { path: ROUTES.ADMIN.DASHBOARD, component: AdminDashboard, layout: AdminLayout },
+    { path: ROUTES.ADMIN.MEMBER, component: MemberManagement, layout: AdminLayout },
+    { path: ROUTES.ADMIN.REVENUE, component: Revenue, layout: AdminLayout },
+    { path: ROUTES.ADMIN.TOUR, component: TourManagement, layout: AdminLayout },
 ]
 
 const memberRoutes = [
-    {path: ROUTES.HOME, component: Home, layout: CustomerLayout},
-    {path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
-    {path: ROUTES.PAYMENT, component: Payment, layout: MenuLayout },
-    {path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
-    {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
-    {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
-    {path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout},
-    {path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout}
+    { path: ROUTES.HOME, component: Home, layout: CustomerLayout },
+    { path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
+    { path: ROUTES.PAYMENT, component: Payment, layout: MenuLayout },
+    { path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
+    { path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
+    { path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
+    { path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout },
+    { path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout },
+    { path: ROUTES.TOUR_AUDIO, component: TourAudio, layout: CustomerLayout }
 ]
 export { adminRoutes, memberRoutes, publicRoutes }
