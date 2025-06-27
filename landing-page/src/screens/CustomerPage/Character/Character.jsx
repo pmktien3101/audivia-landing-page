@@ -5,6 +5,7 @@ import CharacterService from '../../../services/character';
 import HistoryTransaction from '../../../services/historyTransaction';
 import useUser from '../../../hooks/useUser';
 import ROUTES from '../../../utils/routes';
+import toast from 'react-hot-toast';
 
 const Character = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);

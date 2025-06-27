@@ -10,6 +10,8 @@ import ForumService from '../../../services/forum';
 import { PostModal } from './ForumCreatePost/PostModal';
 import toast from 'react-hot-toast';
 import { uploadImageToCloudinary } from '../../../services/cloudinary';
+import { replace, useNavigate } from 'react-router-dom';
+import ROUTES from '../../../utils/routes';
 
 const Forum = () => {
     const [friends, setFriends] = useState([]);
@@ -26,18 +28,18 @@ const Forum = () => {
     const [isSubmittingEdit, setIsSubmittingEdit] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    
+    const [members, setMembers] = useState([])
     // Thêm state cho tìm kiếm
-    const [searchResults, setSearchResults] = useState({ posts: [], users: [] });
+    const [searchResults, setSearchResults] = useState({ posts: [], members: [] });
     const [isSearching, setIsSearching] = useState(false);
     const [showSearchResults, setShowSearchResults] = useState(false);
     const [searchTimeout, setSearchTimeout] = useState(null);
     const [shouldShowAllPosts, setShouldShowAllPosts] = useState(true);
+    const navigate = useNavigate();
 
     const fetchCurrentUser = async() => {
         try {
             const result = await userService.getCurrentUser();
-            console.log('USERr', result)
             if(result){
                 setUser(result);
             }
@@ -45,6 +47,16 @@ const Forum = () => {
             console.error('Lỗi lấy thông tin người dùng:', error);
         }
     };
+    const fetchMembers = async() => {
+        try {
+            const result = await userService.getAllMembers();
+            if(result){
+                setMembers(result)
+            }
+        }catch(error){
+            console.error('Lỗi lấy danh sách người dùng', error);
+        }
+    }
 
     const fetchListFriend = async () => {
         try {
@@ -61,7 +73,6 @@ const Forum = () => {
         try {
             setLoading(true);
             const result = await ForumService.getAllPosts();
-            console.log('POST', result)
             if (result) {
                 setPosts(result);
             }
@@ -74,6 +85,7 @@ const Forum = () => {
 
     useEffect(() => {
         fetchCurrentUser();
+        fetchMembers();
     }, []);
 
     useEffect(() => {
@@ -195,7 +207,7 @@ const Forum = () => {
     const handleSearch = async (term) => {
         if (!term.trim()) {
             setShowSearchResults(false);
-            setSearchResults({ posts: [], users: [] });
+            setSearchResults({ posts: [], members: [] });
             setShouldShowAllPosts(true);
             return;
         }
@@ -212,14 +224,14 @@ const Forum = () => {
                 post.location?.toLowerCase().includes(term.toLowerCase())
             );
 
-            // Tìm kiếm trong danh sách bạn bè
-            const filteredUsers = friends.filter(friend =>
-                friend.userName?.toLowerCase().includes(term.toLowerCase())
+            // Tìm kiếm trong danh sách thành viên (bao gồm cả bạn bè và không phải bạn bè)
+            const filteredMembers = members.filter(member =>
+                member.userName?.toLowerCase().includes(term.toLowerCase())
             );
 
             setSearchResults({
                 posts: filteredPosts,
-                users: filteredUsers
+                members: filteredMembers
             });
         } catch (error) {
             console.error('Lỗi tìm kiếm:', error);
@@ -252,7 +264,7 @@ const Forum = () => {
             setSearchTimeout(timeout);
         } else {
             setShowSearchResults(false);
-            setSearchResults({ posts: [], users: [] });
+            setSearchResults({ posts: [], members: [] });
         }
     };
 
@@ -267,7 +279,7 @@ const Forum = () => {
     // Đóng kết quả tìm kiếm
     const closeSearchResults = () => {
         setShowSearchResults(false);
-        setSearchResults({ posts: [], users: [] });
+        setSearchResults({ posts: [], members: [] });
         setSearchTerm(''); // Reset search term khi đóng
         setShouldShowAllPosts(true); // Hiển thị lại PostList
     };
@@ -314,16 +326,19 @@ const Forum = () => {
                                 </div>
                             ) : (
                                 <div className="search-results-content">
-                                    {/* Kết quả người dùng */}
-                                    {searchResults.users.length > 0 && (
+                                    {/* Kết quả thành viên */}
+                                    {searchResults.members && searchResults.members.length > 0 && (
                                         <div className="search-section">
-                                            <h4>Người dùng ({searchResults.users.length})</h4>
+                                            <h4>Thành viên ({searchResults.members.length})</h4>
                                             <div className="search-users-list">
-                                                {searchResults.users.map((user, index) => (
-                                                    <div key={index} className="search-user-item">
+                                                {searchResults.members.map((member, index) => (
+                                                    <div key={index} className="search-user-item" style={{cursor: 'pointer'}} onClick={() => {
+                                                        closeSearchResults();
+                                                        navigate(ROUTES.PROFILE.replace(':userId', member.id));
+                                                    }}>
                                                         <FriendTag
-                                                            avatarUrl={user.avatarUrl}
-                                                            username={user.userName}
+                                                            avatarUrl={member.avatarUrl}
+                                                            username={member.userName}
                                                         />
                                                     </div>
                                                 ))}
@@ -355,7 +370,7 @@ const Forum = () => {
                                     )}
                                     
                                     {/* Không có kết quả */}
-                                    {searchResults.users.length === 0 && searchResults.posts.length === 0 && (
+                                    {searchResults.posts.length === 0 && searchResults.members.length === 0 && (
                                         <div className="search-no-results">
                                             <p>Không tìm thấy kết quả nào cho "{searchTerm}"</p>
                                         </div>
@@ -416,6 +431,7 @@ const Forum = () => {
                 visible={showPostDetail}
                 onClose={handleClosePostDetail}
                 onPostUpdated={handlePostUpdated}
+                members={members}
             />
             {/* Modal sửa bài viết */}
             {showEditModal && (

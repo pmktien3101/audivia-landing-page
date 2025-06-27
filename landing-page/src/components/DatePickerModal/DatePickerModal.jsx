@@ -14,10 +14,7 @@ const DatePickerModal = ({ show, onClose, onConfirm, selectedDate, setSelectedDa
         <div className="date-picker-container">
           <DatePicker
             selected={selectedDate}
-            onChange={(date) => {
-              console.log("Chọn ngày:", date);
-              setSelectedDate(date);
-            }}
+            onChange={(date) => setSelectedDate(date)}
             dateFormat="dd/MM/yyyy"
             minDate={new Date()}
             placeholderText="Nhấn để chọn ngày"
@@ -41,14 +38,12 @@ const DatePickerModal = ({ show, onClose, onConfirm, selectedDate, setSelectedDa
                 >
                   <FaArrowLeft />
                 </button>
-                
                 <span className="month-title">
                   {monthDate.toLocaleString("vi-VN", {
                     month: "long",
                     year: "numeric",
                   })}
                 </span>
-                
                 <button
                   type="button"
                   onClick={increaseMonth}
@@ -62,6 +57,11 @@ const DatePickerModal = ({ show, onClose, onConfirm, selectedDate, setSelectedDa
           />
           <FaCalendarAlt className="calendar-icon" />
         </div>
+        {selectedDate && (
+          <div className="selected-date-info">
+            <span>Ngày đã chọn: <b>{selectedDate.toLocaleDateString('vi-VN')}</b></span>
+          </div>
+        )}
         <div className="modal-buttons">
           <button className="confirm-btn" onClick={onConfirm}>
             Xác nhận
@@ -69,6 +69,11 @@ const DatePickerModal = ({ show, onClose, onConfirm, selectedDate, setSelectedDa
           <button className="cancel-btn" onClick={onClose}>
             Hủy
           </button>
+          {selectedDate && (
+            <button className="clear-btn" onClick={() => setSelectedDate(null)}>
+              Xóa ngày
+            </button>
+          )}
         </div>
       </div>
     </div>
