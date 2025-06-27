@@ -136,7 +136,7 @@ const Character = () => {
       try {
         setIsUpdating(true);
         await HistoryTransaction.updateAudioCharacterId(userTourId, selectedCharacter.id);
-        alert(`Bạn đã chọn ${selectedCharacter.name}! 🎉`);
+        toast(`Bạn đã chọn nhân vật thành công!`);
 
         navigate(ROUTES.TOUR_AUDIO.replace(':id', tourId));
       } catch (error) {
