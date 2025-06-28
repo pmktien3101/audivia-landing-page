@@ -1,0 +1,35 @@
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .transaction-info {
+    flex: 1;
+  }
+  
+  .transaction-description {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .transaction-date {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .transaction-amount {
+    font-weight: bold;
+  }
+  
+  .transaction-amount.positive {
+    color: #2a9d8f;
+  }
+  
+  .transaction-amount.negative {
+    color: #e76f51;
+  }

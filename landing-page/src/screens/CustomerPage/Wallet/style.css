@@ -1,0 +1,116 @@
+.wallet-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .balance-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .balance-section h2{
+    font-family: "Plus Jakarta Sans", Helvetica;
+    font-size: 25px;
+    color: var(--primary);
+  }
+  
+  .balance-amount {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 15px 0;
+
+  }
+  
+  .deposit-button {
+    background: linear-gradient(135deg, var(--primary), var(--x-1st));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .deposit-button:hover {
+    background-color: linear-gradient(135deg, var(--primary), var(--x-1st));
+  }
+  
+  .tabs-section {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .tab:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .tab.active {
+    background: linear-gradient(135deg, var(--primary), var(--x-1st));
+    color: white;
+  }
+  
+  .transactions-section {
+    margin-top: 20px;
+  }
+  
+  .transactions-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .transaction-info {
+    flex: 1;
+  }
+  
+  .transaction-description {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .transaction-date {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .transaction-amount {
+    font-weight: bold;
+  }
+  
+  .transaction-amount.positive {
+    color: #2a9d8f;
+  }
+  
+  .transaction-amount.negative {
+    color: #e76f51;
+  }
+  
+  .no-transactions {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+  }
