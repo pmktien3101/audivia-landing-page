@@ -5,6 +5,8 @@ import DepositModal from '../../../components/Payment/DepositModal';
 import userService from '../../../services/user';
 import PaymentService from '../../../services/payment';
 import toast from 'react-hot-toast';
+import TransactionService from '../../../services/transaction';
+import { TbRuler } from 'react-icons/tb';
 
 const MyWallet = () => {
     const [user, setUser] = useState()
@@ -12,6 +14,8 @@ const MyWallet = () => {
     const [activeTab, setActiveTab] = useState('all');
     const [amount, setAmount] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [paymentHistories, setPaymentHistories] =  useState([])
+    const [purchasedTourHistories, setPurchasedTourHistories] = useState([])
 
     const fetchCurrentUser = async() => {
       try {
@@ -24,10 +28,6 @@ const MyWallet = () => {
           console.error('Lỗi lấy thông tin người dùng:', error);
       }
   };
-
-  useEffect(() => {
-    fetchCurrentUser()
-  }, [])
 
     // const [balance, setBalance] = useState(5000000); // Số dư mặc định
     const [transactions] = useState([
@@ -77,7 +77,67 @@ const MyWallet = () => {
     const formatCurrency = (amount) => {
       return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
     };
+
+    //get history transaction
+    const fetchPaymentHistories = async () => {
+      try{
+        const response = await PaymentService.getPaymentTransactionHistory(user?.id)
+        setPaymentHistories(response)
+      } catch (error)
+      {
+        console.error("Fetching payment histories", error);
+        
+      }
+    } 
   
+    const fetchPurchasedTourHistories = async () => {
+      try {
+        const response = await TransactionService.getHistoryTransactionByUserId(user?.id)
+        setPurchasedTourHistories(response)
+      } catch (error) {
+        console.error("Fetching purchased histories", error);
+      }
+    }
+
+    //merge 2 list -> 1
+    const formattedPurchases = (purchasedTourHistories ?? []).map(p => ({
+      id: p.id,
+      description: p.description,
+      amount: p.amount,
+      date: p.createdAt,
+      type:  'purchase'
+    }))
+
+    const formattedPayments = (paymentHistories ?? []).map(p => ({
+      id: p.id,
+      description: p.description,
+      amount: p.amount,
+      date: p.paymentTime,
+      type:  'payment'
+    }))
+
+    const mergedTransactions = [...formattedPurchases, ...formattedPayments].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    )
+
+
+    const filteredTransactions = mergedTransactions.filter(transaction => {
+      if (activeTab === 'all') return true
+      return transaction.type === activeTab
+    })
+
+    useEffect(() => {
+      fetchCurrentUser()
+    }, [])
+
+    useEffect(() => {
+      fetchPaymentHistories()
+      fetchPurchasedTourHistories()
+    }, [user])
+
+
+
+
     return (
       <div className="wallet-container">
         <div className="balance-section">
@@ -94,8 +154,8 @@ const MyWallet = () => {
             Tất cả
           </div>
           <div 
-            className={`tab ${activeTab === 'deposit' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('deposit')}
+            className={`tab ${activeTab === 'payment' ? 'active' : ''}`} 
+            onClick={() => setActiveTab('payment')}
           >
             Nạp tiền
           </div>
@@ -106,7 +166,7 @@ const MyWallet = () => {
             Mua tour
           </div>
         </div>
-        <TransactionList transactions={transactions}/>
+        <TransactionList transactions={filteredTransactions}/>
         <DepositModal 
           isOpen={showModal} 
           onClose={handleCloseModal}

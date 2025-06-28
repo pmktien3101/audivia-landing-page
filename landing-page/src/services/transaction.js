@@ -25,8 +25,20 @@ const TransactionService = {
         }
         console.log(params);
         
-        const response = await axiosClient.post(`/transaction-histories`, params)
-        // console.log(response)
+        await axiosClient.post(`/transaction-histories`, params)
+
       },
+
+      getHistoryTransactionByUserId: async (userId) => {
+        try {
+          const response = await axiosClient.get(`/transaction-histories/transaction/${userId}`);
+          return response;
+        } catch (error) {
+          console.error('Error fetching history transaction:', error);
+          throw error;
+        }
+      }   
+
+
 }
 export default TransactionService
