@@ -12,7 +12,7 @@ const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
     onClick(post);
   };
 
-  // Đóng menu khi click ra ngoài
+  // Đóng menu khi click ra   ngoài
   React.useEffect(() => {
     if (!menuOpen) return;
     const handleClickOutside = (event) => {
