@@ -11,7 +11,7 @@ export default function ConfirmPaymentModal({ open, onClose, onConfirm, tour }) 
           <br />
           <b>{tour?.title || 'Không có tên'}</b>
           <br />
-          <b>với giá {tour?.price?.toLocaleString() || '0'} VNĐ?</b>
+          với giá <b>{tour?.price?.toLocaleString() || '0'} VNĐ</b>?
         </p>
         <div style={{ marginTop: 16 }}>
           <button onClick={onConfirm}>Xác nhận</button>

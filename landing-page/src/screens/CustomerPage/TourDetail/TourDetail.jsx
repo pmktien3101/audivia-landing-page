@@ -42,7 +42,6 @@ export default function TourDetail() {
   const fetchCurrentUser = async() => {
     try {
         const result = await userService.getCurrentUser();
-        console.log('USER o detail', result)
         if(result){
             setUser(result);
         }
@@ -57,10 +56,8 @@ export default function TourDetail() {
 
   const checkUserPurchasedTour = async () => {
      if (!user) return;
-    console.log(user.id);
     
     const result = await HistoryTransaction.checkUserPurchasedTour(user.id, id)
-    console.log(result);
     
     if (result)
       setTransaction(result)
@@ -68,7 +65,6 @@ export default function TourDetail() {
 
   const fetchTourById = async () => {
     const result = await tourService.getTourById(id)
-    console.log(result);
     
     if (result)
       setTour(result)
@@ -76,7 +72,6 @@ export default function TourDetail() {
 
   const fetchReviewsByTourId = async () => {
     const result = await ReviewService.getReviewsByTourId(id)
-    console.log(result);
     if (result)
       setReviews(result)
   }
@@ -91,7 +86,7 @@ export default function TourDetail() {
         return;
       }
       
-      if (user.balanceWallet < tour.price) {
+      if (user?.balanceWallet < tour.price) {
         navigate(ROUTES.WALLET)
       } else {
         setOpenModal(true)
@@ -135,16 +130,17 @@ export default function TourDetail() {
 
   return (
     <>
-    <div className='tour-detail-container'>
-        <div className='tour-detail-left'>
-        <TourDetailCard 
-          tour={tour} 
-          isPurchased={!!transaction}
-          onButtonClick={handleButtonClick}
-          loading={loading}
-        />
+    <div className='tour-detail-bg'>
+      <div className='tour-detail-main-container'>
+        <div className='tour-detail-main-left'>
+          <TourDetailCard 
+            tour={tour} 
+            isPurchased={!!transaction}
+            onButtonClick={handleButtonClick}
+            loading={loading}
+          />
         </div>
-        <div className='tour-detail-right'>
+        <div className='tour-detail-main-right'>
           <div className='split-tab-container'>
             <button 
               className={`split-tab ${activeTab === 'intro' ? 'active' : ''}`}
@@ -163,6 +159,7 @@ export default function TourDetail() {
             {renderTabContent()}
           </div>
         </div>
+      </div>
     </div>
     
     <ConfirmPaymentModal

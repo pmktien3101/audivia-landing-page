@@ -53,7 +53,9 @@ const MyWallet = () => {
         
         setIsLoading(true);
         try {
-          const result = await PaymentService.createPaymentIntent(user.userId, amount, "Nạp tiền vào ví");
+          console.log('thanh toán: ', user.id);
+          
+          const result = await PaymentService.createPaymentIntent(user, amount, "Nạp tiền vào ví");
           console.log(result);
           setShowModal(false); // Đóng modal sau khi thành công
           setAmount(''); // Reset amount
