@@ -1,0 +1,85 @@
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  min-width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: modalFadeIn 0.2s;
+}
+
+@keyframes modalFadeIn {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h3 {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.modal-content p b {
+  font-weight: 700;
+}
+
+.modal-content button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-content button:hover {
+  background: #00A5CF;
+}
+
+.modal-content button:last-child {
+  background: #eee;
+  color: #333;
+  margin-left: 12px;
+}
+
+.modal-content button:last-child:hover {
+  background: #ddd;
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 18px 6vw;
+    min-width: unset;
+  }
+  
+  .modal-content p {
+    font-size: 0.9rem;
+  }
+}

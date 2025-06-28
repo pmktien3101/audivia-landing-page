@@ -1,4 +1,3 @@
-// define the Route
 const ROUTES = {
   GUEST_HOME: '/',
   HOME: '/home',
@@ -9,8 +8,8 @@ const ROUTES = {
   RESEND_PASSWORD: '/resend-password',
   SUCCESS_CONFIRM: '/email-success-confirm',
   PROFILE: '/profile',
-  PAYMENT: '/payment',
-  FEEDBACK: '/feedback',
+  WALLET: '/my-wallet',      
+  FEEDBACK: '/feedback',         
   CONTACT: '/contact',
   FAQ: '/faq',
   BLOG: '/blog',
@@ -35,5 +34,6 @@ const ROUTES = {
     CONTACT: '/admin/contact',
   },
   NOT_FOUND: '*'
-}
-export default ROUTES
+};
+
+export default ROUTES;
