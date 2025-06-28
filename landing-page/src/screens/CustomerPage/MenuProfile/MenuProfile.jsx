@@ -200,7 +200,7 @@ const MenuProfile = () => {
           <FiArrowLeft />
         </button>
           <div className="profile-avatar-wrapper">
-            <img className="profile-avatar" src={userProfile?.avatarUrl || 'https://randomuser.me/api/portraits/men/32.jpg'} alt="avatar" />
+            <img className="profile-avatar" src={userProfile?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1749048409/Audivia/j5iyav9zc3ydctbng8qr.png'} alt="avatar" />
           </div>
         </div>
         <div className="profile-info-box">

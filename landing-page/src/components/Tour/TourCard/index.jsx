@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import saveTourService from "../../../services/saveTour";
+import toast from 'react-hot-toast';
 
 import "./style.css";
 import userService from "../../../services/user";
@@ -59,6 +60,7 @@ export const TourCard = ({
       if (onToggleFavorite) {
         onToggleFavorite(tourId, !isSaved);
       }
+      toast.success('Đã lưu tour thành công!');
     } catch (error) {
       console.error('Error saving tour:', error);
     } finally {

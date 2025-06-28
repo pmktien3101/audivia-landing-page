@@ -105,7 +105,7 @@ const tourService = {
       return response.response
     } catch (error) {
       console.log('Error at getTourById', error);
-      
+
     }
   },
 
@@ -115,6 +115,16 @@ const tourService = {
       const response = await axiosClient.get(`/tours/suggested?UserId=${userId}&Longitude=${long}&Latitude=${lat}&Radius=${radius}`)
       return response.response.data
     } catch (error) {
+      throw error
+    }
+  },
+
+  getTourAudioByCheckpointId: async (checkpointId, characterId) => {
+    try {
+      const response = await axiosClient.get(`/checkpoint-audios/checkpoint/${checkpointId}/character/${characterId}`)
+      return response.data
+    } catch (error) {
+      console.error('Lỗi lấy tour audio:', error)
       throw error
     }
   }

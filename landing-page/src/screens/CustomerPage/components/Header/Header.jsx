@@ -16,7 +16,7 @@ const HeaderIcons = () => (
     <NavLink to={ROUTES.FORUM} className="icon-btn" title="Diễn đàn">
       Diễn đàn
     </NavLink>
-    <NavLink to={ROUTES.CONFESSION} className="icon-btn" title="Tâm sự">
+    <NavLink to={ROUTES.FEEDBACK} className="icon-btn" title="Tâm sự">
       Đóng góp
     </NavLink>
   </div>
@@ -42,7 +42,7 @@ const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour }) => (
 )
 
 const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfile, onFavoriteTour }) => (
-  <div className="profile-section" onClick={onToggleDropdown}>
+  <div className={`profile-section${isDropdownOpen ? ' active' : ''}`} onClick={onToggleDropdown}>
     <div className="profile-avatar-header">  
       {user?.raw.avatarUrl ? (
         <img src={user.raw.avatarUrl} alt="avatar" />
