@@ -1,22 +1,11 @@
 import React from 'react'
 import './style.css'
 import { MdLocationOn } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
-import ROUTES from '../../../utils/routes'
 
-export default function TourDetailCard({ tour, isPurchased }) {
-  const navigate = useNavigate()
-
-  const handleButtonClick = () => {
-    if (isPurchased) {
-      navigate(ROUTES.CHARACTER.replace(':id', tour?.id))
-    } else {
-      console.log('Mua tour:', tour?.id)
-    }
-  }
-
+export default function TourDetailCard({tour, isPurchased, onButtonClick, loading}) {
   return (
-    <div className='tour-detail-card-vertical'>
+    <>
+ <div className='tour-detail-card-vertical'>
       {/* Ảnh đại diện */}
       <div className='tour-detail-card-vertical-img'>
         <img src={tour?.thumbnailUrl} alt="Tour thumbnail" />
@@ -44,10 +33,13 @@ export default function TourDetailCard({ tour, isPurchased }) {
             {tour?.price === 0 ? 'Miễn phí' : `${tour?.price.toLocaleString()} VNĐ`}
           </div>
         </div>
-        <button className='tour-detail-card-modern-btn' onClick={handleButtonClick}>
-          {isPurchased ? 'Bắt đầu' : 'Mua ngay'}
+
+        <button className='tour-detail-card-modern-btn' onClick={onButtonClick} disabled={loading}>
+          {loading ? 'Đang xử lý...' : (isPurchased ? 'Bắt đầu' : 'Mua ngay')}
         </button>
       </div>
     </div>
+
+    </>
   )
 }

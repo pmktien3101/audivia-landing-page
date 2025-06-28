@@ -16,7 +16,7 @@ const menuItems = [
     id: 2,
     title: 'Ví của tôi',
     icon: FaWallet,
-    path: ROUTES.PAYMENT,
+    path: ROUTES.WALLET,
   },
   {
     id: 3,
