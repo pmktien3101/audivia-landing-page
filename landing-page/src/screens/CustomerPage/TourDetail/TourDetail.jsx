@@ -1,103 +1,88 @@
-import React, { useEffect, useState } from 'react'
-import TourDetailCard from '../../../components/Tour/TourDetailCard/TourDetailCard'
-import ReviewTourTab from '../../../components/Tour/ReviewTourTab'
-import TourIntroTab from '../../../components/Tour/TourIntroTab'
-import './style.css'
+import React, { useEffect, useState } from 'react';
+import TourDetailCard from '../../../components/Tour/TourDetailCard/TourDetailCard';
+import ReviewTourTab from '../../../components/Tour/ReviewTourTab';
+import TourIntroTab from '../../../components/Tour/TourIntroTab';
+import './style.css';
 
-import { useParams } from 'react-router-dom';
-import HistoryTransaction from '../../../services/historyTransaction'
-import tourService from '../../../services/tour'
-import ReviewService from '../../../services/review'
-import userService from '../../../services/user'
-import TransactionService from '../../../services/transaction'
-import toast from 'react-hot-toast'
-import ConfirmPaymentModal from '../../../components/Payment/ConfirmPaymentModal'
-import ROUTES from '../../../utils/routes'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom';
+import HistoryTransaction from '../../../services/historyTransaction';
+import tourService from '../../../services/tour';
+import ReviewService from '../../../services/review';
+import userService from '../../../services/user';
+import TransactionService from '../../../services/transaction';
+import toast from 'react-hot-toast';
+import ConfirmPaymentModal from '../../../components/Payment/ConfirmPaymentModal';
+import ROUTES from '../../../utils/routes';
 
 export default function TourDetail() {
   const [activeTab, setActiveTab] = useState('intro');
-  const [openModal, setOpenModal] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-  
+  const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  const [tour, setTour] = useState();
+  const [transaction, setTransaction] = useState();
+  const [reviews, setReviews] = useState([]);
+  const [user, setUser] = useState();
+
   const renderTabContent = () => {
     if (!tour) return <div className='loading-data'>Đang tải dữ liệu...</div>;
-    switch(activeTab) {
+    switch (activeTab) {
       case 'intro':
-        return <TourIntroTab tour={tour}/>;
+        return <TourIntroTab tour={tour} />;
       case 'review':
-        return <ReviewTourTab reviews={reviews}/>;
+        return <ReviewTourTab reviews={reviews} />;
       default:
         return null;
     }
-  }
-  const [user, setUser] = useState()
+  };
 
-  const { id } = useParams();
-  const [tour, setTour] = useState()
-  const [transaction, setTransaction] = useState()
-  const [reviews, setReviews] = useState([])
-
-  const fetchCurrentUser = async() => {
+  const fetchCurrentUser = async () => {
     try {
-        const result = await userService.getCurrentUser();
-        console.log('USER o detail', result)
-        if(result){
-            setUser(result);
-        }
+      const result = await userService.getCurrentUser();
+      console.log('USER o detail', result);
+      if (result) {
+        setUser(result);
+      }
     } catch (error) {
-        console.error('Lỗi lấy thông tin người dùng:', error);
+      console.error('Lỗi lấy thông tin người dùng:', error);
     }
   };
 
-  useEffect(() => {
-    fetchCurrentUser()
-  }, [])
-
   const checkUserPurchasedTour = async () => {
-     if (!user) return;
-    console.log(user.id);
-    
-    const result = await HistoryTransaction.checkUserPurchasedTour(user.id, id)
+    if (!user) return;
+    const result = await HistoryTransaction.checkUserPurchasedTour(user.id, id);
     console.log(result);
-    
-    if (result)
-      setTransaction(result)
-  }
+    if (result) setTransaction(result);
+  };
 
   const fetchTourById = async () => {
-    const result = await tourService.getTourById(id)
-    console.log(result);
-    
-    if (result)
-      setTour(result)
-  }
+    const result = await tourService.getTourById(id);
+    if (result) setTour(result);
+  };
 
   const fetchReviewsByTourId = async () => {
-    const result = await ReviewService.getReviewsByTourId(id)
-    console.log(result);
-    if (result)
-      setReviews(result)
-  }
+    const result = await ReviewService.getReviewsByTourId(id);
+    if (result) setReviews(result);
+  };
 
-  // Logic thanh toán
   const handleButtonClick = () => {
     if (transaction) {
-      navigate(ROUTES.CHARACTER.replace(':id', tour?.id))
+      navigate(ROUTES.CHARACTER.replace(':id', tour?.id));
     } else {
       if (!user) {
         toast.error('Vui lòng đăng nhập để mua tour');
         return;
       }
-      
+
       if (user.balanceWallet < tour.price) {
-        navigate(ROUTES.WALLET)
+        navigate(ROUTES.WALLET);
       } else {
-        setOpenModal(true)
+        setOpenModal(true);
       }
     }
-  }
+  };
 
   const handleConfirmPayment = async () => {
     if (!user || !user.id) {
@@ -105,72 +90,69 @@ export default function TourDetail() {
       return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
-      await TransactionService.createNewTransactionHistory(user.id, tour)
-      setOpenModal(false)
-      toast.success('Thanh toán thành công!')
-      
-      // Gọi lại API để lấy thông tin transaction mới nhất
-      await checkUserPurchasedTour()
-      
+      await TransactionService.createNewTransactionHistory(user.id, tour);
+      setOpenModal(false);
+      toast.success('Thanh toán thành công!');
+      await checkUserPurchasedTour(); // Cập nhật lại trạng thái đã mua
     } catch (error) {
       console.error('Lỗi thanh toán:', error);
-      toast.error('Thanh toán thất bại!')
+      toast.error('Thanh toán thất bại!');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchTourById()
-    fetchReviewsByTourId()
-  }, [])
+    fetchCurrentUser();
+    fetchTourById();
+    fetchReviewsByTourId();
+  }, []);
 
   useEffect(() => {
     if (user) {
-      checkUserPurchasedTour()
+      checkUserPurchasedTour();
     }
-  }, [user])
+  }, [user]);
 
   return (
     <>
-    <div className='tour-detail-container'>
+      <div className='tour-detail-container'>
         <div className='tour-detail-left'>
-        <TourDetailCard 
-          tour={tour} 
-          isPurchased={!!transaction}
-          onButtonClick={handleButtonClick}
-          loading={loading}
-        />
+          <TourDetailCard
+            tour={tour}
+            isPurchased={!!transaction}
+            onButtonClick={handleButtonClick}
+            loading={loading}
+          />
         </div>
-        <div className='tour-detail-right'>
+
+        <div className='tour-detail-main-right'>
           <div className='split-tab-container'>
-            <button 
+            <button
               className={`split-tab ${activeTab === 'intro' ? 'active' : ''}`}
               onClick={() => setActiveTab('intro')}
             >
               Giới thiệu
             </button>
-            <button 
+            <button
               className={`split-tab ${activeTab === 'review' ? 'active' : ''}`}
               onClick={() => setActiveTab('review')}
             >
               Đánh giá
             </button>
           </div>
-          <div className='tour-detail-tab-content'>
-            {renderTabContent()}
-          </div>
+          <div className='tour-detail-tab-content'>{renderTabContent()}</div>
         </div>
-    </div>
-    
-    <ConfirmPaymentModal
-      open={openModal}
-      onClose={() => setOpenModal(false)}
-      onConfirm={handleConfirmPayment}
-      tour={tour}
-    />
+      </div>
+
+      <ConfirmPaymentModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onConfirm={handleConfirmPayment}
+        tour={tour}
+      />
     </>
-  )
+  );
 }

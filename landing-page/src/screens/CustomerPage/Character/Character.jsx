@@ -5,6 +5,7 @@ import CharacterService from '../../../services/character';
 import HistoryTransaction from '../../../services/historyTransaction';
 import useUser from '../../../hooks/useUser';
 import ROUTES from '../../../utils/routes';
+import toast from 'react-hot-toast';
 
 const Character = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -82,8 +83,8 @@ const Character = () => {
   };
 
   const handleAudioPreview = (character, event) => {
-    event.stopPropagation(); 
-    
+    event.stopPropagation();
+
     if (playingAudio === character.id) {
       // Stop current audio
       if (currentAudioRef.current) {
@@ -135,9 +136,9 @@ const Character = () => {
       try {
         setIsUpdating(true);
         await HistoryTransaction.updateAudioCharacterId(userTourId, selectedCharacter.id);
-        alert(`Bạn đã chọn ${selectedCharacter.name}! 🎉`);
-        
-        navigate(ROUTES.TOUR_DETAIL.replace(':id', tourId));
+        toast(`Bạn đã chọn nhân vật thành công!`);
+
+        navigate(ROUTES.TOUR_AUDIO.replace(':id', tourId));
       } catch (error) {
         console.error('Error updating audio character:', error);
         alert('Có lỗi xảy ra khi cập nhật nhân vật. Vui lòng thử lại sau.');
@@ -149,7 +150,7 @@ const Character = () => {
 
   const getVoiceTypeColor = (voiceType) => {
     if (voiceType.includes('Female')) {
-      return '#FFB6C1'; 
+      return '#FFB6C1';
     } else if (voiceType.includes('Male')) {
       return '#87CEEB';
     }
@@ -211,8 +212,8 @@ const Character = () => {
             style={{ '--character-color': getVoiceTypeColor(character.voiceType) }}
           >
             <div className="character-avatar">
-              <img 
-                src={character.avatarUrl} 
+              <img
+                src={character.avatarUrl}
                 alt={character.name}
                 className="avatar-image"
                 onError={(e) => {
@@ -224,12 +225,12 @@ const Character = () => {
                 {character.name.charAt(0)}
               </span>
             </div>
-            
+
             <div className="character-info">
               <h3 className="character-name">{character.name}</h3>
               <p className="character-voice-type">{character.voiceType}</p>
               <p className="character-description">{character.description}</p>
-              
+
               <div className="audio-preview-section">
                 <button
                   className={`audio-preview-btn ${playingAudio === character.id ? 'playing' : ''}`}
@@ -257,8 +258,8 @@ const Character = () => {
           <div className="summary-card">
             <h3>Nhân Vật Đã Chọn:</h3>
             <div className="selected-character-info">
-              <img 
-                src={selectedCharacter.avatarUrl} 
+              <img
+                src={selectedCharacter.avatarUrl}
                 alt={selectedCharacter.name}
                 className="selected-avatar-image"
                 onError={(e) => {
@@ -275,7 +276,7 @@ const Character = () => {
                 <p>{selectedCharacter.description}</p>
               </div>
             </div>
-            <button 
+            <button
               className="confirm-button"
               onClick={handleConfirmSelection}
               disabled={isUpdating || isCheckingPurchase}

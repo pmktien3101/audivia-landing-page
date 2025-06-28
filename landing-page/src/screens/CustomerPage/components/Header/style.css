@@ -102,6 +102,13 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
+.profile-section:hover, .profile-section.active {
+    background: linear-gradient(90deg, #e0f7fa 0%, #f3e5f5 100%);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.16);
+    border-color: #00A5CF;
+    transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
 .profile-avatar-header {
     width: 34px;
     height: 34px;
@@ -248,4 +255,5 @@
 
 .header-center .icon-btn{
     font-size: 18px;
+    color: #7e7d7d;
 }

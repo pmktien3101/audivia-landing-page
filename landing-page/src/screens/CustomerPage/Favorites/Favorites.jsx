@@ -91,6 +91,7 @@ const fetchSavedTours = async () => {
     try {
       await saveTourService.deleteTourSaved(savedTourId);
       setSavedTours(prev => prev.filter(tour => tour.id !== savedTourId));
+      toast.success('Deleted tour yêu thích thành công')
     } catch (error) {
       console.error('Lỗi xóa tour:', error);
     }

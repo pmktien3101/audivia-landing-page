@@ -9,7 +9,8 @@ const SavedTourCard = ({
   savedTime, 
   onDelete, 
   onSchedule,
-  savedTourId
+  savedTourId,
+  plannedTime
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,32 +33,6 @@ const SavedTourCard = ({
 
   return (
     <div className="saved-tour-card" onClick={handleCardClick}>
-      {/* Options Button */}
-      <div className="tour-options-container">
-        <button 
-          className="tour-options-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowOptions(!showOptions);
-          }}
-        >
-          <span className="options-dots">•••</span>
-        </button>
-        
-        {showOptions && (
-          <div className="tour-options-menu">
-            <button 
-              className="option-item delete-option"
-              onClick={handleDelete}
-              disabled={isLoading}
-            >
-              <HiOutlineTrash />
-              <span>{isLoading ? 'Đang xóa...' : 'Xóa'}</span>
-            </button>
-          </div>
-        )}
-      </div>
-
       {/* Tour Image */}
       <div className="tour-image-container">
         <img
@@ -65,6 +40,12 @@ const SavedTourCard = ({
           alt={tour.title}
           src={tour.thumbnailUrl || tour.imageUrl}
         />
+        {plannedTime && (
+          <div className="planned-time-badge">
+            <HiOutlineCalendar size={16} />
+            <span>{new Date(plannedTime).toLocaleDateString('vi-VN')}</span>
+          </div>
+        )}
       </div>
 
       {/* Tour Content */}
@@ -90,13 +71,21 @@ const SavedTourCard = ({
           
           <div className="tour-actions">
             <button 
-              className="action-btn schedule-btn"
+              className={`action-btn schedule-btn ${plannedTime ? 'has-date' : ''}`}
               onClick={handleSchedule}
-              title="Lên lịch"
+              title={plannedTime ? 'Đổi ngày' : 'Lên lịch'}
             >
               <HiOutlineCalendar size={18}/>
+              <span className="action-text">{plannedTime ? 'Đổi ngày' : 'Lên lịch'}</span>
             </button>
-            
+            <button 
+              className="action-btn delete-btn"
+              onClick={handleDelete}
+              title="Xóa tour"
+              disabled={isLoading}
+            >
+              <HiOutlineTrash size={18}/>
+            </button>
           </div>
         </div>
       </div>
