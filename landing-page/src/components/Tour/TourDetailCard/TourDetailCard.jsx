@@ -28,10 +28,12 @@ export default function TourDetailCard({tour, isPurchased, onButtonClick, loadin
             {typeof tour?.avgRating === 'number' && (
               <span style={{ marginLeft: 8, fontWeight: 500 }}>{tour.avgRating.toFixed(1)}/5</span>
             )}
+            <span className="rating-count">{`(${tour?.ratingCount} đánh giá)`}</span>
           </div>
           <div className='tour-detail-card-modern-price'>
             {tour?.price === 0 ? 'Miễn phí' : `${tour?.price.toLocaleString()} VNĐ`}
           </div>
+
         </div>
 
         <button className='tour-detail-card-modern-btn' onClick={onButtonClick} disabled={loading}>

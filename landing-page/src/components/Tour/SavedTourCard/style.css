@@ -231,13 +231,20 @@
     display: flex;
     align-items: center;
     gap: 4px;
-
     padding: 5px 10px;
     border-radius: 12px;
     font-size: 20px;
     font-weight: 600;
     color: #f57c00;
     flex-shrink: 0;
+  }
+  .rating-count {
+    font-size: 14px;
+    color: #888;
+    font-weight: 400;
+    margin-left: 4px;
+    letter-spacing: 0.2px;
+    align-self: flex-end;
   }
   
   /* Footer Section */
