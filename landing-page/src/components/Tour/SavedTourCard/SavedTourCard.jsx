@@ -4,10 +4,10 @@ import { IoStar } from 'react-icons/io5';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-const SavedTourCard = ({ 
-  tour, 
-  savedTime, 
-  onDelete, 
+const SavedTourCard = ({
+  tour,
+  savedTime,
+  onDelete,
   onSchedule,
   savedTourId,
   plannedTime
@@ -57,10 +57,10 @@ const SavedTourCard = ({
               <span>{tour.price == 0 ? 'Free' : tour.price + " VNĐ"}</span>
             </div>
           </div>
-          
+
           <div className="saved-tour-rating">
             <IoStar className="star-icon" />
-            <span className="rating-text">{tour.avgRating?.toFixed(1) || tour.rating}</span>
+            <span className="rating-text">{tour.avgRating?.toFixed(1) || tour.rating} <span className="rating-count">{`(${tour.ratingCount} đánh giá)`}</span></span>
           </div>
         </div>
 
@@ -68,23 +68,23 @@ const SavedTourCard = ({
           <div className="saved-time">
             Đã lưu {savedTime}
           </div>
-          
+
           <div className="tour-actions">
-            <button 
+            <button
               className={`action-btn schedule-btn ${plannedTime ? 'has-date' : ''}`}
               onClick={handleSchedule}
               title={plannedTime ? 'Đổi ngày' : 'Lên lịch'}
             >
-              <HiOutlineCalendar size={18}/>
+              <HiOutlineCalendar size={18} />
               <span className="action-text">{plannedTime ? 'Đổi ngày' : 'Lên lịch'}</span>
             </button>
-            <button 
+            <button
               className="action-btn delete-btn"
               onClick={handleDelete}
               title="Xóa tour"
               disabled={isLoading}
             >
-              <HiOutlineTrash size={18}/>
+              <HiOutlineTrash size={18} />
             </button>
           </div>
         </div>

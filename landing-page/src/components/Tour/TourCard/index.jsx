@@ -14,10 +14,10 @@ export const TourCard = ({
   title,
   price,
   rating,
+  ratingCount,
   tourId,
   isSaved = false,
   onToggleFavorite,
-
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState();
@@ -114,6 +114,7 @@ export const TourCard = ({
             alt="Rating star"
             src="https://c.animaapp.com/bADEbyrk/img/vector-31.svg"
           />
+          <span className="rating-count">{`(${ratingCount} đánh giá)`}</span>
         </div>
       </div>
     </div>

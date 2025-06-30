@@ -29,7 +29,6 @@ const Home = () => {
     const fetchCategories = async () => {
         try {
             const response = await TourTypeService.getTourTypes()
-            console.log(response);
 
             setCategories([{ id: 'all', name: 'Tất cả' }, ...response])
         } catch (error) {
@@ -54,6 +53,7 @@ const Home = () => {
                 result = await tourService.getToursByCategory(activeCategory, queryParams);
             }
             setTours(result.data)
+            // console.log(result.data)
             setPagination(result.pagination)
 
         } catch (error) {
