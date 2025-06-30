@@ -3,7 +3,7 @@ import './style.css'
 import CheckpointList from '../../Checkpoint/CheckpointList';
 import { FaClock } from 'react-icons/fa';
 import { MdLocationOn } from 'react-icons/md';
-export default function TourIntroTab({ tour }) {
+export default function TourIntroTab({ tour, isPurchased, onBuyNow }) {
     return (
       <div className='tour-intro-container'>
         {/* General Info Section */}
@@ -35,7 +35,7 @@ export default function TourIntroTab({ tour }) {
             <h3 className='section-title'>Lộ trình tham quan</h3>
             <span className='checkpoint-count'>{tour?.checkpoints?.length || 0} điểm dừng chân</span>
           </div>
-          <CheckpointList checkpoints={tour?.checkpoints} />
+          <CheckpointList checkpoints={tour?.checkpoints} isPurchased={isPurchased} onBuyNow={onBuyNow}/>
         </div>
       </div>
     );

@@ -38,8 +38,7 @@ const Favorites = () => {
   };
 
   const handleConfirmDate = () => {
-    console.log("Ngày đã chọn:", selectedDate);
-    console.log("saved tour id: ", selectedSavedTour.id);
+    if (!selectedSavedTour || !selectedDate) return;
     const plannedTime = new Date(
       Date.UTC(
         selectedDate.getFullYear(),
@@ -48,12 +47,17 @@ const Favorites = () => {
         0, 0, 0
       )
     ).toISOString();
-    const response = saveTourService.updateTourSaved(selectedSavedTour.id, plannedTime)
-    if(response)
-      toast.success("Set up planned time successfully")
-      setShowModal(false)
+    saveTourService.updateTourSaved(selectedSavedTour.id, plannedTime)
+      .then(response => {
+        toast.success("Cập nhật ngày dự định đi thành công");
+        setShowModal(false);
+        fetchSavedTours();
+      })
+      .catch(err => {
+        toast.error("Có lỗi khi cập nhật ngày dự định đi");
+      });
+  };
 
-  }
   const handleCloseModal = () => {
     setShowModal(false);
 
