@@ -23,6 +23,7 @@ import MyWallet from "../screens/CustomerPage/Wallet";
 
 import Feedback from "../screens/CustomerPage/Feedback";
 import TourAudio from "../screens/CustomerPage/TourAudio";
+import { TrialFree } from "../screens/CustomerPage/Trial";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
@@ -54,6 +55,7 @@ const memberRoutes = [
     { path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
     { path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout },
     { path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout },
-    { path: ROUTES.TOUR_AUDIO, component: TourAudio, layout: CustomerLayout }
+    { path: ROUTES.TOUR_AUDIO, component: TourAudio, layout: CustomerLayout },
+    { path: ROUTES.TRIAL_FREE, component: TrialFree, layout: CustomerLayout },
 ]
 export { adminRoutes, memberRoutes, publicRoutes }

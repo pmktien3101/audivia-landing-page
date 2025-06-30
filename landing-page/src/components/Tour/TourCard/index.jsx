@@ -81,7 +81,7 @@ export const TourCard = ({
           src={imageUrl}
         />
         <div className="tour-country-badge">
-          <span>{country}</span>
+          <span><p className="tour-price">{price == 0 ? 'Free' : formatMoney(price) + ' VNĐ'}</p></span>
         </div>
 
         {/* Favorite Button */}
@@ -104,7 +104,7 @@ export const TourCard = ({
       <div className="tour-info">
         <div className="tour-title-price">
           <h3 className="tour-title">{title}</h3>
-          <p className="tour-price">{price == 0 ? 'Free' : formatMoney(price) + ' VNĐ'}</p>
+          <p className="tour-country">{country}</p>
         </div>
 
         <div className="tour-rating">

@@ -10,6 +10,7 @@ const ROUTES = {
   PROFILE: '/profile',
   WALLET: '/my-wallet',
   FEEDBACK: '/feedback',
+  TRIAL_FREE: '/trial',
   CONTACT: '/contact',
   FAQ: '/faq',
   BLOG: '/blog',

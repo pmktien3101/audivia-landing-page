@@ -5,8 +5,7 @@ import './style.css'
 import userService from "../../../../services/user"
 import ROUTES from "../../../../utils/routes"
 import useUser from "../../../../hooks/useUser"
-import { BsFillPeopleFill, BsPeople } from "react-icons/bs"
-import { BiHeart } from "react-icons/bi"
+import { BiHeart, BiHelpCircle } from "react-icons/bi"
 
 const HeaderIcons = () => (
   <div className="header-center">
@@ -16,13 +15,13 @@ const HeaderIcons = () => (
     <NavLink to={ROUTES.FORUM} className="icon-btn" title="Diễn đàn">
       Diễn đàn
     </NavLink>
-    <NavLink to={ROUTES.FEEDBACK} className="icon-btn" title="Tâm sự">
-      Đóng góp
+    <NavLink to={ROUTES.TRIAL_FREE} className="icon-btn trial-attract" title="Trải nghiệm thử">
+      Trải nghiệm thử
     </NavLink>
   </div>
 )
 
-const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour }) => (
+const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour, onFeedback }) => (
   <div className="profile-dropdown">
     <div className="dropdown-arrow" />
     <button className="dropdown-item" onClick={onProfile}>
@@ -33,6 +32,10 @@ const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour }) => (
       <BiHeart size={18} />
       <span>Tour yêu thích</span>
     </button>
+    <button className="dropdown-item" onClick={onFeedback}>
+      <BiHelpCircle size={18} />
+      <span>Đóng góp</span>
+    </button>
     <div className="dropdown-divider" />
     <button className="dropdown-item" onClick={onLogout}>
       <FiLogOut size={18} />
@@ -41,7 +44,7 @@ const ProfileDropdown = ({ onLogout, onProfile, onFavoriteTour }) => (
   </div>
 )
 
-const UserProfile = ({ user, isDropdownOpen, onToggleDropdown, onLogout, onProfile, onFavoriteTour }) => (
+const UserProfile = ({ user, isDropdownOpen, onToggleDropdown }) => (
   <div className={`profile-section${isDropdownOpen ? ' active' : ''}`} onClick={onToggleDropdown}>
     <div className="profile-avatar-header">  
       {user?.raw.avatarUrl ? (
@@ -77,6 +80,10 @@ const Header = () => {
       navigate(ROUTES.FAVORITES);
     };
 
+    const handleFeedback = () => {
+      navigate(ROUTES.FEEDBACK)
+    }
+
     return (
         <div className="main-header">
             <div className="header-left">
@@ -107,7 +114,7 @@ const Header = () => {
                       onProfile={handleProfile}
                       onFavoriteTour={handleFavoriteTour}
                   />
-                  {isDropdownOpen && <ProfileDropdown onLogout={handleLogout} onProfile={handleProfile} onFavoriteTour={handleFavoriteTour}/>} 
+                  {isDropdownOpen && <ProfileDropdown onLogout={handleLogout} onProfile={handleProfile} onFavoriteTour={handleFavoriteTour} onFeedback={handleFeedback}/>} 
                 </div>
             </div>
 
