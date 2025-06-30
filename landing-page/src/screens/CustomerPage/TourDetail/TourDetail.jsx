@@ -25,7 +25,7 @@ export default function TourDetail() {
     if (!tour) return <div className='loading-data'>Đang tải dữ liệu...</div>;
     switch(activeTab) {
       case 'intro':
-        return <TourIntroTab tour={tour}/>;
+        return <TourIntroTab tour={tour} isPurchased={!!transaction} onBuyNow={handleBuyNow}/>;
       case 'review':
         return <ReviewTourTab reviews={reviews}/>;
       default:
@@ -115,6 +115,10 @@ export default function TourDetail() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleBuyNow = () => {
+    setOpenModal(true)
   }
 
   useEffect(() => {
