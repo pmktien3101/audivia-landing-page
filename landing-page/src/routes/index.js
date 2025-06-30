@@ -24,6 +24,7 @@ import MyWallet from "../screens/CustomerPage/Wallet";
 import Feedback from "../screens/CustomerPage/Feedback";
 import TourAudio from "../screens/CustomerPage/TourAudio";
 import { TrialFree } from "../screens/CustomerPage/Trial";
+import FeedbackManagement from "../screens/AdminPage/FeedbackManagement";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
@@ -36,6 +37,8 @@ const adminRoutes = [
     { path: ROUTES.ADMIN.MEMBER, component: MemberManagement, layout: AdminLayout },
     { path: ROUTES.ADMIN.REVENUE, component: Revenue, layout: AdminLayout },
     { path: ROUTES.ADMIN.TOUR, component: TourManagement, layout: AdminLayout },
+    { path: ROUTES.ADMIN.FEEDBACK, component: FeedbackManagement, layout: AdminLayout }
+
 ]
 
 const memberRoutes = [

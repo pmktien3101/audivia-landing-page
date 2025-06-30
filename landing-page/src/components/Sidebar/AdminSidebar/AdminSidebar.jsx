@@ -3,6 +3,7 @@ import {
     MdOutlineDashboard,
     MdGroup,
     MdMap,
+    MdFeedback,
 } from "react-icons/md";
 import './styles.css';
 import ROUTES from '../../../utils/routes';
@@ -33,6 +34,12 @@ const menuItems = [
         title: 'Quản lý tour',
         icon: MdMap,
         path: ROUTES.ADMIN.TOUR
+    },
+    {
+        id: 4,
+        title: 'Đánh giá tour',
+        icon: MdFeedback,
+        path: ROUTES.ADMIN.FEEDBACK
     },
 ];
 

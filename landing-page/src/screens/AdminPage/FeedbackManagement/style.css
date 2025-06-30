@@ -1,0 +1,30 @@
+.feedback-total-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--x-1st) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 24px rgba(100, 100, 200, 0.15);
+    margin-right: 32px;
+    min-width: 220px;
+  }
+  .feedback-total-icon {
+    margin-bottom: 12px;
+  }
+  .feedback-total-value {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .feedback-total-label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    text-align: center;
+  }
+  .admin-feedback-summary {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
