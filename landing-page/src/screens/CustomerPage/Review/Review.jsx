@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useUser from '../../../hooks/useUser';
 import tourService from '../../../services/tour';
 import ReviewService from '../../../services/review';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../../components/Review/ReviewCard/style.css';
 import './style.css';
 import { FiStar } from 'react-icons/fi';
@@ -17,7 +17,8 @@ const Review = () => {
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(5);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchTour = async () => {
       if (!tourId) return;
