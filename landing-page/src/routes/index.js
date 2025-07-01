@@ -54,7 +54,7 @@ const memberRoutes = [
     {path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout},
     {path: ROUTES.FEEDBACK, component: Feedback, layout: CustomerLayout },
     { path: ROUTES.HOME, component: Home, layout: CustomerLayout },
-    { path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
+    { path: ROUTES.PROFILE_ME, component: MenuProfile, layout: MenuLayout },
     { path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
     { path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
     { path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },

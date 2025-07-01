@@ -9,10 +9,12 @@ import { PostModal } from '../Forum/ForumCreatePost/PostModal';
 import { PostDetailModal } from '../Forum/PostDetailModal';
 import './style.css';
 import { FiUsers, FiUser, FiMail, FiPhone, FiArrowDownLeft, FiArrowLeft } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ROUTES from '../../../utils/routes';
 import toast from 'react-hot-toast';
 import { uploadImageToCloudinary } from '../../../services/cloudinary';
+import useUser from '../../../hooks/useUser';
+import FollowService from '../../../services/follow';
 
 const MenuProfile = () => {
   const [user, setUser] = useState(null);
@@ -34,27 +36,36 @@ const MenuProfile = () => {
     images: [],
   });
   const navigate = useNavigate();
-
+  const currentUser = useUser();
+  const { userId } = useParams();
+  const [isFriend, setIsFriend] = useState(false);
+  const [friendLoading, setFriendLoading] = useState(false);
+  const [friendStatus, setFriendStatus] = useState('');
 
   useEffect(() => {
-    const fetchCurrentUser = async () => {
+    const fetchUser = async () => {
       try {
-        const result = await userService.getCurrentUser();
-        if (result) {
-          setUser(result);
-          setUserProfile(result);
+        let result;
+        if (userId) {
+          result = await userService.getUserById(userId);
+        } else if (currentUser && currentUser.userId) {
+          result = await userService.getUserById(currentUser.userId);
         }
-      } catch (error) {
-      }
+        if (result) {
+          setUser(result.response);
+          setUserProfile(result.response);
+        }
+      } catch (error) {}
     };
-    fetchCurrentUser();
-  }, []);
+    if (userId || (currentUser && currentUser.userId)) {
+      fetchUser();
+    }
+  }, [userId, currentUser]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!user?.id) return;
       try {
-        // Fetch friends and posts
         const [friendsData, postsData] = await Promise.all([
           userService.getUserFriends(user.id),
           ForumService.getPostByUserId(user.id)
@@ -68,6 +79,24 @@ const MenuProfile = () => {
     };
     if (user && user.id) fetchData();
   }, [user]);
+
+  const checkFriendStatus = async () => {
+    if (!userId || !currentUser?.userId) return;
+    setFriendLoading(true);
+    try {
+      const status = await FollowService.getFollower(currentUser.userId, userId);
+      setFriendStatus(status?.followStatusString || '');
+      console.log('STATUS', status.followStatusString)
+    } catch (e) {
+      setFriendStatus('');
+    } finally {
+      setFriendLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (userId && currentUser?.userId) checkFriendStatus();
+  }, [userId, currentUser]);
 
   const fetchPosts = async () => {
     if (!user?.id) return;
@@ -189,36 +218,95 @@ const MenuProfile = () => {
   setSelectedPost(null);
 };
 
+  const handleFriendClick = async () => {
+    if (!currentUser?.userId || !userId) return;
+    setFriendLoading(true);
+    try {
+      if (friendStatus === 'Friends') {
+        await FollowService.unfollowUser(currentUser.userId, userId);
+        toast.success('Đã huỷ theo dõi');
+        await checkFriendStatus();
+      } else if (friendStatus === 'Following') {
+        await FollowService.unfollowUser(currentUser.userId, userId);
+        toast.success('Đã huỷ theo dõi');
+        await checkFriendStatus();
+      } else if (friendStatus === 'NotFollowing') {
+        await FollowService.followUser(currentUser.userId, userId);
+        toast.success('Đã bấm theo dõi');
+        await checkFriendStatus();
+      } else if (friendStatus === 'NotFollowedBack') {
+        await FollowService.followUser(currentUser.userId, userId);
+        toast.success('Đã bấm theo dõi');
+        await checkFriendStatus();
+      }
+    } catch (e) {
+      toast.error('Có lỗi xảy ra');
+    } finally {
+      setFriendLoading(false);
+    }
+  };
+
   return (
       <div className="menu-profile-content">
        
         <div className="profile-header-bg">
-        <button
-          className="back-home-btn"
-          onClick={() => navigate(ROUTES.HOME)}
-        >
-          <FiArrowLeft />
-        </button>
           <div className="profile-avatar-wrapper">
-            <img className="profile-avatar" src={userProfile?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1749048409/Audivia/j5iyav9zc3ydctbng8qr.png'} alt="avatar" />
+            <img className="profile-avatar" src={userProfile?.avatarUrl} alt="avatar" />
           </div>
         </div>
         <div className="profile-info-box">
           <div className="profile-info-main">
-            <h2 className="profile-name">{userProfile?.name || userProfile?.userName || 'Tina Pham'}</h2>
-            <span className="profile-bio">{userProfile?.bio || 'Thích đi đây đi đó, trải nghiệm'}</span>
+            <h2 className="profile-name">{userProfile?.name || userProfile?.userName}</h2>
+            <span className="profile-bio">{userProfile?.bio}</span>
           </div>
           <div className="profile-stats">
-            <div className="profile-stat"><span className="stat-number">{posts.length}</span><span className="stat-label">Bài đăng</span></div>
-            <div className="profile-stat"><span className="stat-number">{userProfile?.following || '3,586'}</span><span className="stat-label">Bạn bè</span></div>
-            <div className="profile-stat"><span className="stat-number">{userProfile?.followers || '2,659'}</span><span className="stat-label">Người đang theo dõi</span></div>
+            {!userId ? (
+              <>
+                <div className="profile-stat">
+                  <span className="stat-number">{posts.length}</span>
+                  <span className="stat-label">Bài đăng</span>
+                </div>
+                <div className="profile-stat">
+                  <span className="stat-number">{userProfile?.following}</span>
+                  <span className="stat-label">Bạn bè</span>
+                </div>
+                <div className="profile-stat">
+                  <span className="stat-number">{userProfile?.followers}</span>
+                  <span className="stat-label">Người đang theo dõi</span>
+                </div>
+              </>
+            ) : (
+              <div style={{ display: 'flex', gap: 12 }}>
+                <button
+                  className="profile-action-btn"
+                  onClick={handleFriendClick}
+                  disabled={friendLoading}
+                >
+                  {friendLoading
+                    ? 'Đang xử lý...'
+                    : friendStatus === 'Friends'
+                      ? 'Bạn bè (Huỷ)'
+                      : friendStatus === 'NotFollowedBack'
+                        ? 'Kết Bạn'
+                        : friendStatus === 'NotFollowing'
+                        ? 'Kết bạn'
+                        : friendStatus === 'Following'
+                          ? 'Huỷ theo dõi'
+                          : 'Kết bạn'
+                  }
+                </button>
+                <button className="profile-action-btn">Nhắn tin</button>
+              </div>
+            )}
           </div>
         </div>
+       {!userId && (
         <div className="profile-tabs">
           <button className={`tab${activeTab === 'profile' ? ' active' : ''}`} onClick={() => setActiveTab('profile')}>Trang cá nhân</button>
           <button className={`tab${activeTab === 'friends' ? ' active' : ''}`} onClick={() => setActiveTab('friends')}>Bạn bè</button>
         </div>
-        {activeTab === 'profile' && (
+       )}
+        {activeTab === 'profile' && !userId && (
           <div className="profile-post-box">
             <ForumCreatePost onPostCreated={handlePostCreated} />
           </div>

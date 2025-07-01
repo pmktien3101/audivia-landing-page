@@ -73,7 +73,7 @@ const Header = () => {
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
     const handleProfile = (e) => {
-      navigate(ROUTES.PROFILE);
+      navigate(ROUTES.PROFILE_ME);
     };
 
     const handleFavoriteTour = () => {

@@ -10,7 +10,7 @@ const menuItems = [
     id: 1,
     title: 'Trang cá nhân',
     icon: FaUser,
-    path: ROUTES.PROFILE,
+    path: ROUTES.PROFILE_ME,
   },
   {
     id: 2,
