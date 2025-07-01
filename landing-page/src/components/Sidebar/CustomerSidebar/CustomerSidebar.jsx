@@ -20,9 +20,9 @@ const menuItems = [
   },
   {
     id: 3,
-    title: 'Lịch sử mua tour',
+    title: 'Lịch sử tour',
     icon: FaHistory,
-    path: '/history',
+    path: ROUTES.HISTORY_TOUR,
   },
   {
     id: 4,

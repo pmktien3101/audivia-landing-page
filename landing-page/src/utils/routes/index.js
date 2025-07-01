@@ -11,6 +11,8 @@ const ROUTES = {
   WALLET: '/my-wallet',
   FEEDBACK: '/feedback',
   TRIAL_FREE: '/trial',
+  REVIEW: '/review/:id',
+  HISTORY_TOUR: '/history-tour',
   CONTACT: '/contact',
   FAQ: '/faq',
   BLOG: '/blog',

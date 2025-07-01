@@ -22,6 +22,21 @@ const ReviewService = {
       console.error('Error get review tours:', error);
       throw error;
     }
+  },
+  createTourReview: async (title,
+    rating,
+    content,
+    tourId,
+    createdBy) => {
+    try {
+        const imageUrl = 'string'
+        const response = await axiosClient.post('tour-reviews', {
+          title, imageUrl, content, rating, tourId, createdBy
+        })
+        return response.data
+    } catch (error) {
+      console.error('Error create tour review', error)
+    }
   }
 
 }

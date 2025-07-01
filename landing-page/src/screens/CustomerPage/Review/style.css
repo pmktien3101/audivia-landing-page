@@ -1,0 +1,199 @@
+.review-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background: linear-gradient(120deg, #f2eaf3 60%, #e0e7ff 100%);
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  .review-tour-card, .review-form-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08), 0 1.5px 6px #eee;
+    padding: 28px 24px 24px 24px;
+    margin-bottom: 0;
+    margin: 60px;
+  }
+  
+  .review-tour-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 32px rgba(25, 118, 210, 0.12), 0 2px 8px #e3eaf2;
+    padding: 32px 28px 28px 28px;
+    margin-bottom: 0;
+    border-left: 6px solid var(--primary);
+    transition: box-shadow 0.25s, transform 0.18s;
+    position: relative;
+  }
+  
+  .review-tour-card:hover {
+    box-shadow: 0 12px 40px rgba(25, 118, 210, 0.18), 0 4px 16px #e3eaf2;
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .review-tour-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .review-tour-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px #eee;
+  }
+  
+  .review-tour-title {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  
+  .review-tour-desc {
+    color: #666;
+    font-size: 15px;
+  }
+  
+  .review-tour-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .review-tour-info {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    background: #f5faff;
+    border-radius: 10px;
+    padding: 12px 10px 8px 10px;
+    font-size: 15px;
+    color: var(--primary);
+  }
+  
+  .review-tour-info-item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  .review-tour-info-item .label {
+    color: var(--primary);
+    font-weight: 600;
+    min-width: 70px;
+  }
+  
+  .review-form-title {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--primary);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  
+  .review-form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .review-form-group label {
+    font-weight: 500;
+    color: #222;
+  }
+  
+  .review-input, .review-textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1.5px solid #e3eaf2;
+    font-size: 16px;
+    background: #f8fafc;
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-input:focus, .review-textarea:focus {
+    border: 1.5px solid var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .review-textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .review-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  
+  .review-star {
+    font-size: 28px;
+    cursor: pointer;
+    color: #ddd;
+    transition: color 0.2s, transform 0.1s;
+    user-select: none;
+  }
+  
+  .review-star.filled {
+    color: #FFB800;
+    transform: scale(1.1);
+  }
+  
+  .review-star:hover, .review-star:active {
+    color: #ff9800;
+    transform: scale(1.15);
+  }
+  
+  .review-rating-value {
+    margin-left: 10px;
+    color: #888;
+    font-size: 15px;
+  }
+  
+  .review-submit-btn {
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(90deg, var(--primary) 60%, var(--x-1st) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 8px;
+    box-shadow: 0 2px 8px #e3eaf2;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-submit-btn:disabled {
+    background: #b3c6e6;
+    cursor: not-allowed;
+  }
+  
+  .review-message {
+    margin-top: 18px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  .review-message.success {
+    color: #2e7d32;
+  }
+  
+  .review-message.error {
+    color: #d32f2f;
+  } 

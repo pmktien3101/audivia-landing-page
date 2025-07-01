@@ -162,7 +162,7 @@ export default function TourAudio() {
     }
 
     const handleEndTour = () => {
-        navigate(`/end-tour-confirm?tourId=${tourId}`)
+        navigate(`/review/${tourId}`)
     }
 
     const getCheckpointStatus = (checkpointId) => {

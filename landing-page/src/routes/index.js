@@ -25,6 +25,8 @@ import Feedback from "../screens/CustomerPage/Feedback";
 import TourAudio from "../screens/CustomerPage/TourAudio";
 import { TrialFree } from "../screens/CustomerPage/Trial";
 import FeedbackManagement from "../screens/AdminPage/FeedbackManagement";
+import Review from "../screens/CustomerPage/Review";
+import HistoryTour from "../screens/CustomerPage/HistoryTour";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
@@ -60,5 +62,8 @@ const memberRoutes = [
     { path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout },
     { path: ROUTES.TOUR_AUDIO, component: TourAudio, layout: CustomerLayout },
     { path: ROUTES.TRIAL_FREE, component: TrialFree, layout: CustomerLayout },
+    { path: ROUTES.REVIEW, component: Review, layout: CustomerLayout },
+    { path: ROUTES.HISTORY_TOUR, component: HistoryTour, layout: MenuLayout },
+
 ]
 export { adminRoutes, memberRoutes, publicRoutes }
