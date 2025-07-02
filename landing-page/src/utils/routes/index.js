@@ -22,6 +22,7 @@ const ROUTES = {
   FAVORITES: '/favorites',
   TOUR_DETAIL: '/tour-detail/:id',
   TOUR_AUDIO: '/tour-audio/:id',
+  AUDIO_PLAYER: '/audio-player',
   CONFESSION: '/confession',
   MESSAGE: '/message',
   SERVICES: '/services',
