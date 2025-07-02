@@ -27,6 +27,7 @@ import { TrialFree } from "../screens/CustomerPage/Trial";
 import FeedbackManagement from "../screens/AdminPage/FeedbackManagement";
 import Review from "../screens/CustomerPage/Review";
 import HistoryTour from "../screens/CustomerPage/HistoryTour";
+import AudioPlayer from "../screens/CustomerPage/AudioPlayer";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
@@ -44,15 +45,15 @@ const adminRoutes = [
 ]
 
 const memberRoutes = [
-    {path: ROUTES.HOME, component: Home, layout: CustomerLayout},
-    {path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
-    {path: ROUTES.WALLET, component: MyWallet, layout: MenuLayout },
-    {path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
-    {path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
-    {path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
-    {path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout},
-    {path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout},
-    {path: ROUTES.FEEDBACK, component: Feedback, layout: CustomerLayout },
+    { path: ROUTES.HOME, component: Home, layout: CustomerLayout },
+    { path: ROUTES.PROFILE, component: MenuProfile, layout: MenuLayout },
+    { path: ROUTES.WALLET, component: MyWallet, layout: MenuLayout },
+    { path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
+    { path: ROUTES.NOTIFICATION, component: Notification, layout: CustomerLayout },
+    { path: ROUTES.FAVORITES, component: Favorites, layout: CustomerLayout },
+    { path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout },
+    { path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout },
+    { path: ROUTES.FEEDBACK, component: Feedback, layout: CustomerLayout },
     { path: ROUTES.HOME, component: Home, layout: CustomerLayout },
     { path: ROUTES.PROFILE_ME, component: MenuProfile, layout: MenuLayout },
     { path: ROUTES.FORUM, component: Forum, layout: CustomerLayout },
@@ -61,6 +62,7 @@ const memberRoutes = [
     { path: ROUTES.TOUR_DETAIL, component: TourDetail, layout: CustomerLayout },
     { path: ROUTES.CHARACTER, component: Character, layout: CustomerLayout },
     { path: ROUTES.TOUR_AUDIO, component: TourAudio, layout: CustomerLayout },
+    { path: ROUTES.AUDIO_PLAYER, component: AudioPlayer, layout: CustomerLayout },
     { path: ROUTES.TRIAL_FREE, component: TrialFree, layout: CustomerLayout },
     { path: ROUTES.REVIEW, component: Review, layout: CustomerLayout },
     { path: ROUTES.HISTORY_TOUR, component: HistoryTour, layout: MenuLayout },

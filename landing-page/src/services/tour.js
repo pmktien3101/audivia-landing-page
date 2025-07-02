@@ -57,9 +57,7 @@ const tourService = {
 
   getAllTours: async (pageIndex = 1, pageSize = 5) => {
     try {
-      const response = await axiosClient.get('/tours', {
-        params: { pageIndex, pageSize }
-      });
+      const response = await axiosClient.get('/tours', { params: { pageIndex, pageSize } });
       console.log('TOUR', response)
       return response.response.data
     } catch (error) {
@@ -121,11 +119,31 @@ const tourService = {
 
   getTourAudioByCheckpointId: async (checkpointId, characterId) => {
     try {
-      const response = await axiosClient.get(`/checkpoint-audios/checkpoint/${checkpointId}/character/${characterId}`)
-      return response.data
+      const response = await axiosClient.get(`/checkpoint-audios/checkpoint/${checkpointId}/character/${characterId}`);
+      console.log('API Response for getTourAudioByCheckpointId (FULL):', JSON.stringify(response, null, 2)); // Detailed log
+      return response.response;
     } catch (error) {
-      console.error('Lỗi lấy tour audio:', error)
-      throw error
+      console.error('Lỗi lấy tour audio:', error);
+      throw error;
+    }
+  },
+
+  getNextAudioByCheckpointId: async (checkpointId) => {
+    try {
+      const response = await axiosClient.get(`/checkpoint-audios/next/${checkpointId}`);
+      return response;
+    } catch (error) {
+      console.error('Lỗi lấy tour audio kế tiếp:', error);
+      throw error;
+    }
+  },
+  getPrevAudioByCheckpointId: async (checkpointId) => {
+    try {
+      const response = await axiosClient.get(`/checkpoint-audios/prev/${checkpointId}`);
+      return response;
+    } catch (error) {
+      console.error('Lỗi lấy tour audio phía trước:', error);
+      throw error;
     }
   }
 
