@@ -2,7 +2,7 @@ import React from 'react'
 import './style.css'
 import { MdLocationOn } from 'react-icons/md'
 
-export default function TourDetailCard({tour, isPurchased, onButtonClick, loading}) {
+export default function TourDetailCard({tour, isPurchased, onButtonClick, loading, isDeveloping}) {
   return (
     <>
  <div className='tour-detail-card-vertical'>
@@ -18,6 +18,7 @@ export default function TourDetailCard({tour, isPurchased, onButtonClick, loadin
         </div>
         <div className='tour-detail-card-modern-title'>{tour?.title}</div>
         <div className='tour-detail-card-modern-description'>{tour?.description}</div>
+        
         <div className='tour-detail-card-modern-rating-price'>
           <div className='tour-detail-card-modern-rating'>
             {Array.from({ length: 5 }).map((_, index) => (
@@ -30,15 +31,19 @@ export default function TourDetailCard({tour, isPurchased, onButtonClick, loadin
             )}
             <span className="rating-count">{`(${tour?.ratingCount} đánh giá)`}</span>
           </div>
-          <div className='tour-detail-card-modern-price'>
-            {tour?.price === 0 ? 'Miễn phí' : `${tour?.price.toLocaleString()} VNĐ`}
-          </div>
-
         </div>
-
-        <button className='tour-detail-card-modern-btn' onClick={onButtonClick} disabled={loading}>
-          {loading ? 'Đang xử lý...' : (isPurchased ? 'Bắt đầu' : 'Mua ngay')}
-        </button>
+        <div className='tour-detail-card-modern-price highlight-price'>
+          {tour?.price === 0 ? 'Miễn phí' : `${tour?.price.toLocaleString()} VNĐ`}
+        </div>
+        {isDeveloping ? (
+          <div className="tour-developing-label">
+            Hiện nay đang phát triển, chưa mở bán
+          </div>
+        ) : (
+          <button className='tour-detail-card-modern-btn' onClick={onButtonClick} disabled={loading}>
+            {loading ? 'Đang xử lý...' : (isPurchased ? 'Bắt đầu' : 'Mua ngay')}
+          </button>
+        )}
       </div>
     </div>
 

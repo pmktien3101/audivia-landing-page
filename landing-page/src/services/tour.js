@@ -127,6 +127,15 @@ const tourService = {
       console.error('Lỗi lấy tour audio:', error)
       throw error
     }
+  },
+  hasAudioForTour: async(tourId) => {
+    try {
+      const response = await axiosClient.get(`/checkpoint-audios/tour?tour=${tourId}`)
+      return response
+    } catch (error) {
+      console.error('Lỗi lấy tour audio:', error)
+      throw error
+    }
   }
 
 };

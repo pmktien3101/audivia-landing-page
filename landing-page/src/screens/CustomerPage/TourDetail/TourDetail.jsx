@@ -25,7 +25,7 @@ export default function TourDetail() {
     if (!tour) return <div className='loading-data'>Đang tải dữ liệu...</div>;
     switch(activeTab) {
       case 'intro':
-        return <TourIntroTab tour={tour} isPurchased={!!transaction} onBuyNow={handleBuyNow}/>;
+        return <TourIntroTab tour={tour} isPurchased={!!transaction} onBuyNow={handleBuyNow} isDeveloping={isDeveloping}/>;
       case 'review':
         return <ReviewTourTab reviews={reviews}/>;
       default:
@@ -38,6 +38,7 @@ export default function TourDetail() {
   const [tour, setTour] = useState()
   const [transaction, setTransaction] = useState()
   const [reviews, setReviews] = useState([])
+  const [isDeveloping, setIsDeveloping] = useState(false)
 
   const fetchCurrentUser = async() => {
     try {
@@ -65,7 +66,8 @@ export default function TourDetail() {
 
   const fetchTourById = async () => {
     const result = await tourService.getTourById(id)
-    
+    const checkHasAudio = await tourService.hasAudioForTour(id)
+    setIsDeveloping(!checkHasAudio);
     if (result)
       setTour(result)
   }
@@ -142,6 +144,7 @@ export default function TourDetail() {
             isPurchased={!!transaction}
             onButtonClick={handleButtonClick}
             loading={loading}
+            isDeveloping={isDeveloping}
           />
         </div>
         <div className='tour-detail-main-right'>

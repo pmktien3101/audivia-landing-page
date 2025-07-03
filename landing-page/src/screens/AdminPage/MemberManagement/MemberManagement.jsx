@@ -25,6 +25,7 @@ const MemberManagement = () => {
             setLoading(true);
             try {
                 const response = await userService.getAllMembers();
+                console.log('response', response)
                 const normalized = (response || []).map(m => ({
                     ...m,
                     fullName: m.fullName || ""
@@ -46,6 +47,8 @@ const MemberManagement = () => {
             'Họ tên': member.fullName || '',
             'Tên đăng nhập': member.userName || '',
             'Email': member.email || '',
+            'Số điện thoại': member.phone || '',
+            'Ngày sinh': member.birthDay || '',
             'Vai trò': member.roleName || '',
             'Ngày tạo': member.createdAt ? new Date(member.createdAt).toLocaleDateString('vi-VN') : '',
             'Trạng thái': (member.isDeleted === true || member.isDeleted === 'true') ? 'Không hoạt động' : 'Hoạt động'
@@ -140,6 +143,8 @@ const MemberManagement = () => {
                                     { key: 'fullName', label: 'Họ tên' },
                                     { key: 'userName', label: 'Tên đăng nhập' },
                                     { key: 'email', label: 'Email' },
+                                    { key: 'phone', label: 'Số điện thoại' },
+                                    { key: 'birthDay', label: 'Ngày sinh' },
                                     { key: 'roleName', label: 'Vai trò' },
                                     { key: 'createdAt', label: 'Ngày tạo' },
                                     { key: 'isDeleted', label: 'Trạng thái' },
