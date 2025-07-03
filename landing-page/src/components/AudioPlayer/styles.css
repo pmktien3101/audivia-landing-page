@@ -1,0 +1,276 @@
+.audio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    background: linear-gradient(to right, #4A00B8, #8A2BE2);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.back-button,
+.menu-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+}
+
+.back-button:hover,
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .audio-header {
+        padding: 0.8rem 1rem;
+    }
+
+    .back-button,
+    .menu-button {
+        font-size: 1.6rem;
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .header-text {
+        font-size: 1.2rem;
+    }
+}
+
+.player-controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.8rem 1.5rem;
+    background-color: #FFFFFF;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+.controls-container {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: #777;
+    padding: 0;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-button:hover:not(:disabled) {
+    background-color: #F5F5F5;
+    color: #4A00B8;
+    transform: translateY(-1px);
+}
+
+.control-button:disabled {
+    color: #CCC;
+    cursor: not-allowed;
+}
+
+.play-pause-button button {
+    background-color: #4A00B8;
+    border: none;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-pause-button button:hover {
+    background-color: #6A00E8;
+    transform: translateY(-4px) scale(1.02);
+}
+
+.spinner {
+    border: 0.25rem solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 0.25rem solid #4A00B8;
+    width: 2.5rem;
+    height: 2.5rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .player-controls-container {
+        padding: 1.2rem 1rem;
+        max-width: 95%;
+    }
+
+    .controls-container {
+        gap: 1.8rem;
+    }
+
+    .control-button {
+        font-size: 2rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .play-pause-button button {
+        width: 4.2rem;
+        height: 4.2rem;
+        font-size: 2.4rem;
+    }
+
+    .spinner {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+.transcript-container {
+    padding: 2rem;
+    background-color: #FFFFFF;
+    border-radius: 1.5rem;
+    margin: 3rem auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.transcript-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #333;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .transcript-container {
+        padding: 1.5rem;
+        margin: 2rem auto;
+        border-radius: 1rem;
+    }
+
+    .transcript-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}
+
+.audio-image-container {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    background-color: #E8E8E8;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    margin-bottom: 2.5rem;
+    box-sizing: border-box;
+}
+
+.audio-video,
+.audio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.audio-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F8F8;
+    color: #999;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.buffering-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.image-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .audio-image-container {
+        border-radius: 1rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.5rem;
+    }
+}
