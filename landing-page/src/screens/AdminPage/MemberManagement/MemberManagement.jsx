@@ -48,7 +48,9 @@ const MemberManagement = () => {
             'Tên đăng nhập': member.userName || '',
             'Email': member.email || '',
             'Số điện thoại': member.phone || '',
+            'Giới tính': member.gender || '',
             'Ngày sinh': member.birthDay || '',
+            'Nghề nghiệp': member.job || '',
             'Vai trò': member.roleName || '',
             'Ngày tạo': member.createdAt ? new Date(member.createdAt).toLocaleDateString('vi-VN') : '',
             'Trạng thái': (member.isDeleted === true || member.isDeleted === 'true') ? 'Không hoạt động' : 'Hoạt động'
@@ -144,7 +146,9 @@ const MemberManagement = () => {
                                     { key: 'userName', label: 'Tên đăng nhập' },
                                     { key: 'email', label: 'Email' },
                                     { key: 'phone', label: 'Số điện thoại' },
+                                    { key: 'gender', label: 'Giới tính' },
                                     { key: 'birthDay', label: 'Ngày sinh' },
+                                    { key: 'job', label: 'Nghề nghiệp' },
                                     { key: 'roleName', label: 'Vai trò' },
                                     { key: 'createdAt', label: 'Ngày tạo' },
                                     { key: 'isDeleted', label: 'Trạng thái' },
@@ -170,6 +174,12 @@ const MemberManagement = () => {
                                                 </div>
                                             </div>
                                         );
+                                    }
+                                    if (column.key === 'gender') {
+                                        // Hiển thị 'Nam' nếu true, 'Nữ' nếu false
+                                        if (row.gender === true || row.gender === 'true') return 'Nữ';
+                                        if (row.gender === false || row.gender === 'false') return 'Nam';
+                                        return '';
                                     }
                                     if (column.key === 'isDeleted') {
                                         const isInactive = row.isDeleted === true || row.isDeleted === 'true';
