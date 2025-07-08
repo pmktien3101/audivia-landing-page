@@ -7,6 +7,7 @@ import PaymentService from '../../../services/payment';
 import toast from 'react-hot-toast';
 import TransactionService from '../../../services/transaction';
 import { TbRuler } from 'react-icons/tb';
+import NotificationService from '../../../services/notification';
 
 const MyWallet = () => {
     const [user, setUser] = useState()
@@ -41,6 +42,24 @@ const MyWallet = () => {
         setShowModal(true)
     };
 
+    // Add a function to create a notification after payment success
+    const createPaymentSuccessNotification = async (paymentLinkId) => {
+
+      const rs = await PaymentService.checkPaymentStatus(paymentLinkId)
+      if (rs.status !== 'PAID') return;
+      try {
+        await NotificationService.createNotification({
+          userId: user.id,
+          tourId: null,
+          content: 'Nạp tiền vào ví thành công!',
+          type: 'Thanh toán',
+          isRead: false,
+        });
+      } catch (error) {
+        // Optionally handle error
+      }
+    };
+
     const handlePayment = async () => {
         if (!amount){
             toast.error("Vui lòng nhập số tiền cần nạp!")
@@ -56,11 +75,16 @@ const MyWallet = () => {
           console.log('thanh toán: ', user.id);
           
           const result = await PaymentService.createPaymentIntent(user, amount, "Nạp tiền vào ví");
-          console.log(result);
+
+          
           setShowModal(false); // Đóng modal sau khi thành công
           setAmount(''); // Reset amount
-          window.location.href = result;
-          
+          window.location.href = result.checkoutUrl;
+          // Instead of redirect, show success and create notification
+
+          await createPaymentSuccessNotification(result.paymentLinkId);
+          // Optionally, refresh payment histories
+          await fetchPaymentHistories();
         } catch (error) {
           console.error('Payment error:', error);
           toast.error('Có lỗi xảy ra khi tạo thanh toán!');
