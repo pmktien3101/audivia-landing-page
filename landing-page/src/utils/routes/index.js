@@ -24,7 +24,7 @@ const ROUTES = {
   TOUR_AUDIO: '/tour-audio/:id',
   AUDIO_PLAYER: '/audio-player',
   CONFESSION: '/confession',
-  MESSAGE: '/message',
+  MESSAGE: '/message/t/:id',
   SERVICES: '/services',
   CHECKOUT: '/checkout',
   NOTIFICATION: '/notification',

@@ -28,6 +28,7 @@ export default function useUser() {
         name: decoded[NAME_KEY],
         userId: decoded[USERID_KEY],
         raw: decoded,
+        // token
       };
     } catch (e) {
       return null;

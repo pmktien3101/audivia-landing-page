@@ -1,0 +1,14 @@
+.message-thread-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #f3efef;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.message-content {
+    flex: 1 1 0;
+    overflow-y: auto;
+    min-height: 0;
+
+  }

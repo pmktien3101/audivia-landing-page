@@ -28,6 +28,8 @@ import FeedbackManagement from "../screens/AdminPage/FeedbackManagement";
 import Review from "../screens/CustomerPage/Review";
 import HistoryTour from "../screens/CustomerPage/HistoryTour";
 import AudioPlayer from "../screens/CustomerPage/AudioPlayer";
+import Chat from "../screens/CustomerPage/Message/Message";
+import Message from "../screens/CustomerPage/Message/Message";
 
 const publicRoutes = [
     { path: ROUTES.GUEST_HOME, component: LandingPage, layout: NoHeaderLayout },
@@ -66,6 +68,7 @@ const memberRoutes = [
     { path: ROUTES.TRIAL_FREE, component: TrialFree, layout: CustomerLayout },
     { path: ROUTES.REVIEW, component: Review, layout: CustomerLayout },
     { path: ROUTES.HISTORY_TOUR, component: HistoryTour, layout: MenuLayout },
+    { path: ROUTES.MESSAGE, component: Message, layout: CustomerLayout}
 
 ]
 export { adminRoutes, memberRoutes, publicRoutes }

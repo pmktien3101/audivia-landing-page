@@ -1,0 +1,88 @@
+.message-container {
+    margin: 100px 50px 0 50px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 80vh;
+    /* overflow: hidden !important; */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 12px;
+
+}
+
+.message-section-left {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    overflow-y: auto;
+    height: 80vh;
+}
+
+.message-section-middle {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    /* KHÔNG overflow ở đây! */
+}
+
+.message-section-right {
+    overflow-y: auto;
+    padding: 16px;
+    height: 80vh;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chat-title{
+    font-size: 30px;
+    margin: 0;
+}
+
+.create-group-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.create-group-button:hover {
+    background-color: #1976d2;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+.create-group-button:active {
+    transform: scale(0.95);
+}
+
+.search-friends{
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-friends:focus {
+    border-color: #4c9aff;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(76, 154, 255, 0.2);
+}
