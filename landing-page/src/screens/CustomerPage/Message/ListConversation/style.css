@@ -1,0 +1,86 @@
+.list-conversation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .list-conversation::-webkit-scrollbar {
+    width: 6px;
+  }
+  .list-conversation::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 8px;
+  }
+
+  .conversation-content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+  }
+  .conversation-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    padding: 10px 7px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(60, 60, 60, 0.07); /* Đổ bóng nhẹ */
+
+  }
+  .conversation-item:hover {
+    background: #f0f0f0;
+  }
+  
+  .conversation-item-selected {
+    background: #e3f2fd !important;
+    border-left: 3px solid #00A5CF;
+  }
+
+  .conversation-item-selected:hover {
+    background: #e3f2fd !important;
+  }
+  .conversation-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .conversation-username {
+    font-weight: 500;
+  }
+
+  .group-avatar {
+    position: relative;
+    width: 48px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .group-avatar-circle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .group-avatar-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    background: #fff;
+  }
+
+  .last-message{
+    font-size: 0.9em;
+    color: #888;
+  }

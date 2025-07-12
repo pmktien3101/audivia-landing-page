@@ -15,6 +15,7 @@ import toast from 'react-hot-toast';
 import { uploadImageToCloudinary } from '../../../services/cloudinary';
 import useUser from '../../../hooks/useUser';
 import FollowService from '../../../services/follow';
+import ChatService from '../../../services/chat';
 
 const MenuProfile = () => {
   const [user, setUser] = useState(null);
@@ -246,6 +247,52 @@ const MenuProfile = () => {
     }
   };
 
+
+
+
+  const handleMessageClick = async () => {
+    try { 
+      console.log(currentUser.userId);
+      console.log(userProfile.id);
+      
+      const response = await ChatService.getPrivateRoom(currentUser.userId, userProfile.id)
+      console.log(response);
+      
+      if (response)
+      {
+        navigate(`/message/t/${response.id}`);
+      }
+      else{
+        try {
+
+          const chatRoom = await ChatService.createChatRoom("Private chat", currentUser.userId, 'private');
+
+          if (chatRoom){
+            // Thêm current user vào room
+            await ChatService.createChatRoomMember(chatRoom.id, currentUser.userId, currentUser.name, true);
+            // thêm bạn
+            await ChatService.createChatRoomMember(chatRoom.id, userProfile.id, userProfile.userName, false);
+            navigate(`/message/t/${chatRoom.id}`);
+          }
+
+        } catch (error) {
+          
+        }
+
+
+      }
+        
+    } catch (error) {
+      console.log(error);
+      
+    }
+    
+  }
+
+
+
+
+
   return (
       <div className="menu-profile-content">
        
@@ -295,7 +342,7 @@ const MenuProfile = () => {
                           : 'Kết bạn'
                   }
                 </button>
-                <button className="profile-action-btn">Nhắn tin</button>
+                <button className="profile-action-btn" onClick={handleMessageClick}>Nhắn tin</button>
               </div>
             )}
           </div>

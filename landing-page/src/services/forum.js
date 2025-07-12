@@ -12,7 +12,6 @@ const ForumService = {
     },
 
     getAllPosts: async () => {
-        console.log('vao on post');
         
         try {
             const response = await axiosClient.get('/posts');

@@ -7,6 +7,8 @@ import userService from '../../../../services/user';
 import { CiLocationOn } from 'react-icons/ci';
 import { BiLocationPlus } from 'react-icons/bi';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../../../utils/routes';
 
 export const PostDetailModal = ({ post, visible, onClose, onPostUpdated, members = [] }) => {
   const [user, setUser] = useState(null);
@@ -20,7 +22,7 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated, members
   const [editedContent, setEditedContent] = useState('');
   const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
-
+  const navigate = useNavigate()
   const fetchCurrentUser = async () => {
     try {
       const result = await userService.getCurrentUser();
@@ -162,6 +164,10 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated, members
 
   if (!visible || !post) return null;
 
+  const handleNavigateProfile = (user) => {
+    navigate(ROUTES.PROFILE.replace(':userId', user.id));
+  }
+
   return (
     <div className="post-detail-modal-overlay" onClick={onClose}>
       <div className="post-detail-modal" onClick={(e) => e.stopPropagation()}>
@@ -174,14 +180,14 @@ export const PostDetailModal = ({ post, visible, onClose, onPostUpdated, members
 
         <div className="post-detail-content">
           {/* Post Header */}
-          <div className="post-detail-user-info">
+          <div className="post-detail-user-info" style={{cursor: 'pointer'}} onClick={() => handleNavigateProfile(post.user)}>
             <img 
               src={post.user?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745396073/Audivia/ddizjlgkux0eoifrsoco.avif'} 
               alt="avatar" 
               className="post-detail-avatar"
             />
             <div className="post-detail-user-details">
-              <h4>{post.user?.userName || 'Người dùng'}</h4>
+              <h4 className='post-username'>{post.user?.userName || 'Người dùng'}</h4>
               {post.location && <span className="post-detail-location"><BiLocationPlus color='red'/> {post.location}</span>}
               <span className="post-detail-time">
                 {post.time}

@@ -48,7 +48,6 @@ const userService = {
     getAllMembers: async () => {
         try {
             const response = await axiosClient.get('/users');
-            console.log('MEMBER', response)
             return response
         } catch (error) {
             throw error;
