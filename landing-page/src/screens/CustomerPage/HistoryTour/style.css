@@ -1,0 +1,37 @@
+.history-tour-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 20px;
+}
+
+.history-tour-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .history-tour-container {
+    padding: 16px;
+  }
+  
+  .history-tour-content {
+    padding: 16px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-tour-container {
+    padding: 12px;
+  }
+  
+  .history-tour-content {
+    padding: 12px;
+    border-radius: 8px;
+  }
+}

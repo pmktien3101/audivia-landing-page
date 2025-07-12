@@ -41,9 +41,12 @@ const CustomerSidebar = () => {
     navigate(ROUTES.GUEST_HOME);
   };
 
+  const handleOnclick = () => {
+    navigate("/home")
+  }
   return (
     <div className="sidebar">
-      <div className="logo">
+      <div className="logo" onClick={handleOnclick}>
         <div className="logo-icon">
           <img src='https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745147401/Audivia/fxjo2mcpmqexcxkomtjd.png' alt="Audivia Logo" />
         </div>
