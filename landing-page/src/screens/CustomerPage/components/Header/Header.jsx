@@ -83,10 +83,12 @@ const Header = () => {
     const handleFeedback = () => {
       navigate(ROUTES.FEEDBACK)
     }
-
+    const handleOnClick = () => {
+      navigate(ROUTES.HOME)
+    }
     return (
         <div className="main-header">
-            <div className="header-left">
+            <div className="header-left" onClick={handleOnClick}>
               <img className="logo-img"
                 alt="Vector"
                 src="https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745147401/Audivia/fxjo2mcpmqexcxkomtjd.png"

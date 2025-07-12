@@ -1,0 +1,128 @@
+.history-tour-card {
+  display: flex;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.history-tour-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tour-image-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.tour-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.history-tour-card:hover .tour-thumbnail {
+  transform: scale(1.05);
+}
+
+.tour-info {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.purchased-tour-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.purchase-date {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+}
+
+.tour-amount {
+  font-size: 16px;
+  font-weight: 600;
+  color: #059669;
+  margin: 0 0 16px 0;
+}
+
+.start-tour-btn {
+  align-self: flex-start;
+  background: linear-gradient(135deg, var(--primary), var(--x-1st));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+.start-tour-btn:hover {
+  background: linear-gradient(135deg, #5855eb 0%, #7c3aed 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+}
+
+.start-tour-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .history-tour-card {
+    flex-direction: column;
+  }
+  
+  .tour-image-container {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .tour-info {
+    padding: 12px;
+  }
+  
+  .tour-name {
+    font-size: 16px;
+  }
+  
+  .start-tour-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tour-image-container {
+    height: 160px;
+  }
+  
+  .tour-info {
+    padding: 10px;
+  }
+  
+  .tour-name {
+    font-size: 15px;
+  }
+  
+  .tour-amount {
+    font-size: 14px;
+  }
+}
