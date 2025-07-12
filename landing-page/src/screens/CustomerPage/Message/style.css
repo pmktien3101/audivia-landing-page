@@ -11,11 +11,24 @@
 }
 
 .message-section-left {
+    display: flex;
+    flex-direction: column;
     padding: 16px;
     border-bottom: 1px solid #eee;
     overflow-y: auto;
     height: 80vh;
 }
+
+.list-conversation {
+    padding: 5px;
+    flex: 1 1 0;
+    /* min-height: 0; Bắt buộc để flexbox + overflow hoạt động đúng */
+    overflow-y: auto;
+    background: #fff;
+    /* Nếu muốn có padding hoặc border thì thêm ở đây */
+  }
+
+
 
 .message-section-middle {
     display: flex;
@@ -46,7 +59,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #2196f3;
+    background: linear-gradient(135deg, #00A5CF, #d6a4ff);
     color: white;
     border: none;
     cursor: pointer;

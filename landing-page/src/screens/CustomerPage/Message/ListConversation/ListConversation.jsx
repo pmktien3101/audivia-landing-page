@@ -23,7 +23,7 @@ export default function ListConversation({ chatRooms, currentUserId, selectedRoo
                 <img className="conversation-avatar" src={user?.avatarUrl || '/default-avatar.png'} alt={user?.username} />
                 <div className='conversation-content'>
                     <span className="conversation-username"><b>{user?.username}</b></span>
-                    <span >Vào để xem tin nhắn</span>
+                    <span className='last-message'>Vào để xem tin nhắn</span>
                 </div>
 
               </div>
@@ -33,7 +33,10 @@ export default function ListConversation({ chatRooms, currentUserId, selectedRoo
             return (
               <div className={`conversation-item ${selectedRoomId === room.id ? 'conversation-item-selected' : ''}`} key={room.id} onClick={() => onClick(room)}>
                   <GroupAvatar members={room.members} />
-                <span className="conversation-username">{room.name}</span>
+                <div className='conversation-content'>
+                  <span className="conversation-username">{room.name}</span>
+                    <span className='last-message'>Vào để xem tin nhắn</span>
+                </div>
               </div>
             );
           }

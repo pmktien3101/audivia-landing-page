@@ -200,9 +200,7 @@ export default function Message() {
     
       if (room.type === 'private'){
         const otherMember = room.members.find(m => m.userId !== user.userId);
-        const friend = otherMember?.user;
-        console.log(friend.avatarUrl.length);
-        
+        const friend = otherMember?.user;        
         setMessageHeader({avatarUrl: friend.avatarUrl, username: friend.username, userId: friend.id})
       } 
       else {
@@ -303,19 +301,27 @@ export default function Message() {
   return (
     <div className='message-container'>
       <div className="message-section-left">
-        <div className="chat-header">
-          <h1 className='chat-title'>Tin nhắn</h1>
-          <button 
-            className="create-group-button"
-            onClick={() => setShowCreateGroupModal(true)}
-            title="Tạo nhóm chat"
-          >
-            <span>+</span>
-          </button>
+        <div className="message-left-top">
+          <div className="chat-header">
+            <h1 className='chat-title'>Tin nhắn</h1>
+            <button 
+              className="create-group-button"
+              onClick={() => setShowCreateGroupModal(true)}
+              title="Tạo nhóm chat"
+            >
+              <span>+</span>
+            </button>
+          </div>
+          <input className='search-friends' placeholder='Tìm kiếm bạn bè' onChange={handleSearchFriend}/>
+          <ListFriend list={filteredFriends} onClick={handleFriendClick}/>
         </div>
-        <input className='search-friends' placeholder='Tìm kiếm bạn bè' onChange={handleSearchFriend}/>
-        <ListFriend list={filteredFriends} onClick={handleFriendClick}/>
-        <ListConversation chatRooms={chatRooms} currentUserId={user?.userId} selectedRoomId={selectedRoomId} onClick={handleConversationClick}/>
+        <div className='list-conversation'>
+          <ListConversation chatRooms={chatRooms} currentUserId={user?.userId} selectedRoomId={selectedRoomId} onClick={handleConversationClick}/>
+        </div>
+
+
+
+
       </div>
       <div className="message-section-middle">
         <MessageThread

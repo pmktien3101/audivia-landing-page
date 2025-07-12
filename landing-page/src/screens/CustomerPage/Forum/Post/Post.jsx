@@ -3,11 +3,13 @@ import './style.css';
 import { FiHeart, FiMoreHorizontal, FiEdit3, FiTrash2 } from 'react-icons/fi';
 import { HiHeart } from 'react-icons/hi2';
 import { BiCommentMinus, BiLocationPlus } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../../../utils/routes';
 
 const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-
+  const navigate = useNavigate()
   const handleClick = () => {
     onClick(post);
   };
@@ -26,7 +28,9 @@ const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
 
   const isOwner = showMenu && user && post.user && (user.id === post.user.id);
   
-
+  const handleNavigateProfile = (user) => {
+    navigate(ROUTES.PROFILE.replace(':userId', user.id));
+  }
   return (
     <div className="post-item" onClick={handleClick}>
       <div className="post-header">
@@ -34,12 +38,16 @@ const Post = ({ post, onClick, user, showMenu, onPostEdit, onPostDelete }) => {
           src={post.user?.avatarUrl || 'https://res.cloudinary.com/dgzn2ix8w/image/upload/v1745396073/Audivia/ddizjlgkux0eoifrsoco.avif'} 
           alt="avatar" 
           className="post-avatar"
+          onClick={() => handleNavigateProfile(post.user)}
         />
         <div className="post-info">
-          <h3>{post.user?.userName || 'Người dùng'}</h3>
+          <h3 className='post-username' onClick={() => handleNavigateProfile(post.user)}>{post.user?.userName || 'Người dùng'}</h3>
           <span className="post-time">
             {post.time}
           </span>
+        </div>
+        <div>
+
         </div>
         {isOwner && (
           <div className="post-menu-wrapper" ref={menuRef} onClick={e => e.stopPropagation()}>

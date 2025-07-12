@@ -37,7 +37,7 @@
 }
 
 .close-button {
-  background: none;
+  background: red;
   border: none;
   font-size: 24px;
   cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
+  background: red;
 }
 
 .modal-body {
@@ -113,7 +113,7 @@
 
 .friend-item.selected {
   background-color: #e3f2fd;
-  border: 1px solid #2196f3;
+  border: 1px solid #00A5CF;
 }
 
 .friend-item input[type="checkbox"] {
@@ -123,18 +123,39 @@
   cursor: pointer;
 }
 
-.friend-avatar {
-  width: 32px;
-  height: 32px;
+.conversation-avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #e3eafc;
+  background: #f3f6fa;
+  margin-right: 12px;
+}
+
+.conversation-title {
+  font-weight: 600;
+  color: #22223b;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.friend-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e3eafc;
+  background: #f3f6fa;
   margin-right: 12px;
 }
 
 .friend-name {
-  font-size: 14px;
-  color: #333;
+  font-size: 1rem;
+  color: #22223b;
+  font-weight: 600;
   flex: 1;
+  margin-bottom: 2px;
 }
 
 .modal-footer {
@@ -157,21 +178,21 @@
 }
 
 .cancel-button {
-  background-color: #f0f0f0;
+  background: red;
   color: #666;
 }
 
 .cancel-button:hover:not(:disabled) {
-  background-color: #e0e0e0;
+  background: red;
 }
 
 .create-button {
-  background-color: #2196f3;
-  color: white;
+  background: linear-gradient(135deg, #00A5CF, #d6a4ff);
+  /* color: white; */
 }
 
 .create-button:hover:not(:disabled) {
-  background-color: #1976d2;
+  background: #1976d2;
 }
 
 .create-button:disabled {

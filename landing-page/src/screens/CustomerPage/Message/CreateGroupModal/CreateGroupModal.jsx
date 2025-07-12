@@ -74,11 +74,11 @@ export default function CreateGroupModal({ friends, onClose, onCreateGroup }) {
                     onChange={() => handleFriendToggle(friend.id)}
                   />
                   <img 
-                    className="friend-avatar" 
+                    className="friend-avatar conversation-avatar" 
                     src={friend.avatarUrl || '/default-avatar.png'} 
                     alt={friend.userName} 
                   />
-                  <span className="friend-name">{friend.userName}</span>
+                  <span className="friend-name conversation-title">{friend.userName}</span>
                 </div>
               ))}
             </div>

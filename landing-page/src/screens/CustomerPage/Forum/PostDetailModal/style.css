@@ -490,3 +490,8 @@
 .comments-list::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8; /* Màu khi hover */
 } 
+
+.post-username:hover {
+  text-decoration: underline;
+  cursor: pointer;
+} 
