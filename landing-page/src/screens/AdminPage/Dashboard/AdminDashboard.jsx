@@ -6,6 +6,7 @@ import RevenueCharts from './components/RevenueCharts';
 import TourCharts from './components/TourCharts';
 import UserCharts from './components/UserCharts';
 import SocialMediaCharts from './components/SocialMediaCharts';
+import TopPurchasedTours from './components/TopPurchasedTours';
 import statisticsService from '../../../services/statistics';
 import { FaUsers, FaBoxOpen, FaChartLine, FaClipboardList } from 'react-icons/fa';
 import ExportReport from '../components/ExportReport/ExportReport'
@@ -30,6 +31,7 @@ const AdminDashboard = () => {
     // Chart data
     const [revenueOverTimeData, setRevenueOverTimeData] = useState([]);
     const [topToursData, setTopToursData] = useState([]);
+    const [topPurchasedToursData, setTopPurchasedToursData] = useState([]);
     const [avgRatingData, setAvgRatingData] = useState([]);
     const [tourCategoryData, setTourCategoryData] = useState([]);
     const [ageDistributionData, setAgeDistributionData] = useState([]);
@@ -67,6 +69,9 @@ const AdminDashboard = () => {
 
             const topTours = await statisticsService.revenueStat(startDate, endDate, 'tour', 10);
             setTopToursData(topTours.items);
+
+            const topPurchasedTours = await statisticsService.topPurchasedTours(10, startDate, endDate);
+            setTopPurchasedToursData(topPurchasedTours);
 
             const avgRating = await statisticsService.tourStat('rating_group', startDate, endDate);
             setAvgRatingData(avgRating.items);
@@ -183,6 +188,7 @@ const AdminDashboard = () => {
                     sheetsData={[
                         { sheetName: "Doanh Thu Theo Thời Gian", data: revenueOverTimeData },
                         { sheetName: "Tour Hàng Đầu", data: topToursData },
+                        { sheetName: "Tour Được Mua Nhiều Nhất", data: topPurchasedToursData },
                         { sheetName: "Đánh Giá Trung Bình Tour", data: avgRatingData },
                         { sheetName: "Tour Theo Thể Loại", data: tourCategoryData },
                         // { sheetName: "Phân Bố Tuổi", data: ageDistributionData },
@@ -247,6 +253,8 @@ const AdminDashboard = () => {
                     postsOverTimeData={postsOverTimeData}
                 />
             </div>
+            
+            <TopPurchasedTours topPurchasedToursData={topPurchasedToursData} />
         </>
     )
 }

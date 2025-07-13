@@ -62,6 +62,19 @@ const statisticsService = {
             console.error("Error in postStat:", error);
             throw error;
         }
+    },
+    topPurchasedTours: async (top) => {
+        try {
+            const params = new URLSearchParams();
+            if (top) params.append('top', top);
+            const query = params.toString();
+            const response = await axiosClient.get(`/statistics/top-purchased-tours${query ? `?${query}` : ''}`);
+
+            return response;
+        } catch (error) {
+            console.error("Error in topPurchasedTours:", error);
+            throw error;
+        }
     }
 }
 

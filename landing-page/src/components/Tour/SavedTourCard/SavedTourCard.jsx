@@ -34,14 +34,14 @@ const SavedTourCard = ({
   return (
     <div className="saved-tour-card" onClick={handleCardClick}>
       {/* Tour Image */}
-      <div className="tour-image-container">
+      <div className="saved-tour-card-image-container">
         <img
-          className="tour-image"
-          alt={tour.title}
-          src={tour.thumbnailUrl || tour.imageUrl}
+          className="saved-tour-card-image"
+          alt={tour?.title}
+          src={tour?.thumbnailUrl}
         />
         {plannedTime && (
-          <div className="planned-time-badge">
+          <div className="saved-tour-card-planned-time-badge">
             <HiOutlineCalendar size={16} />
             <span>{new Date(plannedTime).toLocaleDateString('vi-VN')}</span>
           </div>
@@ -49,37 +49,37 @@ const SavedTourCard = ({
       </div>
 
       {/* Tour Content */}
-      <div className="tour-content">
-        <div className="tour-header">
-          <div className="tour-info">
-            <h3 className="tour-name">{tour.title}</h3>
-            <div className="saved-tour-price">
-              <span>{tour.price == 0 ? 'Free' : tour.price + " VNĐ"}</span>
+      <div className="saved-tour-card-content">
+        <div className="saved-tour-card-header">
+          <div className="saved-tour-card-info">
+            <h3 className="saved-tour-card-name">{tour?.title}</h3>
+            <div className="saved-tour-card-price">
+              <span>{tour?.price == 0 ? 'Free' : tour?.price + " VNĐ"}</span>
             </div>
           </div>
 
-          <div className="saved-tour-rating">
-            <IoStar className="star-icon" />
-            <span className="rating-text">{tour.avgRating?.toFixed(1) || tour.rating} <span className="rating-count">{`(${tour.ratingCount} đánh giá)`}</span></span>
+          <div className="saved-tour-card-rating">
+            <IoStar className="saved-tour-card-star-icon" />
+            <span className="saved-tour-card-rating-text">{tour?.avgRating?.toFixed(1) || tour?.rating} <span className="saved-tour-card-rating-count">{`(${tour?.ratingCount} đánh giá)`}</span></span>
           </div>
         </div>
 
-        <div className="tour-footer">
-          <div className="saved-time">
+        <div className="saved-tour-card-footer">
+          <div className="saved-tour-card-saved-time">
             Đã lưu {savedTime}
           </div>
 
-          <div className="tour-actions">
+          <div className="saved-tour-card-actions">
             <button
-              className={`action-btn schedule-btn ${plannedTime ? 'has-date' : ''}`}
+              className={`saved-tour-card-action-btn saved-tour-card-schedule-btn ${plannedTime ? 'has-date' : ''}`}
               onClick={handleSchedule}
               title={plannedTime ? 'Đổi ngày' : 'Lên lịch'}
             >
               <HiOutlineCalendar size={18} />
-              <span className="action-text">{plannedTime ? 'Đổi ngày' : 'Lên lịch'}</span>
+              <span className="saved-tour-card-action-text">{plannedTime ? 'Đổi ngày' : 'Lên lịch'}</span>
             </button>
             <button
-              className="action-btn delete-btn"
+              className="saved-tour-card-action-btn saved-tour-card-delete-btn"
               onClick={handleDelete}
               title="Xóa tour"
               disabled={isLoading}
