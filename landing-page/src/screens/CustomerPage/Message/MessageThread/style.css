@@ -6,9 +6,69 @@
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
 }
+
 .message-content {
     flex: 1 1 0;
     overflow-y: auto;
     min-height: 0;
+}
 
-  }
+/* Loading States */
+.message-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+}
+
+.message-content-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+}
+
+.message-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f4f6;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    animation: message-spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+.message-loading-text {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+}
+
+@keyframes message-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive loading */
+@media (max-width: 768px) {
+    .message-loading-container,
+    .message-content-loading {
+        padding: 20px;
+    }
+    
+    .message-loading-spinner {
+        width: 32px;
+        height: 32px;
+        border-width: 2px;
+    }
+    
+    .message-loading-text {
+        font-size: 13px;
+    }
+}

@@ -21,21 +21,21 @@ export default function HistoryTourCard({tour}) {
 
   return (
     <div className="history-tour-card">
-      <div className="tour-image-container">
+      <div className="history-tour-card-image-container">
         <img 
           src={tour.tour.thumbnailUrl} 
           alt={tour.tour.title}
-          className="tour-thumbnail"
+          className="history-tour-card-thumbnail"
         />
       </div>
       
-      <div className="tour-info">
-        <h3 className="purchased-tour-name">{tour.tour.title}</h3>
-        <p className="purchase-date">Đã mua vào ngày {formatDate(tour.createdAt)}</p>
-        <p className="tour-amount">{formatMoney(tour.amount)} VNĐ</p>
+      <div className="history-tour-card-info">
+        <h3 className="history-tour-card-name">{tour.tour.title}</h3>
+        <p className="history-tour-card-date">Đã mua vào ngày {formatDate(tour.createdAt)}</p>
+        <p className="history-tour-card-amount">{formatMoney(tour.amount)} VNĐ</p>
         
         <button 
-          className="start-tour-btn"
+          className="history-tour-card-btn"
           onClick={handleStartTour}
         >
           Bắt đầu tour
