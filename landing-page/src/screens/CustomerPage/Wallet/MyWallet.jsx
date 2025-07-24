@@ -81,13 +81,13 @@ const MyWallet = () => {
           setAmount(''); // Reset amount
           window.location.href = result.checkoutUrl;
           // Instead of redirect, show success and create notification
-
+          
           await createPaymentSuccessNotification(result.paymentLinkId);
           // Optionally, refresh payment histories
           await fetchPaymentHistories();
         } catch (error) {
           console.error('Payment error:', error);
-          toast.error('Có lỗi xảy ra khi tạo thanh toán!');
+         // toast.error('Có lỗi xảy ra khi tạo thanh toán!');
         } finally {
           setIsLoading(false);
         }
@@ -168,6 +168,7 @@ const MyWallet = () => {
           <h2>Số dư hiện tại</h2>
           <div className="balance-amount">{formatCurrency(user?.balanceWallet)}</div>
           <button className="deposit-button" onClick={handleDeposit}>Nạp tiền</button>
+          <p className='note'>⚠️Lưu ý: Quét mã bằng ngân hàng, không hỗ trợ ví điện tử.</p>
         </div>
   
         <div className="tabs-section">
