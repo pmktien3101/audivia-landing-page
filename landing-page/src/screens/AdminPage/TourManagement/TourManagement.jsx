@@ -243,6 +243,7 @@ const TourManagement = () => {
                                     { key: 'tourTypeName', label: 'Loại Tour' },
                                     { key: 'duration', label: 'Thời gian' },
                                     { key: 'price', label: 'Giá' },
+                                    { key: 'avgRating', label: 'Đánh giá TB' },
                                     { key: 'actions', label: 'Thao tác' }
                                 ]}
                                 filterOptions={[
@@ -267,6 +268,9 @@ const TourManagement = () => {
                                     }
                                     if (column.key === 'price') {
                                         return `${row.price.toLocaleString('vi-VN')} VNĐ`;
+                                    }
+                                    if (column.key === 'avgRating') {
+                                        return `${row.avgRating.toFixed(1)} (${row.ratingCount})`;
                                     }
                                     if (column.key === 'actions') {
                                         return (
